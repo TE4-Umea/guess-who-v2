@@ -30,5 +30,9 @@ export async function getQuestionsFromDatabase() {
         },
     ];
 
+    questions.forEach(question => {
+        question.isHidden = false;
+    });
+
     return questions;
 }
