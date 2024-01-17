@@ -17,6 +17,9 @@ import QuestionButton from './components/QuestionButton.vue'
 </template>
 
 <script>
+import { getCharactersFromDatabase } from './GetCharacters.js';
+import { getQuestionsFromDatabase } from './GetQuestions.js';
+
 export default {
     data() {
         return {
@@ -32,6 +35,13 @@ export default {
                 { text: 'innehåller hans namn L?', command: 'characters.map(character => { character.isHidden = !character.isHidden })' },
             ],
         };
+    },
+    methods: {
+
+    },
+    async mounted() {
+        this.characters = await getCharactersFromDatabase();
+        this.questions = await getQuestionsFromDatabase();
     },
 };
 </script>
