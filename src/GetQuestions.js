@@ -11,14 +11,22 @@ export async function getQuestionsFromDatabase() {
         {
             text: 'Is the character male?',
             command: '',
+            type: 'gender',
         },
         {
             text: 'Is the character female?',
             command: '',
+            type: 'gender',
         },
         {
-            text: '',
+            text: 'Does the character have white hair?',
             command: '',
+            type: 'hairColor', // If correct, close all hairColor questions, else close this one
+        },
+        {
+            text: 'Does the character have brown hair?',
+            command: '',
+            type: 'hairColor',
         },
     ];
 
