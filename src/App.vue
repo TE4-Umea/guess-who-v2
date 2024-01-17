@@ -11,7 +11,8 @@ import QuestionButton from './components/QuestionButton.vue'
     <div id="searchField">
         <input type="text" id="myInput" onkeyup="search()" placeholder="Search for questions.." />
         <ul id="myUL">
-            <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question />
+            <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
+                :characters=characters />
         </ul>
     </div>
 </template>
@@ -31,8 +32,8 @@ export default {
                 { name: 'Alexander', text: 'Al', image: 'alex.jpg', swag: true, isHidden: false },
             ],
             questions: [
-                { text: 'har han swag?', command: 'characters.map(character => { if (!character.swag) { character.isHidden = true } })' },
-                { text: 'innehåller hans namn L?', command: 'characters.map(character => { character.isHidden = !character.isHidden })' },
+                { text: 'har han swag?' },
+                { text: 'RAAAAAAAAAAAAAH' },
             ],
         };
     },
