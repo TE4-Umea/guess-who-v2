@@ -1,30 +1,37 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import CharacterCard from './components/CharacterCard.vue'
+import QuestionButton from './components/QuestionButton.vue'
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+    <div class="grid">
+        <CharacterCard v-for="(character, index) in characters" :key="index" :character=character />
+    </div>
+
+    <div id="searchField">
+        <input type="text" id="myInput" onkeyup="search()" placeholder="Search for questions.." />
+        <ul id="myUL">
+            <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question />
+        </ul>
+    </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script>
+export default {
+    data() {
+        return {
+            characters: [
+                // Remove contents later
+                { name: 'Leo', text: 'Le', image: 'leooberg.png', swag: false, isHidden: false },
+                { name: 'Loke', text: 'BOOY GOT THAT VIRUS', image: 'lokeoberg.png', swag: false, isHidden: false },
+                { name: 'Hjalmar', text: 'Hj', image: 'vue.svg', swag: false, isHidden: false },
+                { name: 'Alexander', text: 'Al', image: 'alex.jpg', swag: true, isHidden: false },
+            ],
+            questions: [
+                { text: 'har han swag?', command: 'characters.map(character => { if (!character.swag) { character.isHidden = true } })' },
+                { text: 'innehåller hans namn L?', command: 'characters.map(character => { character.isHidden = !character.isHidden })' },
+            ],
+        };
+    },
+};
+</script>
