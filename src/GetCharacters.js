@@ -198,5 +198,10 @@ export async function getCharactersFromDatabase() {
         },
     ];
 
+    charactersTemp.forEach(character => {
+        character.isHidden = false;
+    });
+    console.log(charactersTemp);
+
     return charactersTemp;
 }
