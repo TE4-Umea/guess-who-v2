@@ -18,6 +18,7 @@ import QuestionButton from './components/QuestionButton.vue'
 
 <script>
 import { getCharactersFromDatabase } from './GetCharacters.js';
+import { getQuestionsFromDatabase } from './GetQuestions.js';
 
 export default {
     data() {
@@ -40,6 +41,7 @@ export default {
     },
     async mounted() {
         this.characters = await getCharactersFromDatabase();
+        this.questions = await getQuestionsFromDatabase();
     },
 };
 </script>
