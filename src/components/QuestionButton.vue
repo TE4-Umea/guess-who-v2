@@ -4,7 +4,7 @@ defineProps(['question', 'characters', 'index'])
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(index, characters) }">
+        <a v-on:click="() => { askQuestion(question.text, characters) }">
             <p>{{ question.text }}</p>
         </a>
     </li>
@@ -13,11 +13,32 @@ defineProps(['question', 'characters', 'index'])
 <script>
 export default {
     methods: {
-        askQuestion(index, characters) {
-            console.log(index)
-            if (index === 0) {
+        askQuestion(question, characters) {
+            if (question === 'Do they have swag?') {
                 characters.forEach(character => {
                     if (!character.swag) {
+                        character.isHidden = true
+                    }
+                })
+            } else if (question === 'Does their name contain L?') {
+                characters.forEach(character => {
+                    character.isHidden = !character.isHidden
+                })
+            } else if (question === 'eye color stuff') {
+                characters.forEach(character => {
+                    if (character.eyeColor !== 'M') {
+                        character.isHidden = true
+                    }
+                })
+            } else if (question === 'Is the character male?') {
+                characters.forEach(character => {
+                    if (character.gender !== 'M') {
+                        character.isHidden = true
+                    }
+                })
+            } else if (question === 'Is the character female?') {
+                characters.forEach(character => {
+                    if (character.gender !== 'F') {
                         character.isHidden = true
                     }
                 })
