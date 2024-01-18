@@ -4,7 +4,7 @@ defineProps(['question', 'characters', 'index', 'gameLog'])
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question.text, characters, gameLog) }">
+        <a v-on:click="() => { askQuestion(question.text, characters, gameLog) }" v-if="!question.isAnswered">
             <p>{{ question.text }}</p>
         </a>
     </li>
@@ -49,6 +49,7 @@ export default {
             }
 
             this.gameLog.push(question);
+            this.question.isAnswered = true;
         },
     },
 }

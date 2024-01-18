@@ -9,7 +9,7 @@ import QuestionButton from './components/QuestionButton.vue'
     </div>
 
     <div id="searchField">
-        <input type="text" id="myInput" onkeyup="search()" placeholder="Search for questions.." />
+        <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.." />
         <ul id="myUL">
             <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
                 :characters=characters :gameLog=gameLog />
@@ -40,7 +40,16 @@ export default {
         };
     },
     methods: {
-
+        search() {
+            const input = document.getElementById('myInput').value;
+            this.questions.forEach(question => {
+                if (question.text.toLowerCase().includes(input.toLowerCase())) {
+                    question.isAnswered = false;
+                } else {
+                    question.isAnswered = true;
+                }
+            });
+        },
     },
     async mounted() {
         // Get characters and questions from database, must be in mounted() for async/await to work
