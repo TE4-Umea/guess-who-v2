@@ -4,7 +4,8 @@ defineProps(['question', 'characters', 'index', 'gameLog'])
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question.text, characters, gameLog) }" v-if="!question.isAnswered">
+        <a v-on:click="() => { askQuestion(question.text, characters, gameLog) }"
+            v-if="!question.isAnswered && !question.isHidden">
             <p>{{ question.text }}</p>
         </a>
     </li>
