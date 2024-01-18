@@ -35,6 +35,7 @@ export default {
                 { text: 'har han swag?' },
                 { text: 'RAAAAAAAAAAAAAH' },
             ],
+            correctAnswer: {},
         };
     },
     methods: {
@@ -43,6 +44,9 @@ export default {
     async mounted() {
         this.characters = await getCharactersFromDatabase();
         this.questions = await getQuestionsFromDatabase();
+
+        // Set a random character to be the correct answer
+        this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
     },
 };
 </script>
