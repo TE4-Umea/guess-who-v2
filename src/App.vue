@@ -4,10 +4,6 @@ import QuestionButton from './components/QuestionButton.vue'
 </script>
 
 <template>
-    <!-- <div>
-        <p v-for="(log, index) in gameLog" :key="index">{{ log }}</p>
-    </div> -->
-
     <div class="grid">
         <CharacterCard v-for="(character, index) in characters" :key="index" :character=character />
     </div>
@@ -47,6 +43,7 @@ export default {
 
     },
     async mounted() {
+        // Get characters and questions from database, must be in mounted() for async/await to work
         this.characters = await getCharactersFromDatabase();
         this.questions = await getQuestionsFromDatabase();
 
