@@ -1,10 +1,10 @@
 <script setup>
-defineProps(['question', 'characters', 'index'])
+defineProps(['question', 'characters', 'index', 'gameLog'])
 </script>
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question.text, characters) }">
+        <a v-on:click="() => { askQuestion(question.text, characters, gameLog) }">
             <p>{{ question.text }}</p>
         </a>
     </li>
@@ -47,6 +47,8 @@ export default {
                     character.isHidden = !character.isHidden
                 })
             }
+
+            this.gameLog.push(question);
         },
     },
 }
