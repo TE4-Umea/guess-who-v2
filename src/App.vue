@@ -42,11 +42,12 @@ export default {
     methods: {
         search() {
             const input = document.getElementById('myInput').value;
+            console.log(this.questions)
             this.questions.forEach(question => {
                 if (question.text.toLowerCase().includes(input.toLowerCase())) {
-                    question.isAnswered = false;
+                    question.isHidden = false;
                 } else {
-                    question.isAnswered = true;
+                    question.isHidden = true;
                 }
             });
         },
