@@ -1,10 +1,6 @@
 export async function getQuestionsFromDatabase() {
     const questions = [
         {
-            text: 'Do they have swag?',
-            type: 'swag',
-        },
-        {
             text: 'Is the character male?',
             type: 'gender',
         },
@@ -25,7 +21,7 @@ export async function getQuestionsFromDatabase() {
         //     type: 'hairColor',
         // },
         {
-            text: 'Does the character have grey hair?',
+            text: 'Does the character have gray hair?',
             type: 'hairColor',
         },
         {
