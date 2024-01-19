@@ -5,7 +5,9 @@ defineProps(['character'])
 <template>
     <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="character.isHidden = !character.isHidden"
         class="characterCard"> <!-- Get class 'backsideAnimation' if isHidden is true -->
-        <img :src="character.image">
+        <div class="imgWrapper">
+            <img :src="character.image">
+        </div>
         <p>{{ character.name }}</p>
     </div>
 </template>
@@ -36,16 +38,25 @@ defineProps(['character'])
 }
 
 .backsideAnimation img,
-.backsideAnimation p {
+.backsideAnimation p,
+.backsideAnimation div {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.3s, opacity 0.8s linear;
 }
 
 .characterCard img {
+    position: relative;
+    z-index: -1;
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.imgWrapper {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
 }
 
 .characterCard p {
