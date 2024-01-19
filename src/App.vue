@@ -12,7 +12,7 @@ import QuestionButton from './components/QuestionButton.vue'
         <input type="text" id="myInput" onkeyup="search()" placeholder="Search for questions.." />
         <ul id="myUL">
             <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
-                :characters=characters />
+                :characters=characters :correctAnswer=correctAnswer />
         </ul>
     </div>
 </template>
@@ -47,6 +47,7 @@ export default {
 
         // Set a random character to be the correct answer
         this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
+        console.log(this.correctAnswer)
     },
 };
 </script>
