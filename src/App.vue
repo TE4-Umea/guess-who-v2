@@ -24,17 +24,8 @@ import { getQuestionsFromDatabase } from './GetQuestions.js';
 export default {
     data() {
         return {
-            characters: [
-                // Remove contents later
-                { name: 'Leo', text: 'Le', image: 'leooberg.png', swag: false, isHidden: false },
-                { name: 'Loke', text: 'BOOY GOT THAT VIRUS', image: 'lokeoberg.png', swag: false, isHidden: false },
-                { name: 'Hjalmar', text: 'Hj', image: 'vue.svg', swag: false, isHidden: false },
-                { name: 'Alexander', text: 'Al', image: 'alex.jpg', swag: true, isHidden: false },
-            ],
-            questions: [
-                { text: 'har han swag?' },
-                { text: 'RAAAAAAAAAAAAAH' },
-            ],
+            characters: [],
+            questions: [],
             correctAnswer: {},
             gameLog: [],
         };
@@ -59,6 +50,9 @@ export default {
         // Set a random character to be the correct answer
         this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
         console.log(this.correctAnswer)
+    },
+    methods: {
+
     },
 };
 </script>

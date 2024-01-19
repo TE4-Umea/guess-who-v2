@@ -13,14 +13,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
 .grid {
   width: 90vw;
   margin-left: auto;
   margin-right: auto;
 
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
   grid-auto-rows: 1fr;
+  grid-auto-columns: repeat(3, minmax(0, 1fr));
   gap: 2%;
 }
 
@@ -28,8 +36,7 @@
   text-align: center;
   position: fixed;
   bottom: 0;
-  width: 100vw;
-  min-width: 70vw;
+  width: 100%;
 }
 
 #myInput {
@@ -38,15 +45,13 @@
   border: 1px solid #ddd;
 
   padding: 12px 20px 12px 40px;
-  width: 25%;
+  width: 100%;
 }
 
 #myUL {
-  width: 28.4%;
-
   list-style-type: none;
 
-  padding: 0px;
+  padding: 0;
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
@@ -57,7 +62,8 @@
 
 @media screen and (max-width: 768px) {
   .grid {
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
+    gap: 0.2%;
   }
 }
 
