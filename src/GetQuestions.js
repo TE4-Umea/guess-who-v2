@@ -1,26 +1,90 @@
 export async function getQuestionsFromDatabase() {
     const questions = [
         {
-            text: 'Do they have swag?',
-            command: 'characters.map(character => { if (!character.swag) { character.isHidden = true } })',
-        },
-        {
-            text: 'Does their name contain L?',
-            command: 'characters.map(character => { character.isHidden = !character.isHidden })',
-        },
-        {
             text: 'Is the character male?',
-            command: '',
+            type: 'gender',
         },
         {
             text: 'Is the character female?',
-            command: '',
+            type: 'gender',
         },
         {
-            text: '',
-            command: '',
+            text: 'Does the character have white hair?',
+            type: 'hairColor', // If correct, close all hairColor questions, else close this one
         },
+        {
+            text: 'Does the character have brown hair?',
+            type: 'hairColor',
+        },
+        // {
+        //     text: 'Does the character have black hair?',
+        //     type: 'hairColor',
+        // },
+        {
+            text: 'Does the character have gray hair?',
+            type: 'hairColor',
+        },
+        {
+            text: 'Is the character bald?',
+            type: 'hair',
+        },
+        {
+            text: 'Does the character have long hair?',
+            type: 'hair',
+        },
+        {
+            text: 'Does the character have short hair?',
+            type: 'hair',
+        },
+        {
+            text: 'Does the character have a beard?',
+            type: 'facialHair',
+        },
+        {
+            text: 'Does the character have a mustache?',
+            type: 'facialHair',
+        },
+        {
+            text: 'Does the character have a hat?',
+            type: 'hat',
+        },
+        // {
+        //     text: 'Does the character have glasses?',
+        //     type: 'glasses',
+        // },
+        // {
+        //     text: 'Does the character have blue eyes?',
+        //     type: 'eyes',
+        // },
+        // {
+        //     text: 'Does the character have brown eyes?',
+        //     type: 'eyes',
+        // },
+        // {
+        //     text: 'Does the character have green eyes?',
+        //     type: 'eyes',
+        // },
+        // {
+        //     text: 'Does the character have black eyes?',
+        //     type: 'eyes',
+        // },
+        // {
+        //     text: 'Does the character have white skin?',
+        //     type: 'skinColor',
+        // },
+        // {
+        //     text: 'Does the character have brown skin?',
+        //     type: 'skinColor',
+        // },
     ];
+
+    // Add isAnswered property to all questions
+    questions.forEach(question => {
+        question.isAnswered = false;
+    });
+    questions.forEach(question => {
+        question.isHidden = false;
+    });
 
     return questions;
 }

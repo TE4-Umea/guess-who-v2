@@ -9,9 +9,10 @@ import QuestionButton from './components/QuestionButton.vue'
     </div>
 
     <div id="searchField">
-        <input type="text" id="myInput" onkeyup="search()" placeholder="Search for questions.." />
+        <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.." />
         <ul id="myUL">
-            <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question />
+            <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
+                :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog />
         </ul>
     </div>
 </template>
@@ -25,11 +26,30 @@ export default {
         return {
             characters: [],
             questions: [],
+            correctAnswer: {},
+            gameLog: [],
         };
     },
+    methods: {
+        search() {
+            const input = document.getElementById('myInput').value;
+            this.questions.forEach(question => {
+                if (question.text.toLowerCase().includes(input.toLowerCase())) {
+                    question.isHidden = false;
+                } else {
+                    question.isHidden = true;
+                }
+            });
+        },
+    },
     async mounted() {
+        // Get characters and questions from database, must be in mounted() for async/await to work
         this.characters = await getCharactersFromDatabase();
         this.questions = await getQuestionsFromDatabase();
+
+        // Set a random character to be the correct answer
+        this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
+        console.log(this.correctAnswer)
     },
     methods: {
 
