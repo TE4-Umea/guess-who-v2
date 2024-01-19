@@ -51,8 +51,5 @@ export default {
         this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
         console.log(this.correctAnswer)
     },
-    methods: {
-
-    },
 };
 </script>

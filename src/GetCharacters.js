@@ -4,7 +4,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 1,
             name: 'Gandalf the gray',
-            image: 'gandalf.png',
+            image: 'gandalf.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'long',
@@ -19,7 +19,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 2,
             name: 'Frodo',
-            image: 'frodo.png',
+            image: 'frodo.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'short',
@@ -34,7 +34,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 3,
             name: 'Sam',
-            image: 'sam.png',
+            image: 'sam.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'short',
@@ -49,7 +49,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 4,
             name: 'Aragorn',
-            image: 'aragorn.png',
+            image: 'aragorn.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'long',
@@ -64,7 +64,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 5,
             name: 'Galadriel',
-            image: 'galadriel.png',
+            image: 'galadriel.webp',
             gender: 'F',
             skinColor: 'white',
             hair: 'long',
@@ -79,7 +79,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 6,
             name: 'Arwen',
-            image: 'arwen.png',
+            image: 'arwen.webp',
             gender: 'F',
             skinColor: 'white',
             hair: 'long',
@@ -94,7 +94,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 7,
             name: 'Legolas',
-            image: 'legolas.png',
+            image: 'legolas.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'long',
@@ -109,7 +109,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 8,
             name: 'Gimli',
-            image: 'gimli.png',
+            image: 'gimli.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'long',
@@ -124,7 +124,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 9,
             name: 'Gollum',
-            image: 'gollum.png',
+            image: 'gollum.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'bald',
@@ -139,7 +139,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 10,
             name: 'Boromir',
-            image: 'boromir.png',
+            image: 'boromir.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'short',
@@ -154,7 +154,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 11,
             name: 'Elrond',
-            image: 'elrond.png',
+            image: 'elrond.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'long',
@@ -169,7 +169,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 12,
             name: 'Eowyn',
-            image: 'eowyn.png',
+            image: 'eowyn.webp',
             gender: 'F',
             skinColor: 'white',
             hair: 'long',
@@ -184,7 +184,7 @@ export async function getCharactersFromDatabase() {
         {
             id: 13,
             name: 'Bilbo (old)',
-            image: 'bilbo.png',
+            image: 'bilbo.webp',
             gender: 'M',
             skinColor: 'white',
             hair: 'short',
