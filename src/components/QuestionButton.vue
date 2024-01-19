@@ -1,10 +1,11 @@
 <script setup>
-defineProps(['question', 'characters', 'correctAnswer'])
+defineProps(['question', 'characters', 'correctAnswer', 'gameLog'])
 </script>
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question.text, characters, correctAnswer) }">
+        <a v-on:click="() => { askQuestion(question.text, characters, correctAnswer, gameLog) }"
+            v-if="!question.isAnswered && !question.isHidden">
             <p>{{ question.text }}</p>
         </a>
     </li>
@@ -82,6 +83,9 @@ export default {
                     this.closeHats(characters)
                 }
             }
+
+            this.gameLog.push(question);
+            this.question.isAnswered = true;
         },
         closeFemales(characters) {
             characters.forEach(character => {
