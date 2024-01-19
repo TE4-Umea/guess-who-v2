@@ -3,7 +3,7 @@ export async function getCharactersFromDatabase() {
     const charactersTemp = [
         {
             id: 1,
-            name: 'Gandalf the gray',
+            name: 'Gandalf the grey',
             image: 'gandalf.webp',
             tags: ['M', 'whiteSkin', 'longHair', 'greyHair', 'blueEyes', 'mustache', 'beard', 'hat'],
         },
@@ -17,7 +17,7 @@ export async function getCharactersFromDatabase() {
             id: 3,
             name: 'Sam',
             image: 'sam.webp',
-            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'brownEyes'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'whiteHair', 'brownEyes'],
         },
         {
             id: 4,
@@ -41,25 +41,25 @@ export async function getCharactersFromDatabase() {
             id: 7,
             name: 'Legolas',
             image: 'legolas.webp',
-            tags: ['M', 'whiteSkin', 'longHair', 'brownHair', 'blueEyes'],
+            tags: ['M', 'whiteSkin', 'longHair', 'whiteHair', 'blueEyes'],
         },
         {
             id: 8,
             name: 'Gimli',
             image: 'gimli.webp',
-            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'brownEyes', 'beard'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'brownEyes', 'beard', 'hat'],
         },
         {
             id: 9,
             name: 'Gollum',
             image: 'gollum.webp',
-            tags: ['M', 'whiteSkin', 'bald', 'blueEyes'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'blackHair', 'blueEyes'],
         },
         {
             id: 10,
             name: 'Boromir',
             image: 'boromir.webp',
-            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'blueEyes', 'mustache'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'blueEyes', 'beard'],
         },
         {
             id: 11,
@@ -77,7 +77,7 @@ export async function getCharactersFromDatabase() {
             id: 13,
             name: 'Bilbo (old)',
             image: 'bilbo.webp',
-            tags: ['M', 'whiteSkin', 'shortHair', 'whiteHair', 'blueEyes'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'greyHair', 'blueEyes'],
         },
     ];
 

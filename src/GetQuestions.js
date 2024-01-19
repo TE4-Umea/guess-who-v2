@@ -9,25 +9,25 @@ export async function getQuestionsFromDatabase() {
             tag: 'F',
         },
         {
-            text: 'Does the character have white hair?',
+            text: 'Does the character have blonde hair?', // (white)
             tag: 'whiteHair', // If correct, close all hairColor questions, else close this one
         },
         {
             text: 'Does the character have brown hair?',
             tag: 'brownHair',
         },
-        // {
-        //     text: 'Does the character have black hair?',
-        //     tag': 'hairColor',
-        // },
         {
-            text: 'Does the character have gray hair?',
+            text: 'Does the character have black hair?',
+            tag: 'blackHair',
+        },
+        {
+            text: 'Does the character have grey hair?',
             tag: 'greyHair',
         },
-        {
-            text: 'Is the character bald?',
-            tag: 'bald',
-        },
+        // {
+        //     text: 'Is the character bald?',
+        //     tag: 'bald',
+        // },
         {
             text: 'Does the character have long hair?',
             tag: 'longHair',
@@ -40,12 +40,12 @@ export async function getQuestionsFromDatabase() {
             text: 'Does the character have a beard?',
             tag: 'beard',
         },
+        // {
+        //     text: 'Does the character have a mustache?',
+        //     tag: 'mustache',
+        // },
         {
-            text: 'Does the character have a mustache?',
-            tag: 'mustache',
-        },
-        {
-            text: 'Does the character have a hat?',
+            text: 'Does the character have headgear?', // (hat)
             tag: 'hat',
         },
         // {
