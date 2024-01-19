@@ -8,3 +8,4 @@
 * Semicolon om man vill
 * ESModules
 * Enkelfnuttar för strängar
+* ''Grey'' stavas med e
