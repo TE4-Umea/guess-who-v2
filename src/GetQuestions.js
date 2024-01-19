@@ -2,79 +2,79 @@ export async function getQuestionsFromDatabase() {
     const questions = [
         {
             text: 'Is the character male?',
-            type: 'gender',
+            tag: 'M',
         },
         {
             text: 'Is the character female?',
-            type: 'gender',
+            tag: 'F',
         },
         {
             text: 'Does the character have white hair?',
-            type: 'hairColor', // If correct, close all hairColor questions, else close this one
+            tag: 'whiteHair', // If correct, close all hairColor questions, else close this one
         },
         {
             text: 'Does the character have brown hair?',
-            type: 'hairColor',
+            tag: 'brownHair',
         },
         // {
         //     text: 'Does the character have black hair?',
-        //     type: 'hairColor',
+        //     tag': 'hairColor',
         // },
         {
             text: 'Does the character have gray hair?',
-            type: 'hairColor',
+            tag: 'greyHair',
         },
         {
             text: 'Is the character bald?',
-            type: 'hair',
+            tag: 'bald',
         },
         {
             text: 'Does the character have long hair?',
-            type: 'hair',
+            tag: 'longHair',
         },
         {
             text: 'Does the character have short hair?',
-            type: 'hair',
+            tag: 'shortHair',
         },
         {
             text: 'Does the character have a beard?',
-            type: 'facialHair',
+            tag: 'beard',
         },
         {
             text: 'Does the character have a mustache?',
-            type: 'facialHair',
+            tag: 'mustache',
         },
         {
             text: 'Does the character have a hat?',
-            type: 'hat',
+            tag: 'hat',
         },
         // {
         //     text: 'Does the character have glasses?',
-        //     type: 'glasses',
+        //     tag: 'glasses',
         // },
         // {
         //     text: 'Does the character have blue eyes?',
-        //     type: 'eyes',
+        //     tag: 'blueEyes',
         // },
         // {
         //     text: 'Does the character have brown eyes?',
-        //     type: 'eyes',
+        //     tag: 'brownEyes',
         // },
         // {
         //     text: 'Does the character have green eyes?',
-        //     type: 'eyes',
+        //     tag: 'greenEyes',
         // },
         // {
         //     text: 'Does the character have black eyes?',
-        //     type: 'eyes',
+        //     tag: 'blackEyes',
         // },
         // {
         //     text: 'Does the character have white skin?',
-        //     type: 'skinColor',
+        //     tag: 'whiteSkin',
         // },
         // {
         //     text: 'Does the character have brown skin?',
-        //     type: 'skinColor',
+        //     tag: 'brownSkin',
         // },
     ];
 
