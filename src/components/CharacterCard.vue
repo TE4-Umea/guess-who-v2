@@ -22,7 +22,7 @@ defineProps(['character'])
     height: 100%;
     min-height: 100px;
 
-    border: 4px solid red;
+    background-color: rgb(15, 15, 15);
 
     text-align: center;
     line-break: normal;
@@ -63,6 +63,9 @@ defineProps(['character'])
     position: relative;
     bottom: 50px;
     overflow: hidden;
+
+    font-weight: 700;
+    font-size: var(--step-0);
 }
 
 @media screen and (max-width: 768px) {
