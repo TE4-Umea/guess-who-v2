@@ -4,7 +4,7 @@ defineProps(['question', 'characters', 'correctAnswer', 'gameLog', 'stats'])
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question, characters, correctAnswer, gameLog, stats) }"
+        <a v-on:click="() => { askQuestion(question, characters, correctAnswer, gameLog) }"
             v-if="!question.isAnswered && !question.isHidden">
             <p>{{ question.text }}</p>
         </a>
@@ -14,8 +14,14 @@ defineProps(['question', 'characters', 'correctAnswer', 'gameLog', 'stats'])
 <script>
 export default {
     methods: {
-        askQuestion(question, characters, correctAnswer, gameLog, stats) {
-            stats.questionsAsked++
+        updateStats() {
+            this.stats.questionsAsked++
+            if (this.stats.time === 0) {
+                this.stats.time = Date.now()
+            }
+        },
+        askQuestion(question, characters, correctAnswer, gameLog) {
+            this.updateStats()
             let correctAnswerIncludesTag = false
             let answer = ''
 
