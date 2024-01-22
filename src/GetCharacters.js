@@ -3,7 +3,7 @@ export async function getCharactersFromDatabase() {
     const charactersTemp = [
         {
             id: 1,
-            name: 'Gandalf the grey',
+            name: 'Gandalf the Grey',
             image: 'gandalf.webp',
             tags: ['M', 'whiteSkin', 'longHair', 'greyHair', 'blueEyes', 'mustache', 'beard', 'hat'],
         },
