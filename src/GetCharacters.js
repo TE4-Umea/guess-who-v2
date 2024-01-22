@@ -75,7 +75,7 @@ export async function getCharactersFromDatabase() {
         },
         {
             id: 13,
-            name: 'Bilbo (old)',
+            name: 'Bilbo',
             image: 'bilbo.webp',
             tags: ['M', 'whiteSkin', 'shortHair', 'greyHair', 'blueEyes'],
         },
