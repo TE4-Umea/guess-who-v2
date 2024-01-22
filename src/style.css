@@ -61,6 +61,7 @@ body {
   width: 100%;
   padding: 12px 0 12px 0;
   text-align: center;
+  margin-left: -1px;
 }
 
 #myUL {
