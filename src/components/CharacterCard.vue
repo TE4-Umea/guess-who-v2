@@ -19,8 +19,10 @@ export default {
         Guess(character, answer) {
             this.stats.guesses++
             if (character.name === answer.name) {
-                character.name = this.stats
-                this.stats.time = (Date.now() - this.stats.time) / 1000
+                if (this.stats.time !== 0 && this.stats.time > 3600000) {
+                    character.name = this.stats
+                    this.stats.time = (Date.now() - this.stats.time) / 1000
+                }
                 alert('bra jobbat 👍\n                                                                                         data   ok')
             } else {
                 character.isHidden = true
