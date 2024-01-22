@@ -3,7 +3,7 @@ defineProps(['character', 'correctAnswer', 'stats'])
 </script>
 
 <template>
-    <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="Guess(character, correctAnswer, stats)"
+    <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="Guess(character, correctAnswer,)"
         class="characterCard">
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
@@ -16,10 +16,11 @@ defineProps(['character', 'correctAnswer', 'stats'])
 <script>
 export default {
     methods: {
-        Guess(character, answer, stats) {
-            stats.guesses++
+        Guess(character, answer) {
+            this.stats.guesses++
             if (character.name === answer.name) {
-                character.name = stats
+                character.name = this.stats
+                this.stats.time = (Date.now() - this.stats.time) / 1000
                 alert('bra jobbat 👍\n                                                                                         data   ok')
             } else {
                 character.isHidden = true
