@@ -40,10 +40,10 @@ export async function getQuestionsFromDatabase() {
             text: 'Does the character have a beard?',
             tag: 'beard',
         },
-        // {
-        //     text: 'Does the character have a mustache?',
-        //     tag: 'mustache',
-        // },
+        {
+            text: 'Does the character have a mustache?',
+            tag: 'mustache',
+        },
         {
             text: 'Does the character have headgear?', // (hat)
             tag: 'hat',
@@ -52,14 +52,14 @@ export async function getQuestionsFromDatabase() {
         //     text: 'Does the character have glasses?',
         //     tag: 'glasses',
         // },
-        // {
-        //     text: 'Does the character have blue eyes?',
-        //     tag: 'blueEyes',
-        // },
-        // {
-        //     text: 'Does the character have brown eyes?',
-        //     tag: 'brownEyes',
-        // },
+        {
+            text: 'Does the character have blue eyes?',
+            tag: 'blueEyes',
+        },
+        {
+            text: 'Does the character have brown eyes?',
+            tag: 'brownEyes',
+        },
         // {
         //     text: 'Does the character have green eyes?',
         //     tag: 'greenEyes',

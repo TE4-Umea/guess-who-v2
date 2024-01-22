@@ -5,14 +5,15 @@ import QuestionButton from './components/QuestionButton.vue'
 
 <template>
     <div class="grid">
-        <CharacterCard v-for="(character, index) in characters" :key="index" :character=character />
+        <CharacterCard v-for="(character, index) in characters" :key="index" :character=character
+            :correctAnswer=correctAnswer :stats=stats />
     </div>
 
     <div id="searchField">
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.." />
         <ul id="myUL">
             <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
-                :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog />
+                :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats />
         </ul>
     </div>
 </template>
@@ -28,6 +29,11 @@ export default {
             questions: [],
             correctAnswer: {},
             gameLog: [],
+            stats: {
+                guesses: 0,
+                questionsAsked: 0,
+                time: 0,
+            },
         };
     },
     methods: {

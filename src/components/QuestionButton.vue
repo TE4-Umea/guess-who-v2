@@ -1,10 +1,10 @@
 <script setup>
-defineProps(['question', 'characters', 'correctAnswer', 'gameLog'])
+defineProps(['question', 'characters', 'correctAnswer', 'gameLog', 'stats'])
 </script>
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question, characters, correctAnswer, gameLog) }"
+        <a v-on:click="() => { askQuestion(question, characters, correctAnswer, gameLog, stats) }"
             v-if="!question.isAnswered && !question.isHidden">
             <p>{{ question.text }}</p>
         </a>
@@ -15,7 +15,8 @@ defineProps(['question', 'characters', 'correctAnswer', 'gameLog'])
 export default {
     methods: {
         // eslint-disable-next-line complexity
-        askQuestion(question, characters, correctAnswer) {
+        askQuestion(question, characters, correctAnswer, gameLog, stats) {
+            stats.questionsAsked++
             let correctAnswerIncludesTag = false
 
             for (let i = 0; i < correctAnswer.tags.length; i++) {

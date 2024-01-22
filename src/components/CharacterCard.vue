@@ -1,10 +1,11 @@
 <script setup>
-defineProps(['character'])
+defineProps(['character', 'correctAnswer', 'stats'])
 </script>
 
 <template>
-    <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="character.isHidden = !character.isHidden"
-        class="characterCard"> <!-- Get class 'backsideAnimation' if isHidden is true -->
+    <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="Guess(character, correctAnswer, stats)"
+        class="characterCard">
+        <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
             <img :src="character.image">
         </div>
@@ -13,7 +14,20 @@ defineProps(['character'])
 </template>
 
 <script>
-
+export default {
+    methods: {
+        Guess(character, answer, stats) {
+            stats.guesses++
+            if (character.name === answer.name) {
+                character.name = stats
+                alert('bra jobbat 👍\n                                                                                         data   ok')
+            } else {
+                character.isHidden = true
+                alert('🤬 R(dataAAAAAdataAAH 👎')
+            }
+        },
+    },
+}
 </script>
 
 <style>
