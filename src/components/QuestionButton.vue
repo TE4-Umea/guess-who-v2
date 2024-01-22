@@ -14,10 +14,10 @@ defineProps(['question', 'characters', 'correctAnswer', 'gameLog', 'stats'])
 <script>
 export default {
     methods: {
-        // eslint-disable-next-line complexity
         askQuestion(question, characters, correctAnswer, gameLog, stats) {
             stats.questionsAsked++
             let correctAnswerIncludesTag = false
+            let answer = ''
 
             for (let i = 0; i < correctAnswer.tags.length; i++) {
                 if (correctAnswer.tags[i] === question.tag) {
@@ -27,11 +27,15 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
+                answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)
+                answer = 'No'
             }
 
-            this.gameLog.push(question);
+            console.log(answer)
+
+            this.gameLog.push({ question, answer });
             this.question.isAnswered = true;
         },
 
