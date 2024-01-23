@@ -12,7 +12,7 @@ import QuestionButton from './components/QuestionButton.vue'
 
     <div class="grid">
         <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
-            :characters=characters :stats=stats />
+            :characters=characters :gameLog=gameLog :stats=stats />
     </div>
 
     <div id="searchField">
@@ -43,6 +43,7 @@ export default {
                 guesses: 0,
                 questionsAsked: 0,
                 time: 0,
+                gameOver: false,
             },
         };
     },
