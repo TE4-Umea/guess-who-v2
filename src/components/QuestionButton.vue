@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['question', 'characters', 'correctAnswer', 'gameLog', 'stats'])
+defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 'stats'])
 </script>
 
 <template>
@@ -33,6 +33,7 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
+                this.closeUselessQuestions(question.type)
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)
@@ -70,6 +71,13 @@ export default {
             })
         },
 
+        closeUselessQuestions(type) {
+            this.questions.forEach(question => {
+                if (question.type === type) {
+                    question.isAnswered = true
+                }
+            })
+        },
     },
 }
 </script>
