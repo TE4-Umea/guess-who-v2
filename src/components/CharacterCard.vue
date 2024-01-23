@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['character', 'correctAnswer', 'stats', 'characters'])
+defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
@@ -17,9 +17,9 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters'])
 export default {
     methods: {
         Guess(character, answer) {
-            this.stats.guesses++
-            if (character.name === answer.name) {
-                if (this.stats.time === 0 || this.stats.time > 3600000) {
+            if (!this.stats.gameOver) {
+                this.stats.guesses++
+                if (character.name === answer.name) {
                     this.characters.forEach(character => {
                         if (character.name !== answer.name) {
                             character.isHidden = true
@@ -32,11 +32,12 @@ export default {
 
                     const element = document.getElementById(character.id)
                     element.classList.add('correct')
+
+                    this.stats.gameOver = true
+                } else {
+                    character.isHidden = true
+                    alert('🤬 R(dataAAAAAdataAAH 👎')
                 }
-                alert('bra jobbat 👍\n                                                                                         data   ok')
-            } else {
-                character.isHidden = true
-                alert('🤬 R(dataAAAAAdataAAH 👎')
             }
         },
     },

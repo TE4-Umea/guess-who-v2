@@ -21,7 +21,10 @@ export default {
             }
         },
         askQuestion(question, characters, correctAnswer, gameLog) {
-            this.updateStats()
+            if (!this.stats.gameOver) {
+                this.updateStats()
+            }
+
             let correctAnswerIncludesTag = false
             let answer = ''
 
