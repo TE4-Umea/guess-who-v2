@@ -23,7 +23,7 @@ import WinScreen from './components/WinScreen.vue'
         </h2>
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
             :onFocus="() => { showQuestions() }" />
-        <ul id="myUL">
+        <ul id="myUL" tabindex="-1">
             <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question :characters=characters
                 :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats :questions=questions />
         </ul>

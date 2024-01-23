@@ -33,7 +33,7 @@ export default {
                     this.stats.gameOver = true
                 } else {
                     character.isHidden = true
-                    alert('🤬 R(dataAAAAAdataAAH 👎')
+                    // Aalert('🤬 R(dataAAAAAdataAAH 👎')
                 }
             }
         },
