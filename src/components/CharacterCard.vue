@@ -4,7 +4,7 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 
 <template>
     <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
-        v-on:click="Guess(character, correctAnswer,)" class="characterCard">
+        v-on:click="Guess(character, correctAnswer,)" class="characterCard" :title="'Guess on ' + character.name + '?'">
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
             <img :src="character.image">
@@ -59,6 +59,8 @@ export default {
     transition: transform 0.8s;
     transform-style: preserve-3d;
     transition-timing-function: cubic-bezier(1, 1.03, .54, 1.4);
+
+    cursor: pointer;
 }
 
 .characterCard p {

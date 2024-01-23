@@ -47,9 +47,10 @@ body {
 
 #searchField {
   text-align: center;
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  width: 100%;
+  width: 76vw;
+  margin: 0 auto 0 auto;
 }
 
 #myInput {
@@ -57,8 +58,10 @@ body {
 
   border: 1px solid #ddd;
 
-  padding: 12px 20px 12px 40px;
   width: 100%;
+  padding: 12px 0 12px 0;
+  text-align: center;
+  margin-left: -1px;
 }
 
 #myUL {
@@ -68,9 +71,12 @@ body {
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 0;
 
-  max-height: 300px;
+  max-height: 240px;
   overflow-y: scroll;
+
+  display: none;
 }
 
 @media screen and (max-width: 768px) {
