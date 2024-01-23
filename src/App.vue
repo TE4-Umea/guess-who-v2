@@ -14,17 +14,18 @@ import WinScreen from './components/WinScreen.vue'
         :questions=stats.questionsAsked :time=stats.time></WinScreen>
     <div class="grid">
         <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
-            :characters=characters :stats=stats />
+            :characters=characters :gameLog=gameLog :stats=stats />
     </div>
 
     <div id="searchField">
         <h2 v-if="gameLog.length > 0">
             {{ gameLog[gameLog.length - 1].question.text }} {{ gameLog[gameLog.length - 1].answer }}
         </h2>
-        <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.." />
+        <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
+            :onFocus="() => { showQuestions() }" />
         <ul id="myUL">
-            <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
-                :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats />
+            <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question :characters=characters
+                :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats :questions=questions />
         </ul>
     </div>
 </template>
@@ -44,6 +45,7 @@ export default {
                 guesses: 0,
                 questionsAsked: 0,
                 time: 0,
+                gameOver: false,
             },
         };
     },
@@ -57,6 +59,12 @@ export default {
                     question.isHidden = true;
                 }
             });
+        },
+        showQuestions() {
+            document.getElementById('myUL').style.display = 'block'
+        },
+        hideQuestions() {
+            document.getElementById('myUL').style.display = 'none'
         },
     },
     async mounted() {
