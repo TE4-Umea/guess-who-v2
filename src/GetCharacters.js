@@ -23,19 +23,19 @@ export async function getCharactersFromDatabase() {
             id: 4,
             name: 'Aragorn',
             image: 'aragorn.webp',
-            tags: ['M', 'whiteSkin', 'longHair', 'brownHair', 'brownEyes', 'mustache', 'beard'],
+            tags: ['M', 'whiteSkin', 'longHair', 'brownHair', 'blueEyes', 'mustache', 'beard'],
         },
         {
             id: 5,
             name: 'Galadriel',
             image: 'galadriel.webp',
-            tags: ['F', 'whiteSkin', 'longHair', 'whiteHair', 'blueEyes', 'hat'],
+            tags: ['F', 'whiteSkin', 'longHair', 'whiteHair', 'brownEyes', 'hat'],
         },
         {
             id: 6,
             name: 'Arwen',
             image: 'arwen.webp',
-            tags: ['F', 'whiteSkin', 'longHair', 'brownHair', 'blueEyes'],
+            tags: ['F', 'whiteSkin', 'longHair', 'brownHair', 'greenEyes'],
         },
         {
             id: 7,
@@ -47,7 +47,7 @@ export async function getCharactersFromDatabase() {
             id: 8,
             name: 'Gimli',
             image: 'gimli.webp',
-            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'brownEyes', 'beard', 'hat'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'brownEyes', 'mustache', 'beard', 'hat'],
         },
         {
             id: 9,
@@ -59,25 +59,25 @@ export async function getCharactersFromDatabase() {
             id: 10,
             name: 'Boromir',
             image: 'boromir.webp',
-            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'blueEyes', 'beard'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'brownHair', 'brownEyes', 'mustache', 'beard'],
         },
         {
             id: 11,
             name: 'Elrond',
             image: 'elrond.webp',
-            tags: ['M', 'whiteSkin', 'longHair', 'brownHair', 'blueEyes', 'hat'],
+            tags: ['M', 'whiteSkin', 'longHair', 'brownHair', 'brownEyes', 'hat'],
         },
         {
             id: 12,
             name: 'Eowyn',
             image: 'eowyn.webp',
-            tags: ['F', 'whiteSkin', 'longHair', 'whiteHair', 'blueEyes'],
+            tags: ['F', 'whiteSkin', 'longHair', 'whiteHair', 'greenEyes'],
         },
         {
             id: 13,
-            name: 'Bilbo (old)',
+            name: 'Bilbo',
             image: 'bilbo.webp',
-            tags: ['M', 'whiteSkin', 'shortHair', 'greyHair', 'blueEyes'],
+            tags: ['M', 'whiteSkin', 'shortHair', 'greyHair', 'brownEyes'],
         },
     ];
 

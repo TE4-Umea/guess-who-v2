@@ -60,14 +60,10 @@ export async function getQuestionsFromDatabase() {
             text: 'Does the character have brown eyes?',
             tag: 'brownEyes',
         },
-        // {
-        //     text: 'Does the character have green eyes?',
-        //     tag: 'greenEyes',
-        // },
-        // {
-        //     text: 'Does the character have black eyes?',
-        //     tag: 'blackEyes',
-        // },
+        {
+            text: 'Does the character have green eyes?',
+            tag: 'greenEyes',
+        },
         // {
         //     text: 'Does the character have white skin?',
         //     tag: 'whiteSkin',
