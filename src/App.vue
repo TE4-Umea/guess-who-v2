@@ -10,7 +10,7 @@ import WinScreen from './components/WinScreen.vue'
             {{ turn.question.text }}: {{ turn.answer }}
         </p>
     </div> -->
-    <WinScreen v-if="stats.guesses > 0" :name=correctAnswer.name :image=correctAnswer.image :guesses=stats.guesses
+    <WinScreen v-if="stats.gameOver" :name=correctAnswer.name :image=correctAnswer.image :guesses=stats.guesses
         :questions=stats.questionsAsked :time=stats.time></WinScreen>
     <div class="grid">
         <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
