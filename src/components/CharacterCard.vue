@@ -1,10 +1,10 @@
 <script setup>
-defineProps(['character', 'correctAnswer', 'stats'])
+defineProps(['character', 'correctAnswer', 'stats', 'characters'])
 </script>
 
 <template>
-    <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="Guess(character, correctAnswer,)"
-        class="characterCard" title="Guess on this character?">
+    <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
+        v-on:click="Guess(character, correctAnswer,)" class="characterCard" title="Guess on this character?">
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
             <img :src="character.image">
@@ -19,9 +19,19 @@ export default {
         Guess(character, answer) {
             this.stats.guesses++
             if (character.name === answer.name) {
-                if (this.stats.time !== 0 && this.stats.time > 3600000) {
+                if (this.stats.time === 0 || this.stats.time > 3600000) {
+                    this.characters.forEach(character => {
+                        if (character.name !== answer.name) {
+                            character.isHidden = true
+                        }
+                    })
                     character.name = this.stats
-                    this.stats.time = (Date.now() - this.stats.time) / 1000
+                    if (this.stats.time !== 0) {
+                        this.stats.time = (Date.now() - this.stats.time) / 1000
+                    }
+
+                    const element = document.getElementById(character.id)
+                    element.classList.add('correct')
                 }
                 alert('bra jobbat 👍\n                                                                                         data   ok')
             } else {
@@ -52,16 +62,13 @@ export default {
     cursor: pointer;
 }
 
-.backsideAnimation {
-    transform: rotateX(180deg);
-}
+.characterCard p {
+    position: relative;
+    bottom: 50px;
+    overflow: hidden;
 
-.backsideAnimation img,
-.backsideAnimation p,
-.backsideAnimation div {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s 0.3s, opacity 0.8s linear;
+    font-weight: 700;
+    font-size: var(--step-0);
 }
 
 .characterCard img {
@@ -78,13 +85,24 @@ export default {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
 }
 
-.characterCard p {
-    position: relative;
-    bottom: 50px;
-    overflow: hidden;
+.backsideAnimation {
+    transform: rotateX(180deg);
+}
 
-    font-weight: 700;
-    font-size: var(--step-0);
+.backsideAnimation img,
+.backsideAnimation p,
+.backsideAnimation div {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.8s linear;
+}
+
+.correct p {
+    bottom: 90%;
+}
+
+.correct .imgWrapper {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 100%);
 }
 
 @media screen and (max-width: 768px) {

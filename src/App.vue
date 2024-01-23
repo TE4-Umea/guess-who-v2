@@ -11,8 +11,8 @@ import QuestionButton from './components/QuestionButton.vue'
     </div> -->
 
     <div class="grid">
-        <CharacterCard v-for="(character, index) in characters" :key="index" :character=character
-            :correctAnswer=correctAnswer :stats=stats />
+        <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
+            :characters=characters :stats=stats />
     </div>
 
     <div id="searchField">
