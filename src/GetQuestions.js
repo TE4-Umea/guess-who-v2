@@ -48,14 +48,17 @@ export async function getQuestionsFromDatabase() {
         {
             text: 'Does the character have a beard?',
             tag: 'beard',
+            type: 'beard',
         },
         {
             text: 'Does the character have a mustache?',
             tag: 'mustache',
+            type: 'mustache',
         },
         {
             text: 'Does the character have headgear?', // (hat)
             tag: 'hat',
+            type: 'headgear',
         },
         // {
         //     text: 'Does the character have glasses?',
