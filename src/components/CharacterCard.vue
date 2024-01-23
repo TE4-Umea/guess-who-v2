@@ -34,10 +34,10 @@ export default {
                     element.classList.add('correct')
                 }
 
-                alert('🤩 Correct guess! 👍')
+                // Aalert('🤩 Correct guess! 👍')
             } else {
                 character.isHidden = true
-                alert('😢 Wrong guess! 👎')
+                // Aalert('😢 Wrong guess! 👎')
             }
         },
     },
