@@ -4,7 +4,7 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters'])
 
 <template>
     <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
-        v-on:click="Guess(character, correctAnswer,)" class="characterCard" title="Guess on this character?">
+        v-on:click="Guess(character, correctAnswer,)" class="characterCard" :title="'Gissa på ' + character.name + '?'">
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
             <img :src="character.image">
@@ -33,10 +33,11 @@ export default {
                     const element = document.getElementById(character.id)
                     element.classList.add('correct')
                 }
-                alert('bra jobbat 👍\n                                                                                         data   ok')
+
+                alert('🤩 Correct guess! 👍')
             } else {
                 character.isHidden = true
-                alert('🤬 R(dataAAAAAdataAAH 👎')
+                alert('😢 Wrong guess! 👎')
             }
         },
     },

@@ -20,7 +20,7 @@ export default {
                 this.stats.time = Date.now()
             }
         },
-        askQuestion(question, characters, correctAnswer, gameLog) {
+        askQuestion(question, characters, correctAnswer) {
             this.updateStats()
             let correctAnswerIncludesTag = false
             let answer = ''
