@@ -3,8 +3,8 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters'])
 </script>
 
 <template>
-    <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
-        v-on:click="Guess(character, correctAnswer,)" class="characterCard">
+    <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="Guess(character, correctAnswer,)"
+        class="characterCard">
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
             <img :src="character.image">
@@ -25,13 +25,9 @@ export default {
                             character.isHidden = true
                         }
                     })
-                    character.name = this.stats
                     if (this.stats.time !== 0) {
                         this.stats.time = (Date.now() - this.stats.time) / 1000
                     }
-
-                    const element = document.getElementById(character.id)
-                    element.classList.add('correct')
                 }
                 alert('bra jobbat 👍\n                                                                                         data   ok')
             } else {
@@ -93,14 +89,6 @@ export default {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.3s, opacity 0.8s linear;
-}
-
-.correct p {
-    bottom: 90%;
-}
-
-.correct .imgWrapper {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 100%);
 }
 
 @media screen and (max-width: 768px) {
