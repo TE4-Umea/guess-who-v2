@@ -21,7 +21,9 @@ export default {
             }
         },
         askQuestion(question, characters, correctAnswer) {
-            this.updateStats()
+            if (!this.stats.gameOver) {
+                this.updateStats()
+            }
             let correctAnswerIncludesTag = false
             let answer = ''
             this.question.isAnswered = true;
