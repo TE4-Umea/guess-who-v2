@@ -1,6 +1,7 @@
 <script setup>
 import CharacterCard from './components/CharacterCard.vue'
 import QuestionButton from './components/QuestionButton.vue'
+import WinScreen from './components/WinScreen.vue'
 </script>
 
 <template>
@@ -9,7 +10,8 @@ import QuestionButton from './components/QuestionButton.vue'
             {{ turn.question.text }}: {{ turn.answer }}
         </p>
     </div> -->
-
+    <WinScreen v-if="stats.gameOver" :name=correctAnswer.name :image=correctAnswer.image :guesses=stats.guesses
+        :questions=stats.questionsAsked :time=stats.time></WinScreen>
     <div class="grid">
         <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
             :characters=characters :gameLog=gameLog :stats=stats />
