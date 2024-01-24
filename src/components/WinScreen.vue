@@ -1,22 +1,44 @@
 <script setup>
-defineProps(['name', 'image', 'guesses', 'questions', 'time', 'gameOver'])
+defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
-    <div class="center">
-        <div :class="[{ enterAnimation: gameOver }]" class="winScreen">
-            <h1>You win!</h1>
-            <img :src="image">
-            <h1>{{ name }}</h1>
-            <p>You guessed {{ guesses }} times. You asked {{ questions }} questions. It took {{ time }} seconds.</p>
-            <button>Restart</button>
-            <button>Game log</button>
-        </div>
+<div class="center">
+    <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
+        <h1>You win!</h1>
+        <img :src="correctAnswer.image">
+        <h1>{{ correctAnswer.name }}</h1>
+        <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{ stats.time }}
+            seconds.</p>
+        <button v-on:click="() => { restart() }">Restart</button>
+        <button>Game log</button>
     </div>
+</div>
 </template>
 
 <script>
-export default {}
+export default {
+    methods: {
+        restart() {
+            // This.questions.forEach(question => {
+            //     question.isAnswered = false
+            // })
+            // this.stats = {
+            //     guesses: 0,
+            //     questionsAsked: 0,
+            //     time: 0,
+            //     gameOver: false,
+            // }
+            // this.gameLog = []
+            // this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
+            // console.log(this.correctAnswer)
+            // this.characters.forEach(character => {
+            //     character.isHidden = false
+            // })
+            location.reload()
+        },
+    },
+}
 </script>
 
 <style>
