@@ -13,21 +13,28 @@ import WinScreen from './components/WinScreen.vue'
     <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
         :gameLog=gameLog>
     </WinScreen>
-    <div class="grid">
-        <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
-            :characters=characters :gameLog=gameLog :stats=stats />
+
+    <div id="characterGrid">
+        <div class="grid">
+            <CharacterCard v-for="character in characters" :key=character.id :character=character
+                :correctAnswer=correctAnswer :characters=characters :gameLog=gameLog :stats=stats />
+        </div>
     </div>
 
     <div id="searchField">
-        <h2 v-if="gameLog.length > 0">
+        <h2 v-if="gameLog.length > 0" class="lastQuestion">
             {{ gameLog[gameLog.length - 1].question.text }} {{ gameLog[gameLog.length - 1].answer }}
         </h2>
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
             :onFocus="() => { showQuestions() }" />
-        <ul id="myUL" tabindex="-1">
-            <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question :characters=characters
-                :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats :questions=questions />
-        </ul>
+
+        <div id="questionField">
+            <ul id="myUL" tabindex="-1">
+                <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question
+                    :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats
+                    :questions=questions />
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -78,7 +85,6 @@ export default {
         },
         hideQuestions() {
             document.getElementById('myUL').style.display = 'none'
-
         },
     },
     async mounted() {
