@@ -4,10 +4,10 @@ defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question, characters, correctAnswer) }"
+        <button v-on:click="() => { askQuestion(question, characters, correctAnswer) }"
             v-if="!question.isAnswered && !question.isHidden">
             <p>{{ question.text }}</p>
-        </a>
+        </button>
     </li>
 </template>
 
@@ -21,7 +21,9 @@ export default {
             }
         },
         askQuestion(question, characters, correctAnswer) {
-            this.updateStats()
+            if (!this.stats.gameOver) {
+                this.updateStats()
+            }
             let correctAnswerIncludesTag = false
             let answer = ''
             this.question.isAnswered = true;
@@ -128,7 +130,7 @@ export default {
 </script>
 
 <style>
-#myUL li a {
+#myUL li button {
     border: 1px solid #ddd;
     background-color: #28282b;
 
@@ -142,19 +144,23 @@ export default {
 
     display: block;
     size: 100%;
+    width: 100%;
+
+    font-family: "Yanone Kaffeesatz", sans-serif;
+    font-size: 1.3rem;
 }
 
 #myUL li:hover {
     background-color: #505050;
 }
 
-a {
+button {
     font-weight: 500;
     color: #646cff;
     text-decoration: inherit;
 }
 
-a:hover {
+button:hover {
     color: #535bf2;
 }
 </style>

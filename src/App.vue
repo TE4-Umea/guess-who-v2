@@ -1,6 +1,7 @@
 <script setup>
 import CharacterCard from './components/CharacterCard.vue'
 import QuestionButton from './components/QuestionButton.vue'
+import WinScreen from './components/WinScreen.vue'
 </script>
 
 <template>
@@ -9,10 +10,11 @@ import QuestionButton from './components/QuestionButton.vue'
             {{ turn.question.text }}: {{ turn.answer }}
         </p>
     </div> -->
-
+    <WinScreen v-if="stats.gameOver" :name=correctAnswer.name :image=correctAnswer.image :guesses=stats.guesses
+        :questions=stats.questionsAsked :time=stats.time></WinScreen>
     <div class="grid">
         <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
-            :characters=characters :stats=stats />
+            :characters=characters :gameLog=gameLog :stats=stats />
     </div>
 
     <div id="searchField">
@@ -21,7 +23,7 @@ import QuestionButton from './components/QuestionButton.vue'
         </h2>
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
             :onFocus="() => { showQuestions() }" />
-        <ul id="myUL">
+        <ul id="myUL" tabindex="-1">
             <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question :characters=characters
                 :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats :questions=questions />
         </ul>
@@ -43,6 +45,7 @@ export default {
                 guesses: 0,
                 questionsAsked: 0,
                 time: 0,
+                gameOver: false,
             },
         };
     },

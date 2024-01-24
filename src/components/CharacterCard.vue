@@ -1,10 +1,11 @@
 <script setup>
-defineProps(['character', 'correctAnswer', 'stats', 'characters'])
+defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
     <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
         v-on:click="Guess(character, correctAnswer,)" class="characterCard" :title="'Guess on ' + character.name + '?'">
+
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
             <img :src="character.image">
@@ -17,27 +18,23 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters'])
 export default {
     methods: {
         Guess(character, answer) {
-            this.stats.guesses++
-            if (character.name === answer.name) {
-                if (this.stats.time === 0 || this.stats.time > 3600000) {
+            if (!this.stats.gameOver) {
+                this.stats.guesses++
+                if (character.name === answer.name) {
                     this.characters.forEach(character => {
                         if (character.name !== answer.name) {
                             character.isHidden = true
                         }
                     })
-                    character.name = this.stats
                     if (this.stats.time !== 0) {
                         this.stats.time = (Date.now() - this.stats.time) / 1000
                     }
 
-                    const element = document.getElementById(character.id)
-                    element.classList.add('correct')
+                    this.stats.gameOver = true
+                } else {
+                    character.isHidden = true
+                    // Aalert('🤬 R(dataAAAAAdataAAH 👎')
                 }
-
-                alert('🤩 Correct guess! 👍')
-            } else {
-                character.isHidden = true
-                alert('😢 Wrong guess! 👎')
             }
         },
     },
@@ -96,14 +93,6 @@ export default {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.3s, opacity 0.8s linear;
-}
-
-.correct p {
-    bottom: 90%;
-}
-
-.correct .imgWrapper {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 100%);
 }
 
 @media screen and (max-width: 768px) {
