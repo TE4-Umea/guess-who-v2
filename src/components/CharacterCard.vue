@@ -1,10 +1,12 @@
 <script setup>
-defineProps(['character'])
+defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
-    <div :class="[{ backsideAnimation: character.isHidden }]" v-on:click="character.isHidden = !character.isHidden"
-        class="characterCard"> <!-- Get class 'backsideAnimation' if isHidden is true -->
+    <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
+        v-on:click="Guess(character, correctAnswer,)" class="characterCard" :title="'Guess on ' + character.name + '?'">
+
+        <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
             <img :src="character.image">
         </div>
@@ -13,7 +15,34 @@ defineProps(['character'])
 </template>
 
 <script>
+export default {
+    methods: {
+        Guess(character, answer) {
+            if (this.stats.time === 0) {
+                this.stats.time = Date.now()
+            }
 
+            if (!this.stats.gameOver) {
+                this.stats.guesses++
+                if (character.name === answer.name) {
+                    this.characters.forEach(character => {
+                        if (character.name !== answer.name) {
+                            character.isHidden = true
+                        }
+                    })
+                    if (this.stats.time !== 0) {
+                        this.stats.time = (Date.now() - this.stats.time) / 1000
+                    }
+
+                    this.stats.gameOver = true
+                } else {
+                    character.isHidden = true
+                    // Aalert('🤬 R(dataAAAAAdataAAH 👎')
+                }
+            }
+        },
+    },
+}
 </script>
 
 <style>
@@ -22,7 +51,7 @@ defineProps(['character'])
     height: 100%;
     min-height: 100px;
 
-    border: 4px solid red;
+    background-color: rgb(15, 15, 15);
 
     text-align: center;
     line-break: normal;
@@ -31,18 +60,16 @@ defineProps(['character'])
     transition: transform 0.8s;
     transform-style: preserve-3d;
     transition-timing-function: cubic-bezier(1, 1.03, .54, 1.4);
+
+    cursor: pointer;
 }
 
-.backsideAnimation {
-    transform: rotateX(180deg);
-}
+.characterCard p {
+    position: relative;
+    bottom: 50px;
+    overflow: hidden;
 
-.backsideAnimation img,
-.backsideAnimation p,
-.backsideAnimation div {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s 0.3s, opacity 0.8s linear;
+    font-weight: 700;
 }
 
 .characterCard img {
@@ -59,10 +86,16 @@ defineProps(['character'])
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
 }
 
-.characterCard p {
-    position: relative;
-    bottom: 50px;
-    overflow: hidden;
+.backsideAnimation {
+    transform: rotateX(180deg);
+}
+
+.backsideAnimation img,
+.backsideAnimation p,
+.backsideAnimation div {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.8s linear;
 }
 
 @media screen and (max-width: 768px) {

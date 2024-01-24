@@ -1,22 +1,33 @@
 <script setup>
-defineProps(['question', 'characters', 'correctAnswer', 'gameLog'])
+defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 'stats'])
 </script>
 
 <template>
     <li>
-        <a v-on:click="() => { askQuestion(question, characters, correctAnswer, gameLog) }"
+        <button v-on:click="() => { askQuestion(question, characters, correctAnswer) }"
             v-if="!question.isAnswered && !question.isHidden">
             <p>{{ question.text }}</p>
-        </a>
+        </button>
     </li>
 </template>
 
 <script>
 export default {
     methods: {
-        // eslint-disable-next-line complexity
+        updateStats() {
+            this.stats.questionsAsked++
+            if (this.stats.time === 0) {
+                this.stats.time = Date.now()
+            }
+        },
         askQuestion(question, characters, correctAnswer) {
+            if (!this.stats.gameOver) {
+                this.updateStats()
+            }
+
             let correctAnswerIncludesTag = false
+            let answer = ''
+            this.question.isAnswered = true;
 
             for (let i = 0; i < correctAnswer.tags.length; i++) {
                 if (correctAnswer.tags[i] === question.tag) {
@@ -26,12 +37,17 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
+                // this.closeRedundantQuestionsOnCorrect(question.type)
+                answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)
+                this.closeRedundantQuestionsOnWrong(question.type)
+                answer = 'No'
             }
 
-            this.gameLog.push(question);
-            this.question.isAnswered = true;
+            this.closeRedundantQuestionBasedOnRemainingTags()
+
+            this.gameLog.push({ question, answer });
         },
 
         closeAllWithTag(characters, tag) {
@@ -59,12 +75,57 @@ export default {
             })
         },
 
+        closeRedundantQuestionsOnCorrect(type) {
+            this.questions.forEach(question => {
+                if (question.type === type) {
+                    question.isAnswered = true
+                }
+            })
+        },
+
+        closeRedundantQuestionsOnWrong(type) {
+            let questionsLeft = 0;
+            // Count how many questions are left
+            this.questions.forEach(question => {
+                if (question.type === type && question.isAnswered === false) {
+                    questionsLeft++
+                }
+            })
+
+            // If there are only 1 question left, close it
+            this.questions.forEach(question => {
+                if (question.type === type && question.isAnswered === false) {
+                    if (questionsLeft === 1) {
+                        question.isAnswered = true
+                    }
+                }
+            })
+        },
+
+        closeRedundantQuestionBasedOnRemainingTags() {
+            const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+            console.log(remainingTags)
+
+            this.questions.forEach(question => {
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
+                    }
+                }
+
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
+        },
     },
 }
 </script>
 
 <style>
-#myUL li a {
+#myUL li button {
     border: 1px solid #ddd;
     background-color: #28282b;
 
@@ -78,19 +139,23 @@ export default {
 
     display: block;
     size: 100%;
+    width: 100%;
+
+    font-family: "Yanone Kaffeesatz", sans-serif;
+    font-size: 1.3rem;
 }
 
 #myUL li:hover {
     background-color: #505050;
 }
 
-a {
+button {
     font-weight: 500;
     color: #646cff;
     text-decoration: inherit;
 }
 
-a:hover {
+button:hover {
     color: #535bf2;
 }
 </style>
