@@ -4,16 +4,18 @@ import QuestionButton from './components/QuestionButton.vue'
 </script>
 
 <template>
-    <div class="grid">
+    <div class="grid" id="characterGrid">
         <CharacterCard v-for="(character, index) in characters" :key="index" :character=character />
     </div>
 
     <div id="searchField">
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.." />
-        <ul id="myUL">
-            <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
+        <div id="questionField">
+            <ul id="myUL">
+                <QuestionButton v-for="(question, index) in  questions " :key="index" :index="index" :question=question
                 :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog />
-        </ul>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -41,6 +43,18 @@ export default {
                 }
             });
         },
+
+        clearSearchField() {
+            document.getElementById('myInput').value = '';
+        },
+
+        closeQuestionsOnClick(event) {
+            this.questions.forEach(question => {
+                if (!this.$el.contains(event.target)) {
+                    question.isHidden = true;
+                }
+            });
+        },
     },
     async mounted() {
         // Get characters and questions from database, must be in mounted() for async/await to work
@@ -50,6 +64,11 @@ export default {
         // Set a random character to be the correct answer
         this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
         console.log(this.correctAnswer)
+
+        document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);
+        document.getElementById('searchField').addEventListener('click', this.search);
+        document.getElementById('questionField').addEventListener('click', this.closeQuestionsOnClick);
+        document.getElementById('questionField').addEventListener('click', this.clearSearchField);
     },
 };
 </script>
