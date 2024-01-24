@@ -689,7 +689,7 @@ export async function getCharactersFromDatabase() {
             id: 105,
             name: 'Sett',
             image: 'leagueoflegends/SettSquare.png',
-            tags: ['M', 'vastaya', 'ionia', 'noxus', 'fighter', 'top', 'melee', 'grit'],
+            tags: ['M', 'human', 'vastaya', 'ionia', 'noxus', 'fighter', 'top', 'melee', 'grit'],
         },
         {
             id: 106,
