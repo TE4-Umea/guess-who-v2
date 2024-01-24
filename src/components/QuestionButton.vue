@@ -24,6 +24,7 @@ export default {
             if (!this.stats.gameOver) {
                 this.updateStats()
             }
+
             let correctAnswerIncludesTag = false
             let answer = ''
             this.question.isAnswered = true;
@@ -36,11 +37,11 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
-                // this.closeUselessQuestionsOnCorrect(question.type)
+                // this.closeRedundantQuestionsOnCorrect(question.type)
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)
-                // this.closeUselessQuestionsOnWrong(question.type)
+                this.closeRedundantQuestionsOnWrong(question.type)
                 answer = 'No'
             }
 
@@ -102,14 +103,10 @@ export default {
         },
 
         closeRedundantQuestionBasedOnRemainingTags() {
-
-            let remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+            const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
             console.log(remainingTags)
 
-            let updatedQuestions = this.questions
-
-            updatedQuestions.forEach(question => {
-
+            this.questions.forEach(question => {
                 let questionIsRelevant = false
 
                 for (let i = 0; i < remainingTags.length; i++) {
@@ -122,8 +119,6 @@ export default {
                     question.isAnswered = true
                 }
             })
-
-            this.questions = updatedQuestions
         },
     },
 }
