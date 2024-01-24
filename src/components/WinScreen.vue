@@ -3,12 +3,15 @@ defineProps(['name', 'image', 'guesses', 'questions', 'time'])
 </script>
 
 <template>
-    <div class="winScreen">
-        <h1>You win!</h1>
-        <img :src="image">
-        <h1>{{ name }}</h1>
-        <p>You guessed {{ guesses }} times. You asked {{ questions }} questions. It took {{ time }} seconds.</p>
-        <button>Restart</button>
+    <div class="center">
+        <div class="winScreen">
+            <h1>You win!</h1>
+            <img :src="image">
+            <h1>{{ name }}</h1>
+            <p>You guessed {{ guesses }} times. You asked {{ questions }} questions. It took {{ time }} seconds.</p>
+            <button>Restart</button>
+            <button>Game log</button>
+        </div>
     </div>
 </template>
 
@@ -17,12 +20,17 @@ export default {}
 </script>
 
 <style>
+.center {
+    display: flex;
+    justify-content: center;
+}
+
 .winScreen {
     width: 80vw;
-    margin: auto;
     padding: 1rem;
+    margin-top: 1rem;
 
-    background-color: rgb(15, 15, 15);
+    background-color: rgb(24, 24, 24);
 
     text-align: center;
 
@@ -49,5 +57,12 @@ export default {}
     border-style: none;
     border-radius: 20px;
     padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .winScreen img {
+        width: 48vw;
+        height: 48vw;
+    }
 }
 </style>
