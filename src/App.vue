@@ -72,7 +72,7 @@ export default {
                     question.isHidden = true;
                 }
             });
-
+        },
         showQuestions() {
             document.getElementById('myUL').style.display = 'block'
         },
