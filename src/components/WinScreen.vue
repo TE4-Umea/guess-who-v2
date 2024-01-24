@@ -1,10 +1,10 @@
 <script setup>
-defineProps(['name', 'image', 'guesses', 'questions', 'time'])
+defineProps(['name', 'image', 'guesses', 'questions', 'time', 'gameOver'])
 </script>
 
 <template>
     <div class="center">
-        <div class="winScreen">
+        <div :class="[{ enterAnimation: gameOver }]" class="winScreen">
             <h1>You win!</h1>
             <img :src="image">
             <h1>{{ name }}</h1>
@@ -57,6 +57,20 @@ export default {}
     border-style: none;
     border-radius: 20px;
     padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.enterAnimation {
+    animation: enter 2s;
+}
+
+@keyframes enter {
+    0% {
+        top: -50rem;
+    }
+
+    100% {
+        top: 0;
+    }
 }
 
 @media screen and (max-width: 768px) {
