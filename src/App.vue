@@ -11,7 +11,7 @@ import WinScreen from './components/WinScreen.vue'
         </p>
     </div> -->
     <WinScreen v-if="stats.gameOver" :name=correctAnswer.name :image=correctAnswer.image :guesses=stats.guesses
-        :questions=stats.questionsAsked :time=stats.time></WinScreen>
+        :questions=stats.questionsAsked :time=stats.time :gameOver=stats.gameOver></WinScreen>
     <div class="grid">
         <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
             :characters=characters :gameLog=gameLog :stats=stats />
