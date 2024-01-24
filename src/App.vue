@@ -13,7 +13,7 @@ import WinScreen from './components/WinScreen.vue'
     <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
         :gameLog=gameLog>
     </WinScreen>
-    <div class="grid">
+    <div class="grid" id="characterGrid">
         <CharacterCard v-for="character in characters" :key=character.id :character=character :correctAnswer=correctAnswer
             :characters=characters :gameLog=gameLog :stats=stats />
     </div>
@@ -24,10 +24,14 @@ import WinScreen from './components/WinScreen.vue'
         </h2>
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
             :onFocus="() => { showQuestions() }" />
-        <ul id="myUL" tabindex="-1">
-            <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question :characters=characters
-                :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats :questions=questions />
-        </ul>
+
+        <div id="questionField">
+            <ul id="myUL" tabindex="-1">
+                <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question
+                    :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats
+                    :questions=questions />
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -78,7 +82,6 @@ export default {
         },
         hideQuestions() {
             document.getElementById('myUL').style.display = 'none'
-
         },
     },
     async mounted() {
