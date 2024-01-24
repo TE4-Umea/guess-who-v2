@@ -4,7 +4,7 @@ defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 
 
 <template>
     <li>
-        <button v-on:click="() => { askQuestion(question, characters, correctAnswer, gameLog) }"
+        <button v-on:click="() => { askQuestion(question, characters, correctAnswer) }"
             v-if="!question.isAnswered && !question.isHidden">
             <p>{{ question.text }}</p>
         </button>
@@ -36,13 +36,15 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
-                this.closeUselessQuestionsOnCorrect(question.type)
+                // this.closeUselessQuestionsOnCorrect(question.type)
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)
-                this.closeUselessQuestionsOnWrong(question.type)
+                // this.closeUselessQuestionsOnWrong(question.type)
                 answer = 'No'
             }
+
+            this.closeRedundantQuestionBasedOnRemainingTags()
 
             this.gameLog.push({ question, answer });
         },
@@ -72,7 +74,7 @@ export default {
             })
         },
 
-        closeUselessQuestionsOnCorrect(type) {
+        closeRedundantQuestionsOnCorrect(type) {
             this.questions.forEach(question => {
                 if (question.type === type) {
                     question.isAnswered = true
@@ -80,7 +82,7 @@ export default {
             })
         },
 
-        closeUselessQuestionsOnWrong(type) {
+        closeRedundantQuestionsOnWrong(type) {
             let questionsLeft = 0;
             // Count how many questions are left
             this.questions.forEach(question => {
@@ -97,6 +99,31 @@ export default {
                     }
                 }
             })
+        },
+
+        closeRedundantQuestionBasedOnRemainingTags() {
+
+            let remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+            console.log(remainingTags)
+
+            let updatedQuestions = this.questions
+
+            updatedQuestions.forEach(question => {
+
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
+                    }
+                }
+
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
+
+            this.questions = updatedQuestions
         },
     },
 }

@@ -70,7 +70,6 @@ export default {
     overflow: hidden;
 
     font-weight: 700;
-    font-size: var(--step-0);
 }
 
 .characterCard img {

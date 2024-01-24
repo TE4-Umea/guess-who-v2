@@ -3,14 +3,17 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
-    <div class="winScreen">
+<div class="center">
+    <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
         <h1>You win!</h1>
         <img :src="correctAnswer.image">
         <h1>{{ correctAnswer.name }}</h1>
         <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{ stats.time }}
             seconds.</p>
         <button v-on:click="() => { restart() }">Restart</button>
+        <button>Game log</button>
     </div>
+</div>
 </template>
 
 <script>
@@ -39,12 +42,17 @@ export default {
 </script>
 
 <style>
+.center {
+    display: flex;
+    justify-content: center;
+}
+
 .winScreen {
     width: 80vw;
-    margin: auto;
     padding: 1rem;
+    margin-top: 1rem;
 
-    background-color: rgb(15, 15, 15);
+    background-color: rgb(24, 24, 24);
 
     text-align: center;
 
@@ -71,5 +79,26 @@ export default {
     border-style: none;
     border-radius: 20px;
     padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.enterAnimation {
+    animation: enter 2s;
+}
+
+@keyframes enter {
+    0% {
+        top: -50rem;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .winScreen img {
+        width: 48vw;
+        height: 48vw;
+    }
 }
 </style>
