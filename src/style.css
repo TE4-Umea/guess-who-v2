@@ -102,3 +102,7 @@ p {
 }
 
 @media (prefers-color-scheme: light) {}
+
+.lastQuestion {
+  margin: 0;
+}
