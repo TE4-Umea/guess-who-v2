@@ -39,7 +39,6 @@ export default {
                 } else {
                     correctGuess = 'No'
                     character.isHidden = true
-                    // Aalert('🤬 R(dataAAAAAdataAAH 👎')
                 }
             }
 
