@@ -18,6 +18,10 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 export default {
     methods: {
         Guess(character, answer) {
+            if (this.stats.time === 0) {
+                this.stats.time = Date.now()
+            }
+
             if (!this.stats.gameOver) {
                 this.stats.guesses++
                 if (character.name === answer.name) {
