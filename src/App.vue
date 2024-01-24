@@ -61,11 +61,24 @@ export default {
                 }
             });
         },
+
+        clearSearchField() {
+            document.getElementById('myInput').value = '';
+        },
+
+        closeQuestionsOnClick(event) {
+            this.questions.forEach(question => {
+                if (!this.$el.contains(event.target)) {
+                    question.isHidden = true;
+                }
+            });
+        },
         showQuestions() {
             document.getElementById('myUL').style.display = 'block'
         },
         hideQuestions() {
             document.getElementById('myUL').style.display = 'none'
+
         },
     },
     async mounted() {
@@ -76,6 +89,11 @@ export default {
         // Set a random character to be the correct answer
         this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
         console.log(this.correctAnswer)
+
+        document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);
+        document.getElementById('searchField').addEventListener('click', this.search);
+        document.getElementById('questionField').addEventListener('click', this.closeQuestionsOnClick);
+        document.getElementById('questionField').addEventListener('click', this.clearSearchField);
     },
 };
 </script>

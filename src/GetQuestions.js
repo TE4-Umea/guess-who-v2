@@ -94,7 +94,7 @@ export async function getQuestionsFromDatabase() {
         question.isAnswered = false;
     });
     questions.forEach(question => {
-        question.isHidden = false;
+        question.isHidden = true;
     });
 
     return questions;
