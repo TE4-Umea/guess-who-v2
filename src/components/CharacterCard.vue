@@ -18,6 +18,7 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 export default {
     methods: {
         Guess(character, answer) {
+            let correctGuess = 'Yes'
             if (this.stats.time === 0) {
                 this.stats.time = Date.now()
             }
@@ -36,10 +37,17 @@ export default {
 
                     this.stats.gameOver = true
                 } else {
+                    correctGuess = 'No'
                     character.isHidden = true
                     // Aalert('🤬 R(dataAAAAAdataAAH 👎')
                 }
             }
+
+            this.gameLog.push({
+                question: {
+                    text: 'Is it ' + character.name + '?',
+                }, answer: correctGuess,
+            });
         },
     },
 }
@@ -70,7 +78,6 @@ export default {
     overflow: hidden;
 
     font-weight: 700;
-    font-size: var(--step-0);
 }
 
 .characterCard img {
