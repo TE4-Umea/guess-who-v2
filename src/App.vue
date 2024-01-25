@@ -2,6 +2,7 @@
 import CharacterCard from './components/CharacterCard.vue'
 import QuestionButton from './components/QuestionButton.vue'
 import WinScreen from './components/WinScreen.vue'
+import StartScreen from './components/StartScreen.vue'
 </script>
 
 <template>
@@ -10,6 +11,9 @@ import WinScreen from './components/WinScreen.vue'
             {{ turn.question.text }}: {{ turn.answer }}
         </p>
     </div> -->
+    <StartScreen>
+    </StartScreen>
+
     <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
         :gameLog=gameLog>
     </WinScreen>
