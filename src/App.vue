@@ -39,8 +39,8 @@ import WinScreen from './components/WinScreen.vue'
 </template>
 
 <script>
-import { getCharactersFromDatabase } from './characters/GetLeagueCharacters.js';
-import { getQuestionsFromDatabase } from './questions/GetLeagueQuestions.js';
+import { getCharactersFromDatabase } from './characters/GetOverwatchCharacters.js';
+import { getQuestionsFromDatabase } from './questions/GetOverwatchQuestions.js';
 
 export default {
     data() {
