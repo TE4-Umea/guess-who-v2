@@ -5,11 +5,6 @@ import WinScreen from './components/WinScreen.vue'
 </script>
 
 <template>
-    <!-- <div>
-        <p v-for="(turn, index) in gameLog" :key="index">
-            {{ turn.question.text }}: {{ turn.answer }}
-        </p>
-    </div> -->
     <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
         :gameLog=gameLog>
     </WinScreen>
