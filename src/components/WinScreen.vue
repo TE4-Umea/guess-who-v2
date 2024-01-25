@@ -65,22 +65,21 @@ export default {
                 character.isHidden = false;
             });
 
-            this.gameLog.forEach(turn => {
+            this.gameLog.forEach((turn, index) => {
                 console.log('replay turn')
+                console.log(index)
 
                 setTimeout(() => {
                     if (turn.question.type === 'character') {
                         if (turn.answer === 'Yes') {
-                            // Hide all characters except the correct answer
                             this.characters.forEach(character => {
                                 if (character.name !== this.correctAnswer.name) {
                                     character.isHidden = true;
                                 }
                             });
                         } else {
-                            // Hide the correct answer
                             this.characters.forEach(character => {
-                                if (character.name === turn.question.text) {
+                                if (turn.question.text.includes(character.name)) {
                                     character.isHidden = true;
                                 }
                             });
@@ -111,12 +110,12 @@ export default {
                             })
                         }
                     }
-                }, 1500);
+                }, 500 * (index + 1));
             });
 
             setTimeout(() => {
                 this.stats.gameOver = true
-            }, 4000);
+            }, 7000);
         },
     },
 }
