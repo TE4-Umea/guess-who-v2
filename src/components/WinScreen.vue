@@ -107,7 +107,7 @@ export default {
                             })
                         }
                     }
-                }, 500 * (index + 1));
+                }, 600 * (index + 1));
             });
 
             // eslint-disable-next-line no-warning-comments
