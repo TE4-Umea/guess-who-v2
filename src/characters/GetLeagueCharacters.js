@@ -431,7 +431,7 @@ export async function getCharactersFromDatabase() {
             id: 66,
             name: 'Lissandra',
             image: 'leagueoflegends/LissandraSquare.png',
-            tags: ['F', 'iceborne', 'freljord', 'mage', 'mid', 'ranged', 'mana'],
+            tags: ['F', 'human', 'freljord', 'mage', 'mid', 'ranged', 'mana'],
         },
         {
             id: 67,
@@ -671,7 +671,7 @@ export async function getCharactersFromDatabase() {
             id: 102,
             name: 'Sejuani',
             image: 'leagueoflegends/SejuaniSquare.png',
-            tags: ['F', 'iceborne', 'freljord', 'tank', 'jungle', 'melee', 'mana'],
+            tags: ['F', 'human', 'freljord', 'tank', 'jungle', 'melee', 'mana'],
         },
         {
             id: 103,
