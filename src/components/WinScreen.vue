@@ -99,6 +99,7 @@ export default {
     border-style: none;
     border-radius: 20px;
     padding: 0.5rem 2rem 0.5rem 2rem;
+    margin: 0.5rem;
 }
 
 .enterAnimation {
