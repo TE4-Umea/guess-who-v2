@@ -28,8 +28,6 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
 </template>
 
 <script>
-import { closeAllWithoutTag } from './QuestionButton.vue'
-import { closeAllWithTag } from './QuestionButton.vue'
 
 export default {
     methods: {
@@ -62,55 +60,63 @@ export default {
         },
         replay() {
             this.stats.gameOver = false
-            const waitTimer = 1000
-
-            setTimeout(() => {
-                console.log('wait test')
-            }, waitTimer);
 
             this.characters.forEach(character => {
                 character.isHidden = false;
             });
 
-            setTimeout(() => {
-                console.log('wait test')
-            }, waitTimer);
-
             this.gameLog.forEach(turn => {
                 console.log('replay turn')
 
-                if (turn.question.type === 'character') {
-                    if (turn.answer === 'Yes') {
-                        // Hide all characters except the correct answer
-                        this.characters.forEach(character => {
-                            if (character.name !== turn.question.text) {
-                                character.isHidden = true;
-                            }
-                        });
-                    } else {
-                        // Hide the correct answer
-                        this.characters.forEach(character => {
-                            if (character.name === turn.question.text) {
-                                character.isHidden = true;
-                            }
-                        });
-                    }
-                } else if (turn.question.type !== 'character') {
-                    if (turn.answer === 'Yes') {
-                        // Close all without tag
-                        closeAllWithTag(this.characters, turn.question.tag);
-                    } else {
-                        // Close all with tag
-                        closeAllWithoutTag(this.characters, turn.question.tag);
-                    }
-                }
-
                 setTimeout(() => {
-                    console.log('wait test')
-                }, waitTimer);
+                    if (turn.question.type === 'character') {
+                        if (turn.answer === 'Yes') {
+                            // Hide all characters except the correct answer
+                            this.characters.forEach(character => {
+                                if (character.name !== this.correctAnswer.name) {
+                                    character.isHidden = true;
+                                }
+                            });
+                        } else {
+                            // Hide the correct answer
+                            this.characters.forEach(character => {
+                                if (character.name === turn.question.text) {
+                                    character.isHidden = true;
+                                }
+                            });
+                        }
+                    } else if (turn.question.type !== 'character') {
+                        if (turn.answer === 'Yes') {
+                            // Close all without tag
+                            this.characters.forEach(character => {
+                                let hasTag = false
+                                for (let i = 0; i < character.tags.length; i++) {
+                                    if (character.tags[i] === turn.question.tag) {
+                                        hasTag = true
+                                    }
+                                }
+
+                                if (!hasTag) {
+                                    character.isHidden = true
+                                }
+                            })
+                        } else {
+                            // Close all with tag
+                            this.characters.forEach(character => {
+                                for (let i = 0; i < character.tags.length; i++) {
+                                    if (character.tags[i] === turn.question.tag) {
+                                        character.isHidden = true
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }, 1500);
             });
 
-            this.stats.gameOver = true
+            setTimeout(() => {
+                this.stats.gameOver = true
+            }, 4000);
         },
     },
 }
