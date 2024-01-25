@@ -3,17 +3,27 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
-<div class="center">
-    <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
-        <h1>You win!</h1>
-        <img :src="correctAnswer.image">
-        <h1>{{ correctAnswer.name }}</h1>
-        <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{ stats.time }}
-            seconds.</p>
-        <button v-on:click="() => { restart() }">Restart</button>
-        <button>Game log</button>
+    <div class="center">
+        <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
+            <div>
+                <h1>You win!</h1>
+                <img :src="correctAnswer.image">
+                <h1>{{ correctAnswer.name }}</h1>
+                <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{
+                    stats.time }}
+                    seconds.</p>
+                <button v-on:click="() => { restart() }">Restart</button>
+                <button>Main menu</button>
+                <button v-on:click="() => { toggleGameLog() }">Game log</button>
+            </div>
+            <div class="questions" id="gameLog">
+                <h2>Questions asked:</h2>
+                <p v-for="(turn, index) in gameLog" :key="index">
+                    {{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}
+                </p>
+            </div>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -36,6 +46,13 @@ export default {
             //     character.isHidden = false
             // })
             location.reload()
+        },
+        toggleGameLog() {
+            if (document.getElementById('gameLog').style.display === 'block') {
+                document.getElementById('gameLog').style.display = 'none'
+            } else {
+                document.getElementById('gameLog').style.display = 'block'
+            }
         },
     },
 }
@@ -60,6 +77,9 @@ export default {
 
     z-index: 1;
     position: fixed;
+
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .winScreen img {
@@ -100,5 +120,15 @@ export default {
         width: 48vw;
         height: 48vw;
     }
+}
+
+.questions {
+    display: none;
+    overflow-y: scroll;
+    max-height: 750px;
+}
+
+.questions p {
+    margin: 0;
 }
 </style>
