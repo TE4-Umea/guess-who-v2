@@ -66,9 +66,6 @@ export default {
             });
 
             this.gameLog.forEach((turn, index) => {
-                console.log('replay turn')
-                console.log(index)
-
                 setTimeout(() => {
                     if (turn.question.type === 'character') {
                         if (turn.answer === 'Yes') {
@@ -113,9 +110,11 @@ export default {
                 }, 500 * (index + 1));
             });
 
+            // eslint-disable-next-line no-warning-comments
+            // TODO: make promise that resolves and .then() sets gameOver to true
             setTimeout(() => {
                 this.stats.gameOver = true
-            }, 7000);
+            }, 10000);
         },
     },
 }

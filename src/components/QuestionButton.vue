@@ -37,7 +37,7 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
-                // this.closeRedundantQuestionsOnCorrect(question.type)
+                // Tthis.closeRedundantQuestionsOnCorrect(question.type)
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)
@@ -104,7 +104,6 @@ export default {
 
         closeRedundantQuestionBasedOnRemainingTags() {
             const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
-            console.log(remainingTags)
 
             this.questions.forEach(question => {
                 let questionIsRelevant = false
