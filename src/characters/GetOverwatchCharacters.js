@@ -41,7 +41,7 @@ export async function getCharactersFromDatabase() {
             id: 7,
             name: 'Ana',
             image: 'overwatch/AnaSquare.png',
-            tags: ['F', 'human', 'health', 'brawl', 'dive', 'support', 'hitscan', 'projectile'],
+            tags: ['F', 'human', 'health', 'brawl', 'poke', 'dive', 'support', 'hitscan', 'projectile'],
         },
         {
             id: 8,
