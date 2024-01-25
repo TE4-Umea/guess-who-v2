@@ -121,6 +121,11 @@ export default {
         width: 48vw;
         height: 48vw;
     }
+
+    .winScreen {
+        flex-direction: column;
+        max-height: 85vh;
+    }
 }
 
 .questions {
