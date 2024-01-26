@@ -55,8 +55,6 @@ export default {
             } else {
                 document.getElementById('gameLog').style.display = 'block'
             }
-
-            console.log(this.gameLog)
         },
         replay() {
             this.stats.gameOver = false
