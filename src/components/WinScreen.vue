@@ -15,6 +15,7 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
                 <button v-on:click="() => { restart() }">Restart</button>
                 <button>Main menu</button>
                 <button v-on:click="() => { toggleGameLog() }">Game log</button>
+                <button v-on:click="() => { replay() }">Watch replay</button>
             </div>
             <div class="questions" id="gameLog">
                 <h2>Questions asked:</h2>
@@ -27,6 +28,7 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
 </template>
 
 <script>
+
 export default {
     methods: {
         restart() {
@@ -53,6 +55,65 @@ export default {
             } else {
                 document.getElementById('gameLog').style.display = 'block'
             }
+
+            console.log(this.gameLog)
+        },
+        replay() {
+            this.stats.gameOver = false
+            const delay = 800
+
+            this.characters.forEach(character => {
+                character.isHidden = false;
+            });
+
+            this.gameLog.forEach((turn, index) => {
+                setTimeout(() => {
+                    if (turn.question.type === 'character') {
+                        if (turn.answer === 'Yes') {
+                            this.characters.forEach(character => {
+                                if (character.name !== this.correctAnswer.name) {
+                                    character.isHidden = true;
+                                }
+                            });
+                        } else {
+                            this.characters.forEach(character => {
+                                if (turn.question.text.includes(character.name)) {
+                                    character.isHidden = true;
+                                }
+                            });
+                        }
+                    } else if (turn.question.type !== 'character') {
+                        if (turn.answer === 'Yes') {
+                            // Close all without tag
+                            this.characters.forEach(character => {
+                                let hasTag = false
+                                for (let i = 0; i < character.tags.length; i++) {
+                                    if (character.tags[i] === turn.question.tag) {
+                                        hasTag = true
+                                    }
+                                }
+
+                                if (!hasTag) {
+                                    character.isHidden = true
+                                }
+                            })
+                        } else {
+                            // Close all with tag
+                            this.characters.forEach(character => {
+                                for (let i = 0; i < character.tags.length; i++) {
+                                    if (character.tags[i] === turn.question.tag) {
+                                        character.isHidden = true
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }, delay * (index + 1));
+            });
+
+            setTimeout(() => {
+                this.stats.gameOver = true
+            }, delay * (this.gameLog.length + 1));
         },
     },
 }
