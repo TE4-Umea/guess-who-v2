@@ -1,9 +1,9 @@
-# Guess Who
+# Guess Who - Vem där?
+Ett spel där du ska gissa vilken karaktär som datorn har valt. Du får ställa frågor till datorn som den svarar ja eller nej på. När du tror att du vet vilken karaktär det är så kan du gissa. Om du gissar rätt så vinner du, annars fortsätter spelet. 
 
 ## Styleguide
-* CamelCase för variabler och funktioner
-* PascalCase för vue-filer
-* lowercase för bilder
+* camelCase för variabler och funktioner
+* PascalCase för filer
 * 4 mellanslags indentering
 * Semicolon om man vill
 * ESModules
