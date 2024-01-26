@@ -14,8 +14,6 @@ defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 
 <script>
 
 export default {
-
-
     methods: {
         updateStats() {
             this.stats.questionsAsked++
@@ -49,7 +47,6 @@ export default {
             }
 
             this.closeRedundantQuestionsBasedOnRemainingTags()
-
 
             this.gameLog.push({ question, answer });
         },
@@ -138,7 +135,7 @@ export default {
                     question.isAnswered = true
                 }
             })
-        }
+        },
     },
 }
 </script>
