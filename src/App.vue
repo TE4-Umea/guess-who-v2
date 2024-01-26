@@ -12,7 +12,7 @@ import WinScreen from './components/WinScreen.vue'
     <div id="characterGrid">
         <div class="grid">
             <CharacterCard v-for="character in characters" :key=character.id :character=character
-                :correctAnswer=correctAnswer :characters=characters :gameLog=gameLog :stats=stats />
+                :correctAnswer=correctAnswer :characters=characters :gameLog=gameLog :stats=stats :questions=questions />
         </div>
     </div>
 
@@ -35,8 +35,8 @@ import WinScreen from './components/WinScreen.vue'
 </template>
 
 <script>
-import { getCharactersFromDatabase } from './characters/GetLeagueCharacters.js';
-import { getQuestionsFromDatabase } from './questions/GetLeagueQuestions.js';
+import { getCharactersFromDatabase } from './characters/GetLotrCharacters.js';
+import { getQuestionsFromDatabase } from './questions/GetLotrQuestions.js';
 
 export default {
     data() {

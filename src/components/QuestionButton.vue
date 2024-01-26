@@ -12,6 +12,7 @@ defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 
 </template>
 
 <script>
+
 export default {
     methods: {
         updateStats() {
@@ -45,7 +46,7 @@ export default {
                 answer = 'No'
             }
 
-            this.closeRedundantQuestionBasedOnRemainingTags()
+            this.closeRedundantQuestionsBasedOnRemainingTags()
 
             this.gameLog.push({ question, answer });
         },
@@ -102,7 +103,7 @@ export default {
             })
         },
 
-        closeRedundantQuestionBasedOnRemainingTags() {
+        closeRedundantQuestionsBasedOnRemainingTags() {
             const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
 
             this.questions.forEach(question => {
@@ -115,6 +116,22 @@ export default {
                 }
 
                 if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
+        },
+
+        closeQuestionsBasedOnQuestionTypePreferences(typeToClose) {
+            this.questions.forEach(question => {
+                let questionIsPrefered = true
+
+                for (let i = 0; i < question.type.length; i++) {
+                    if (question.type[i] === typeToClose) {
+                        questionIsPrefered = false
+                    }
+                }
+
+                if (questionIsPrefered === false) {
                     question.isAnswered = true
                 }
             })
