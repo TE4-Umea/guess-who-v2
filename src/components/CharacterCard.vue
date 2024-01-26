@@ -43,6 +43,7 @@ export default {
             this.gameLog.push({
                 question: {
                     text: 'Is it ' + character.name + '?',
+                    type: 'character',
                 }, answer: correctGuess,
             });
 
