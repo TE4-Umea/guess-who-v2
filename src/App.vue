@@ -11,33 +11,36 @@ import StartScreen from './components/StartScreen.vue'
             {{ turn.question.text }}: {{ turn.answer }}
         </p>
     </div> -->
-    <StartScreen>
+    <StartScreen v-if="!stats.gameStarted" :stats=stats>
     </StartScreen>
 
     <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
         :gameLog=gameLog>
     </WinScreen>
 
-    <div id="characterGrid">
-        <div class="grid">
-            <CharacterCard v-for="character in characters" :key=character.id :character=character
+    <div v-if="stats.gameStarted">
+        <div id="characterGrid">
+            <p class="center">Character</p>
+            <div class="grid">
+                <CharacterCard v-for="character in characters" :key=character.id :character=character
                 :correctAnswer=correctAnswer :characters=characters :gameLog=gameLog :stats=stats />
+            </div>
         </div>
-    </div>
 
-    <div id="searchField">
-        <h2 v-if="gameLog.length > 0" class="lastQuestion">
-            {{ gameLog[gameLog.length - 1].question.text }} {{ gameLog[gameLog.length - 1].answer }}
-        </h2>
-        <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
+        <div id="searchField">
+            <h2 v-if="gameLog.length > 0" class="lastQuestion">
+                {{ gameLog[gameLog.length - 1].question.text }} {{ gameLog[gameLog.length - 1].answer }}
+            </h2>
+            <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
             :onFocus="() => { showQuestions() }" />
 
-        <div id="questionField">
-            <ul id="myUL" tabindex="-1">
-                <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question
-                    :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats
-                    :questions=questions />
-            </ul>
+            <div id="questionField">
+                <ul id="myUL" tabindex="-1">
+                    <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question
+                        :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats
+                        :questions=questions />
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -58,6 +61,7 @@ export default {
                 questionsAsked: 0,
                 time: 0,
                 gameOver: false,
+                gameStarted: false,
             },
         };
     },
@@ -99,11 +103,6 @@ export default {
         // Set a random character to be the correct answer
         this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
         console.log(this.correctAnswer)
-
-        document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);
-        document.getElementById('searchField').addEventListener('click', this.search);
-        document.getElementById('questionField').addEventListener('click', this.closeQuestionsOnClick);
-        document.getElementById('questionField').addEventListener('click', this.clearSearchField);
     },
 };
 </script>
