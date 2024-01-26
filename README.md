@@ -1,5 +1,5 @@
 # Guess Who - Vem där?
-Ett spel där du ska gissa vilken karaktär som datorn har valt. Du får ställa frågor till datorn som den svarar ja eller nej på. När du tror att du vet vilken karaktär det är så kan du gissa. Om du gissar rätt så vinner du, annars fortsätter spelet. 
+Ett spel där du ska gissa vilken karaktär som datorn har valt. Du får ställa frågor till datorn som den svarar ja eller nej på. När du tror att du vet vilken karaktär det är så kan du gissa. Om du gissar rätt så vinner du, annars fortsätter spelet. Försök att gissa rätt på så få frågor och gissningar som möjligt.
 
 ## Styleguide
 * camelCase för variabler och funktioner
