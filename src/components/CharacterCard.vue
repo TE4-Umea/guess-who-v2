@@ -18,7 +18,7 @@ defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'ch
 export default {
     methods: {
         Guess(character, answer) {
-            if (this.stats.replay || this.stats.gameOver) {
+            if (this.stats.replay || this.stats.gameOver || character.isHidden) {
                 return
             }
 
@@ -50,7 +50,7 @@ export default {
                     type: 'character',
                 }, answer: correctGuess,
             })
-            
+
             this.closeRedundantQuestionsBasedOnRemainingTags()
         },
 
