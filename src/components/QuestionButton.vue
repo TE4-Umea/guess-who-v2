@@ -40,7 +40,7 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
-                // this.closeRedundantQuestionsOnCorrect(question.type)
+                // Tthis.closeRedundantQuestionsOnCorrect(question.type)
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)

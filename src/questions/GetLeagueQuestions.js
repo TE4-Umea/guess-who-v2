@@ -343,6 +343,186 @@ export async function getQuestionsFromDatabase() {
             tag: 'manaless',
             type: ['resource', 'mecanics'],
         },
+        {
+            text: 'Is the character AP?',
+            tag: 'AP',
+            type: 'damageType',
+        },
+        {
+            text: 'Is the character AD?',
+            tag: 'AD',
+            type: 'damageType',
+        },
+        {
+            text: 'Is the character hybrid?',
+            tag: 'Hybrid',
+            type: 'damageType',
+        },
+        {
+            text: 'Is the character HP scaling?',
+            tag: 'HP-scale',
+            type: 'damageType',
+        },
+        {
+            text: 'Does the character have blue eyes?',
+            tag: 'blueEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have orange eyes?',
+            tag: 'orangeEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have red eyes?',
+            tag: 'redEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have green eyes?',
+            tag: 'greenEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have dark eyes?',
+            tag: 'darkEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have white eyes?',
+            tag: 'whiteEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have pink eyes?',
+            tag: 'pinkEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have purple eyes?',
+            tag: 'purpleEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have yellow eyes?',
+            tag: 'yellowEyes',
+            type: ['eyeColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have dark hair?',
+            tag: 'darkHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have blue hair?',
+            tag: 'blueHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have white hair?',
+            tag: 'whiteHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have dark hair?',
+            tag: 'darkHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have red hair?',
+            tag: 'redHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have dark hair?',
+            tag: 'darkHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have purple hair?',
+            tag: 'purpleHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have dark hair?',
+            tag: 'darkHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have blonde hair?',
+            tag: 'blondeHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have brown hair?',
+            tag: 'brownHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have orange hair?',
+            tag: 'darkHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have green hair?',
+            tag: 'greenHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Does the character have pink hair?',
+            tag: 'pinkHair',
+            type: ['hairColor', 'appearance'],
+        },
+        {
+            text: 'Is the character bald?',
+            tag: 'bald',
+            type: ['hairLength', 'appearance'],
+        },
+        {
+            text: 'Does the character have short hair?',
+            tag: 'shortHair',
+            type: ['hairLength', 'appearance'],
+        },
+        {
+            text: 'Does the character have medium length hair?',
+            tag: 'mediumHair',
+            type: ['hairLength', 'appearance'],
+        },
+        {
+            text: 'Does the character have long hair?',
+            tag: 'longHair',
+            type: ['hairLength', 'appearance'],
+        },
+        {
+            text: 'Does the character have facial hair?',
+            tag: 'facialHair',
+            type: ['facialHair', 'appearance'],
+        },
+        {
+            text: 'Does the character have headwear?',
+            tag: 'headwear',
+            type: ['headwear', 'appearance'],
+        },
+        {
+            text: 'Does the character have glasses, a mask, or goggles?',
+            tag: 'mask',
+            type: ['mask', 'appearance'],
+        },
+        {
+            text: 'Does the character have animal features?',
+            tag: 'animal',
+            type: ['animal', 'appearance'],
+        },
+        {
+            text: 'Does the character have robotic features?',
+            tag: 'robot',
+            type: ['robot', 'appearance'],
+        },
+        {
+            text: 'Does the character lack clothes?',
+            tag: 'naked',
+            type: ['naked', 'appearance'],
+        },
     ];
 
     // Add isAnswered and isHidden property to all questions

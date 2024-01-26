@@ -40,8 +40,6 @@ export default {
                     correctGuess = 'No'
                     character.isHidden = true
                 }
-            }
-
             this.gameLog.push({
                 question: {
                     text: 'Is it ' + character.name + '?',
