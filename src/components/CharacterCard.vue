@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
+defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
@@ -47,6 +47,26 @@ export default {
                     text: 'Is it ' + character.name + '?',
                 }, answer: correctGuess,
             });
+
+            this.closeRedundantQuestionsBasedOnRemainingTags()
+        },
+
+        closeRedundantQuestionsBasedOnRemainingTags() {
+            const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+
+            this.questions.forEach(question => {
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
+                    }
+                }
+
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
         },
     },
 }

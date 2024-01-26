@@ -12,7 +12,10 @@ defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 
 </template>
 
 <script>
+
 export default {
+
+
     methods: {
         updateStats() {
             this.stats.questionsAsked++
@@ -105,7 +108,6 @@ export default {
 
         closeRedundantQuestionsBasedOnRemainingTags() {
             const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
-            console.log(remainingTags)
 
             this.questions.forEach(question => {
                 let questionIsRelevant = false
