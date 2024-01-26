@@ -21,10 +21,11 @@ export default {
             }
         },
         askQuestion(question, characters, correctAnswer) {
-            if (!this.stats.gameOver) {
-                this.updateStats()
+            if (this.stats.replay || this.stats.gameOver) {
+                return
             }
 
+            this.updateStats()
             let correctAnswerIncludesTag = false
             let answer = ''
             this.question.isAnswered = true;

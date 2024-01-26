@@ -60,6 +60,7 @@ export default {
         },
         replay() {
             this.stats.gameOver = false
+            this.stats.replay = true
             const delay = 800
 
             this.characters.forEach(character => {
@@ -114,6 +115,7 @@ export default {
 
             setTimeout(() => {
                 this.stats.gameOver = true
+                this.stats.replay = false
             }, delay * (this.gameLog.length + 1));
         },
     },

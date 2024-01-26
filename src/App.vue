@@ -50,6 +50,7 @@ export default {
                 questionsAsked: 0,
                 time: 0,
                 gameOver: false,
+                replay: false,
             },
         };
     },
