@@ -55,11 +55,10 @@ export default {
             } else {
                 document.getElementById('gameLog').style.display = 'block'
             }
-
-            console.log(this.gameLog)
         },
         replay() {
             this.stats.gameOver = false
+            this.stats.replay = true
             const delay = 800
 
             this.characters.forEach(character => {
@@ -68,6 +67,7 @@ export default {
 
             this.gameLog.forEach((turn, index) => {
                 setTimeout(() => {
+                    document.getElementById('lastQuestion').innerHTML = (index + 1) + '. ' + turn.question.text + ' ' + turn.answer
                     if (turn.question.type === 'character') {
                         if (turn.answer === 'Yes') {
                             this.characters.forEach(character => {
@@ -113,6 +113,7 @@ export default {
 
             setTimeout(() => {
                 this.stats.gameOver = true
+                this.stats.replay = false
             }, delay * (this.gameLog.length + 1));
         },
     },

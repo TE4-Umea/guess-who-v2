@@ -17,8 +17,9 @@ import WinScreen from './components/WinScreen.vue'
     </div>
 
     <div id="searchField">
-        <h2 v-if="gameLog.length > 0" class="lastQuestion">
-            {{ gameLog[gameLog.length - 1].question.text }} {{ gameLog[gameLog.length - 1].answer }}
+        <h2 v-if="gameLog.length > 0" class="lastQuestion" id="lastQuestion">
+            {{ gameLog.length }}. {{ gameLog[gameLog.length - 1].question.text }}
+            {{ gameLog[gameLog.length - 1].answer }}
         </h2>
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
             :onFocus="() => { showQuestions() }" />
@@ -49,6 +50,7 @@ export default {
                 questionsAsked: 0,
                 time: 0,
                 gameOver: false,
+                replay: false,
             },
         };
     },
