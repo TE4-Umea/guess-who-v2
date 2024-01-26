@@ -68,6 +68,7 @@ export default {
 
             this.gameLog.forEach((turn, index) => {
                 setTimeout(() => {
+                    document.getElementById('lastQuestion').innerHTML = (index + 1) + '. ' + turn.question.text + ' ' + turn.answer
                     if (turn.question.type === 'character') {
                         if (turn.answer === 'Yes') {
                             this.characters.forEach(character => {
