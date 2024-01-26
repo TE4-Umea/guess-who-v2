@@ -60,6 +60,7 @@ export default {
         },
         replay() {
             this.stats.gameOver = false
+            const delay = 800
 
             this.characters.forEach(character => {
                 character.isHidden = false;
@@ -107,14 +108,12 @@ export default {
                             })
                         }
                     }
-                }, 600 * (index + 1));
+                }, delay * (index + 1));
             });
 
-            // eslint-disable-next-line no-warning-comments
-            // TODO: make promise that resolves and .then() sets gameOver to true
             setTimeout(() => {
                 this.stats.gameOver = true
-            }, 10000);
+            }, delay * (this.gameLog.length + 1));
         },
     },
 }
