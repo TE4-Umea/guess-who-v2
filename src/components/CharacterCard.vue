@@ -10,7 +10,7 @@ defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'ch
         <div class="imgWrapper">
             <img :src="character.image" alt="">
         </div>
-        <p>{{ character.name }}</p>
+        <h3>{{ character.name }}</h3>
     </div>
 </template>
 
@@ -94,7 +94,7 @@ export default {
     cursor: pointer;
 }
 
-.characterCard p {
+.characterCard h3 {
     position: relative;
     bottom: 50px;
     overflow: hidden;
@@ -121,7 +121,7 @@ export default {
 }
 
 .backsideAnimation img,
-.backsideAnimation p,
+.backsideAnimation h3,
 .backsideAnimation div {
     visibility: hidden;
     opacity: 0;
