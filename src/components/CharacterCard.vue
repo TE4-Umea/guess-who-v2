@@ -18,6 +18,7 @@ defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'ch
 export default {
     methods: {
         Guess(character, answer) {
+            if (character.isHidden === false) {
             if (this.stats.replay || this.stats.gameOver || character.isHidden) {
                 return
             }
@@ -52,6 +53,7 @@ export default {
             })
 
             this.closeRedundantQuestionsBasedOnRemainingTags()
+            }
         },
 
         closeRedundantQuestionsBasedOnRemainingTags() {
