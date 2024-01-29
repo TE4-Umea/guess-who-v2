@@ -162,6 +162,12 @@ export default {
     border-radius: 20px;
     padding: 0.5rem 2rem 0.5rem 2rem;
     margin: 0.5rem;
+    cursor: pointer;
+    background-color: black;
+}
+
+.winScreen button:hover {
+    background-color: rgb(64, 64, 64);
 }
 
 .enterAnimation {
