@@ -7,7 +7,7 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
         <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
             <div>
                 <h1>You win!</h1>
-                <img :src="correctAnswer.image">
+                <img :src="correctAnswer.image" alt="">
                 <h1>{{ correctAnswer.name }}</h1>
                 <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{
                     stats.time }}
