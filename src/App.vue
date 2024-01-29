@@ -5,11 +5,6 @@ import WinScreen from './components/WinScreen.vue'
 </script>
 
 <template>
-    <!-- <div>
-        <p v-for="(turn, index) in gameLog" :key="index">
-            {{ turn.question.text }}: {{ turn.answer }}
-        </p>
-    </div> -->
     <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
         :gameLog=gameLog>
     </WinScreen>
@@ -17,13 +12,14 @@ import WinScreen from './components/WinScreen.vue'
     <div id="characterGrid">
         <div class="grid">
             <CharacterCard v-for="character in characters" :key=character.id :character=character
-                :correctAnswer=correctAnswer :characters=characters :gameLog=gameLog :stats=stats />
+                :correctAnswer=correctAnswer :characters=characters :gameLog=gameLog :stats=stats :questions=questions />
         </div>
     </div>
 
     <div id="searchField">
-        <h2 v-if="gameLog.length > 0" class="lastQuestion">
-            {{ gameLog[gameLog.length - 1].question.text }} {{ gameLog[gameLog.length - 1].answer }}
+        <h2 v-if="gameLog.length > 0" class="lastQuestion" id="lastQuestion">
+            {{ gameLog.length }}. {{ gameLog[gameLog.length - 1].question.text }}
+            {{ gameLog[gameLog.length - 1].answer }}
         </h2>
         <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
             :onFocus="() => { showQuestions() }" />
@@ -54,6 +50,7 @@ export default {
                 questionsAsked: 0,
                 time: 0,
                 gameOver: false,
+                replay: false,
             },
         };
     },

@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
+defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
@@ -19,36 +19,59 @@ export default {
     methods: {
         Guess(character, answer) {
             if (character.isHidden === false) {
-                let correctGuess = 'Yes'
-                if (this.stats.time === 0) {
-                    this.stats.time = Date.now()
+            if (this.stats.replay || this.stats.gameOver || character.isHidden) {
+                return
+            }
+
+            let correctGuess = 'Yes'
+            if (this.stats.time === 0) {
+                this.stats.time = Date.now()
+            }
+
+            this.stats.guesses++
+            if (character.name === answer.name) {
+                this.characters.forEach(character => {
+                    if (character.name !== answer.name) {
+                        character.isHidden = true
+                    }
+                })
+                if (this.stats.time !== 0) {
+                    this.stats.time = (Date.now() - this.stats.time) / 1000
                 }
 
-                if (!this.stats.gameOver) {
-                    this.stats.guesses++
-                    if (character.name === answer.name) {
-                        this.characters.forEach(character => {
-                            if (character.name !== answer.name) {
-                                character.isHidden = true
-                            }
-                        })
-                        if (this.stats.time !== 0) {
-                            this.stats.time = (Date.now() - this.stats.time) / 1000
-                        }
+                this.stats.gameOver = true
+            } else {
+                correctGuess = 'No'
+                character.isHidden = true
+            }
 
-                        this.stats.gameOver = true
-                    } else {
-                        correctGuess = 'No'
-                        character.isHidden = true
+            this.gameLog.push({
+                question: {
+                    text: 'Is it ' + character.name + '?',
+                    type: 'character',
+                }, answer: correctGuess,
+            })
+
+            this.closeRedundantQuestionsBasedOnRemainingTags()
+            }
+        },
+
+        closeRedundantQuestionsBasedOnRemainingTags() {
+            const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+
+            this.questions.forEach(question => {
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
                     }
                 }
 
-                this.gameLog.push({
-                    question: {
-                        text: 'Is it ' + character.name + '?',
-                    }, answer: correctGuess,
-                });
-            }
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
         },
     },
 }
