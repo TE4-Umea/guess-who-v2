@@ -80,9 +80,6 @@ export default {
         showQuestions() {
             document.getElementById('myUL').style.display = 'block'
         },
-        hideQuestions() {
-            document.getElementById('myUL').style.display = 'none'
-        },
     },
     async mounted() {
         // Get characters and questions from database, must be in mounted() for async/await to work
