@@ -19,9 +19,14 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
             </div>
             <div class="questions" id="gameLog">
                 <h2>Questions asked:</h2>
-                <p v-for="(turn, index) in gameLog" :key="index">
+                <ul>
+                    <li v-for="(turn, index) in gameLog" :key="index">
+                        <p>{{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}</p>
+                    </li>
+                </ul>
+                <!-- <p v-for="(turn, index) in gameLog" :key="index">
                     {{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}
-                </p>
+                </p> -->
             </div>
         </div>
     </div>
@@ -204,5 +209,10 @@ export default {
 
 .questions p {
     margin: 0;
+}
+
+.questions ul {
+    list-style-type: none;
+    padding: 0;
 }
 </style>
