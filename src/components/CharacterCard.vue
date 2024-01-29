@@ -18,35 +18,37 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 export default {
     methods: {
         Guess(character, answer) {
-            let correctGuess = 'Yes'
-            if (this.stats.time === 0) {
-                this.stats.time = Date.now()
-            }
-
-            if (!this.stats.gameOver) {
-                this.stats.guesses++
-                if (character.name === answer.name) {
-                    this.characters.forEach(character => {
-                        if (character.name !== answer.name) {
-                            character.isHidden = true
-                        }
-                    })
-                    if (this.stats.time !== 0) {
-                        this.stats.time = (Date.now() - this.stats.time) / 1000
-                    }
-
-                    this.stats.gameOver = true
-                } else {
-                    correctGuess = 'No'
-                    character.isHidden = true
+            if (character.isHidden === false) {
+                let correctGuess = 'Yes'
+                if (this.stats.time === 0) {
+                    this.stats.time = Date.now()
                 }
-            }
 
-            this.gameLog.push({
-                question: {
-                    text: 'Is it ' + character.name + '?',
-                }, answer: correctGuess,
-            });
+                if (!this.stats.gameOver) {
+                    this.stats.guesses++
+                    if (character.name === answer.name) {
+                        this.characters.forEach(character => {
+                            if (character.name !== answer.name) {
+                                character.isHidden = true
+                            }
+                        })
+                        if (this.stats.time !== 0) {
+                            this.stats.time = (Date.now() - this.stats.time) / 1000
+                        }
+
+                        this.stats.gameOver = true
+                    } else {
+                        correctGuess = 'No'
+                        character.isHidden = true
+                    }
+                }
+
+                this.gameLog.push({
+                    question: {
+                        text: 'Is it ' + character.name + '?',
+                    }, answer: correctGuess,
+                });
+            }
         },
     },
 }
