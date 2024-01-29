@@ -99,6 +99,10 @@ p {
   .grid {
     grid-template-columns: auto auto auto;
   }
+
+  #myUL {
+    display: block;
+  }
 }
 
 @media (prefers-color-scheme: light) {}
