@@ -16,11 +16,11 @@ export async function getQuestionsFromDatabase() {
             tag: 'human', // If correct, close all species questions, else close this one
             type: ['species'],
         },
-        {
-            text: 'Is the character a darkin?',
-            tag: 'darkin',
-            type: ['species'],
-        },
+        // {
+        //     text: 'Is the character a darkin?',
+        //     tag: 'darkin',
+        //     type: ['species'],
+        // },
         {
             text: 'Is the character a yordle?',
             tag: 'yordle',
@@ -41,89 +41,104 @@ export async function getQuestionsFromDatabase() {
             tag: 'voidborn',
             type: ['species'],
         },
+        // {
+        //     text: 'Is the character a spirit?',
+        //     tag: 'spirit',
+        //     type: 'species',
+        // },
         {
-            text: 'Is the character a spirit?',
-            tag: 'spirit',
+            text: 'Is the character a demon, darkin or spirit?',
+            tag: 'demonDarkinSpirit', // ['demon', 'darkin', 'spirit']
             type: ['species'],
         },
         {
-            text: 'Is the character a tree?',
-            tag: 'tree',
+            text: 'Is the character a god, celestial, aspect or ascended?',
+            tag: 'godCelestialAspectAscended', // ['god', 'celestial', 'aspect', 'ascended']
             type: ['species'],
         },
+        // {
+        //     text: 'Is the character a tree?',
+        //     tag: 'tree',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a golem?',
+        //     tag: 'golem',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a demon?',
+        //     tag: 'demon',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character an aspect?',
+        //     tag: 'aspect',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a god?',
+        //     tag: 'god',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a dragon?',
+        //     tag: 'dragon',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a rat?',
+        //     tag: 'rat',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a cat?',
+        //     tag: 'cat',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a minotaur?',
+        //     tag: 'minotaur',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a troll?',
+        //     tag: 'troll',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a celestial?',
+        //     tag: 'celestial',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character an ascended?',
+        //     tag: 'ascended',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a revenant?',
+        //     tag: 'revenant',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a titan?',
+        //     tag: 'titan',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a yeti?',
+        //     tag: 'yeti',
+        //     type: ['species'],
+        // },
+        // {
+        //     text: 'Is the character a brackern?',
+        //     tag: 'brackern',
+        //     type: ['species'],
+        // },
         {
-            text: 'Is the character a golem?',
-            tag: 'golem',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a demon?',
-            tag: 'demon',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character an aspect?',
-            tag: 'aspect',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a god?',
-            tag: 'god',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a dragon?',
-            tag: 'human',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a rat?',
-            tag: 'rat',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a cat?',
-            tag: 'cat',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a minotaur?',
-            tag: 'minotaur',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a troll?',
-            tag: 'troll',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a celestial?',
-            tag: 'celestial',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character an ascended?',
-            tag: 'ascended',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a revenant?',
-            tag: 'revenant',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a titan?',
-            tag: 'titan',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a yeti?',
-            tag: 'yeti',
-            type: ['species'],
-        },
-        {
-            text: 'Is the character a brackern?',
-            tag: 'brackern',
+            text: 'Is the character a brackern, titan, yeti, troll, minotaur, rat, cat, tree, golem or dragon?',
+            tag: 'brackernTitanYetiTrollMinotaurRatCatTreeGolemDragon', // ['brackern', 'titan', 'yeti', 'troll', 'minotaur', 'rat', 'cat', 'tree', 'golem', 'dragon']
             type: ['species'],
         },
 
@@ -167,11 +182,11 @@ export async function getQuestionsFromDatabase() {
             tag: 'freljord',
             type: ['location', 'lore'],
         },
-        {
-            text: 'Is the character from Camavor?',
-            tag: 'camavor',
-            type: ['location', 'lore'],
-        },
+        // {
+        //     text: 'Is the character from Camavor?',
+        //     tag: 'camavor',
+        //     type: ['location', 'lore'],
+        // },
         {
             text: 'Is the character from Ionia?',
             tag: 'ionia',
@@ -197,14 +212,19 @@ export async function getQuestionsFromDatabase() {
             tag: 'void',
             type: ['location', 'lore'],
         },
+        // {
+        //     text: 'Is the character from Kathkan?',
+        //     tag: 'kathkan',
+        //     type: ['location', 'lore'],
+        // },
+        // {
+        //     text: 'Is the character from Icathia?',
+        //     tag: 'icathia',
+        //     type: ['location', 'lore'],
+        // },
         {
-            text: 'Is the character from Kathkan?',
-            tag: 'kathkan',
-            type: ['location', 'lore'],
-        },
-        {
-            text: 'Is the character from Icathia?',
-            tag: 'icathia',
+            text: 'Is the character from Icathia, Kathkan or Camavor?',
+            tag: 'icathiaKathkanCamavor', // ['icathia', 'kathkan', 'camavor']
             type: ['location', 'lore'],
         },
         {
@@ -244,7 +264,7 @@ export async function getQuestionsFromDatabase() {
             type: ['role', 'mecanics'],
         },
         {
-            text: 'Is the character a enchanter?',
+            text: 'Is the character an enchanter?',
             tag: 'enchanter',
             type: ['role', 'mecanics'],
         },
@@ -284,58 +304,63 @@ export async function getQuestionsFromDatabase() {
             type: ['range', 'mecanics'],
         },
         {
-            text: 'Does the characer use mana?',
+            text: 'Does the character use mana?',
             tag: 'mana',
             type: ['resource', 'mecanics'],
         },
         {
-            text: 'Does the characer use energy?',
+            text: 'Does the character use energy?',
             tag: 'energy',
             type: ['resource', 'mecanics'],
         },
+        // {
+        //     text: 'Does the character use fury?',
+        //     tag: 'fury',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use grit?',
+        //     tag: 'grit',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use courage?',
+        //     tag: 'courage',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use health?',
+        //     tag: 'health',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use shield?',
+        //     tag: 'shield',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use flow?',
+        //     tag: 'flow',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use rage?',
+        //     tag: 'rage',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use heat?',
+        //     tag: 'heat',
+        //     type: ['resource', 'mecanics'],
+        // },
+        // {
+        //     text: 'Does the character use ferocity?',
+        //     tag: 'ferocity',
+        //     type: ['resource', 'mecanics'],
+        // },
         {
-            text: 'Does the characer use fury?',
-            tag: 'fury',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use grit?',
-            tag: 'grit',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use courage?',
-            tag: 'courage',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use health?',
-            tag: 'health',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use shield?',
-            tag: 'shield',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use flow?',
-            tag: 'flow',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use rage?',
-            tag: 'rage',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use heat?',
-            tag: 'heat',
-            type: ['resource', 'mecanics'],
-        },
-        {
-            text: 'Does the characer use ferocity?',
-            tag: 'ferocity',
+            text: 'Does the character use an alternate resource?',
+            tag: 'otherResource',
             type: ['resource', 'mecanics'],
         },
         {
@@ -421,11 +446,6 @@ export async function getQuestionsFromDatabase() {
         {
             text: 'Does the character have white hair?',
             tag: 'whiteHair',
-            type: ['hairColor', 'appearance'],
-        },
-        {
-            text: 'Does the character have dark hair?',
-            tag: 'darkHair',
             type: ['hairColor', 'appearance'],
         },
         {

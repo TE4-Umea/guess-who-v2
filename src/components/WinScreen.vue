@@ -165,10 +165,10 @@ export default {
 }
 
 .enterAnimation {
-    animation: enter 2s;
+    animation: winScreenEnter 2s;
 }
 
-@keyframes enter {
+@keyframes winScreenEnter {
     0% {
         top: -50rem;
     }

@@ -61,6 +61,20 @@ p {
   margin: 0 auto 0 auto;
 }
 
+.enter {
+  animation: questionFieldEnter 2s;
+}
+
+@keyframes questionFieldEnter {
+  0% {
+    bottom: -50rem;
+  }
+
+  100% {
+    bottom: 0;
+  }
+}
+
 #myInput {
   font-size: 16px;
 
@@ -91,8 +105,8 @@ p {
   display: block;
 }
 
-.correct .imgWrapper {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 100%);
+.lastQuestion {
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -102,7 +116,3 @@ p {
 }
 
 @media (prefers-color-scheme: light) {}
-
-.lastQuestion {
-  margin: 0;
-}
