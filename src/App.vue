@@ -71,6 +71,10 @@ export default {
         },
 
         closeQuestionsOnClick(event) {
+            if (screen.width <= 768) {
+                return;
+            }
+
             this.questions.forEach(question => {
                 if (!this.$el.contains(event.target)) {
                     question.isHidden = true;
@@ -79,9 +83,6 @@ export default {
         },
         showQuestions() {
             document.getElementById('myUL').style.display = 'block'
-        },
-        hideQuestions() {
-            document.getElementById('myUL').style.display = 'none'
         },
     },
     async mounted() {

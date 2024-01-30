@@ -6,7 +6,7 @@ defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 
     <li>
         <button v-on:click="() => { askQuestion(question, characters, correctAnswer) }"
             v-if="!question.isAnswered && !question.isHidden">
-            <p>{{ question.text }}</p>
+            <h3>{{ question.text }}</h3>
         </button>
     </li>
 </template>
@@ -156,7 +156,9 @@ export default {
     display: block;
     size: 100%;
     width: 100%;
+}
 
+#myUL li button h3 {
     font-family: "Yanone Kaffeesatz", sans-serif;
     font-size: 1.3rem;
 }

@@ -7,7 +7,7 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
         <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
             <div>
                 <h1>You win!</h1>
-                <img :src="correctAnswer.image">
+                <img :src="correctAnswer.image" alt="">
                 <h1>{{ correctAnswer.name }}</h1>
                 <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{
                     stats.time }}
@@ -19,9 +19,14 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
             </div>
             <div class="questions" id="gameLog">
                 <h2>Questions asked:</h2>
-                <p v-for="(turn, index) in gameLog" :key="index">
+                <ul>
+                    <li v-for="(turn, index) in gameLog" :key="index">
+                        <p>{{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}</p>
+                    </li>
+                </ul>
+                <!-- <p v-for="(turn, index) in gameLog" :key="index">
                     {{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}
-                </p>
+                </p> -->
             </div>
         </div>
     </div>
@@ -162,6 +167,12 @@ export default {
     border-radius: 20px;
     padding: 0.5rem 2rem 0.5rem 2rem;
     margin: 0.5rem;
+    cursor: pointer;
+    background-color: black;
+}
+
+.winScreen button:hover {
+    background-color: rgb(64, 64, 64);
 }
 
 .enterAnimation {
@@ -198,5 +209,10 @@ export default {
 
 .questions p {
     margin: 0;
+}
+
+.questions ul {
+    list-style-type: none;
+    padding: 0;
 }
 </style>

@@ -4,13 +4,13 @@ defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'ch
 
 <template>
     <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
-        v-on:click="Guess(character, correctAnswer,)" class="characterCard" :title="'Guess on ' + character.name + '?'">
+        v-on:click="Guess(character, correctAnswer)" class="characterCard" :title="'Guess on ' + character.name + '?'">
 
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
-            <img :src="character.image">
+            <img :src="character.image" alt="">
         </div>
-        <p>{{ character.name }}</p>
+        <h3>{{ character.name }}</h3>
     </div>
 </template>
 
@@ -18,7 +18,6 @@ defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'ch
 export default {
     methods: {
         Guess(character, answer) {
-            if (character.isHidden === false) {
             if (this.stats.replay || this.stats.gameOver || character.isHidden) {
                 return
             }
@@ -53,7 +52,6 @@ export default {
             })
 
             this.closeRedundantQuestionsBasedOnRemainingTags()
-            }
         },
 
         closeRedundantQuestionsBasedOnRemainingTags() {
@@ -96,7 +94,7 @@ export default {
     cursor: pointer;
 }
 
-.characterCard p {
+.characterCard h3 {
     position: relative;
     bottom: 50px;
     overflow: hidden;
@@ -123,7 +121,7 @@ export default {
 }
 
 .backsideAnimation img,
-.backsideAnimation p,
+.backsideAnimation h3,
 .backsideAnimation div {
     visibility: hidden;
     opacity: 0;
