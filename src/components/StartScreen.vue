@@ -1,27 +1,46 @@
 <script setup>
-defineProps(['stats'])
+import { ref } from 'vue'
+defineProps(['stats', 'themePack'])
+
+const picked = ref('League of Legends')
 </script>
 
 <template>
-<div class="">
-    <div class="startScreen">
-        <button v-on:click="test()">test</button>
+    <div class="center">
+        <div class="startScreen">
+            <section class="startScreenText">
+                <h1>Guess Who?</h1>
+                <div>
+                    <p id="pickedText">Picked: {{ picked }}</p>
+                </div>
+            </section>
+            <section>
+                <div class="packSelectionButtons">
+                    <input type="radio" value="League of Legends" v-model="picked" v-on:click="selectLeaguePack()" />
+                    <label>League of Legends</label>
+                    <input type="radio" value="Overwatch" v-model="picked" v-on:click="selectOverwatchPack()" />
+                    <label>Overwatch</label>
+                </div>
+                <div class="startScreenButtons">
+                    <button v-on:click="startGame()">Start</button>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
 export default {
     methods: {
-        test() {
+        startGame() {
             this.stats.gameStarted = true
         },
 
-        startMechanics() {
-            document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);
-            document.getElementById('searchField').addEventListener('click', this.search);
-            document.getElementById('questionField').addEventListener('click', this.closeQuestionsOnClick);
-            document.getElementById('questionField').addEventListener('click', this.clearSearchField);
+        selectLeaguePack() {
+            this.themePack[0] = 'league'
+        },
+        selectOverwatchPack() {
+            this.themePack[0] = 'overwatch'
         },
     },
 }
@@ -29,9 +48,33 @@ export default {
 
 <style>
 .startScreen {
-    width: 100%;
-    min-height: 100vw;
+    width: 80vw;
+    min-height: 100%;
+    padding: 1rem;
 
-    background-color: rgb(101, 25, 173);
+    background-color: rgb(24, 24, 24);
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    z-index: 1;
+    position: fixed;
+    flex-direction: column;
+}
+
+.startScreenText {
+    font-size: large;
+}
+.packSelectionButtons {
+    font-size: larger;
+}
+
+.startScreenButtons button {
+    color: chartreuse;
+    font-weight: 700;
+    border-style: none;
+    border-radius: 20px;
+    padding: 0.5rem 2rem 0.5rem 2rem;
 }
 </style>

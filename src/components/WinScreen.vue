@@ -1,41 +1,42 @@
 <script setup>
 defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
+
+const gameLogReset = []
 </script>
 
 <template>
-<div class="center">
-    <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
-        <h1>You win!</h1>
-        <img :src="correctAnswer.image">
-        <h1>{{ correctAnswer.name }}</h1>
-        <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{ stats.time }}
-            seconds.</p>
-        <button v-on:click="() => { restart() }">Restart</button>
-        <button>Game log</button>
+    <div class="center">
+        <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
+            <h1>You win!</h1>
+            <img :src="correctAnswer.image">
+            <h1>{{ correctAnswer.name }}</h1>
+            <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{ stats.time
+            }}
+                seconds.</p>
+            <button v-on:click="() => { restart() }">Restart</button>
+            <button>Game log</button>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
 export default {
     methods: {
         restart() {
-            // This.questions.forEach(question => {
-            //     question.isAnswered = false
-            // })
-            // this.stats = {
-            //     guesses: 0,
-            //     questionsAsked: 0,
-            //     time: 0,
-            //     gameOver: false,
-            // }
-            // this.gameLog = []
-            // this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
-            // console.log(this.correctAnswer)
-            // this.characters.forEach(character => {
-            //     character.isHidden = false
-            // })
-            location.reload()
+            this.questions.forEach(question => {
+                question.isAnswered = false
+            })
+            this.stats.guesses = 0
+            this.stats.questionsAsked = 0
+            this.stats.time = 0
+            this.stats.gameOver = false
+            this.gameLog = this.gameLogReset
+
+            this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
+            console.log(this.correctAnswer)
+            this.characters.forEach(character => {
+                character.isHidden = false
+            })
         },
     },
 }
