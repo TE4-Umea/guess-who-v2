@@ -71,7 +71,8 @@ export default {
 }
 
 .startScreenButtons button {
-    color: chartreuse;
+    color: #646cff;
+    background-color: #000000;
     font-weight: 700;
     border-style: none;
     border-radius: 20px;
