@@ -10,6 +10,7 @@ const picked = ref('League of Legends')
         <div class="startScreen">
             <section class="startScreenText">
                 <h1>Guess Who?</h1>
+                <img class="startScreenImage" src="../../public/icon.svg" alt="">
                 <div>
                     <p id="pickedText">Picked: {{ picked }}</p>
                 </div>
@@ -52,7 +53,7 @@ export default {
     min-height: 100%;
     padding: 1rem;
 
-    background-color: rgb(24, 24, 24);
+    background-color: #2b2b2b;
 
     text-align: center;
 
@@ -66,6 +67,7 @@ export default {
 .startScreenText {
     font-size: large;
 }
+
 .packSelectionButtons {
     font-size: larger;
 }
@@ -77,5 +79,10 @@ export default {
     border-style: none;
     border-radius: 20px;
     padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.startScreenImage {
+    width: 25%;
+    height: 25%;
 }
 </style>
