@@ -1,16 +1,16 @@
 <script setup>
-defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
+defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 </script>
 
 <template>
     <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
-        v-on:click="Guess(character, correctAnswer,)" class="characterCard" :title="'Guess on ' + character.name + '?'">
+        v-on:click="Guess(character, correctAnswer)" class="characterCard" :title="'Guess on ' + character.name + '?'">
 
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
-            <img :src="character.image">
+            <img :src="character.image" alt="">
         </div>
-        <p>{{ character.name }}</p>
+        <h3>{{ character.name }}</h3>
     </div>
 </template>
 
@@ -18,35 +18,58 @@ defineProps(['character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
 export default {
     methods: {
         Guess(character, answer) {
+            if (this.stats.replay || this.stats.gameOver || character.isHidden) {
+                return
+            }
+
             let correctGuess = 'Yes'
             if (this.stats.time === 0) {
                 this.stats.time = Date.now()
             }
 
-            if (!this.stats.gameOver) {
-                this.stats.guesses++
-                if (character.name === answer.name) {
-                    this.characters.forEach(character => {
-                        if (character.name !== answer.name) {
-                            character.isHidden = true
-                        }
-                    })
-                    if (this.stats.time !== 0) {
-                        this.stats.time = (Date.now() - this.stats.time) / 1000
+            this.stats.guesses++
+            if (character.name === answer.name) {
+                this.characters.forEach(character => {
+                    if (character.name !== answer.name) {
+                        character.isHidden = true
                     }
-
-                    this.stats.gameOver = true
-                } else {
-                    correctGuess = 'No'
-                    character.isHidden = true
+                })
+                if (this.stats.time !== 0) {
+                    this.stats.time = (Date.now() - this.stats.time) / 1000
                 }
+
+                this.stats.gameOver = true
+            } else {
+                correctGuess = 'No'
+                character.isHidden = true
             }
 
             this.gameLog.push({
                 question: {
                     text: 'Is it ' + character.name + '?',
+                    type: 'character',
                 }, answer: correctGuess,
-            });
+            })
+
+            this.closeRedundantQuestionsBasedOnRemainingTags()
+        },
+
+        closeRedundantQuestionsBasedOnRemainingTags() {
+            const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+
+            this.questions.forEach(question => {
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
+                    }
+                }
+
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
         },
     },
 }
@@ -71,7 +94,7 @@ export default {
     cursor: pointer;
 }
 
-.characterCard p {
+.characterCard h3 {
     position: relative;
     bottom: 50px;
     overflow: hidden;
@@ -98,7 +121,7 @@ export default {
 }
 
 .backsideAnimation img,
-.backsideAnimation p,
+.backsideAnimation h3,
 .backsideAnimation div {
     visibility: hidden;
     opacity: 0;

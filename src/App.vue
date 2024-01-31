@@ -8,7 +8,6 @@ import StartScreen from './components/StartScreen.vue'
 <template>
     <StartScreen v-if="!stats.gameStarted" :stats=stats :themePack=themePack>
     </StartScreen>
-
     <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
         :gameLog=gameLog>
     </WinScreen>
@@ -46,8 +45,8 @@ import StartScreen from './components/StartScreen.vue'
 </template>
 
 <script>
-import { getCharactersFromDatabase } from './characters/GetLeagueCharacters.js';
-import { getQuestionsFromDatabase } from './questions/GetLeagueQuestions.js';
+import { getCharactersFromDatabase } from './characters/GetOverwatchCharacters.js';
+import { getQuestionsFromDatabase } from './questions/GetOverwatchQuestions.js';
 
 export default {
     data() {
@@ -63,6 +62,7 @@ export default {
                 time: 0,
                 gameOver: false,
                 gameStarted: false,
+                replay: false,
             },
         };
     },
@@ -83,6 +83,10 @@ export default {
         },
 
         closeQuestionsOnClick(event) {
+            if (screen.width <= 768) {
+                return;
+            }
+
             this.questions.forEach(question => {
                 if (!this.$el.contains(event.target)) {
                     question.isHidden = true;
@@ -91,9 +95,6 @@ export default {
         },
         showQuestions() {
             document.getElementById('myUL').style.display = 'block'
-        },
-        hideQuestions() {
-            document.getElementById('myUL').style.display = 'none'
         },
     },
     async mounted() {

@@ -6,12 +6,13 @@ defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 
     <li>
         <button v-on:click="() => { askQuestion(question, characters, correctAnswer) }"
             v-if="!question.isAnswered && !question.isHidden">
-            <p>{{ question.text }}</p>
+            <h3>{{ question.text }}</h3>
         </button>
     </li>
 </template>
 
 <script>
+
 export default {
     methods: {
         updateStats() {
@@ -21,10 +22,11 @@ export default {
             }
         },
         askQuestion(question, characters, correctAnswer) {
-            if (!this.stats.gameOver) {
-                this.updateStats()
+            if (this.stats.replay || this.stats.gameOver) {
+                return
             }
 
+            this.updateStats()
             let correctAnswerIncludesTag = false
             let answer = ''
             this.question.isAnswered = true;
@@ -37,7 +39,6 @@ export default {
 
             if (correctAnswerIncludesTag) {
                 this.closeAllWithoutTag(characters, question.tag)
-                // this.closeRedundantQuestionsOnCorrect(question.type)
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(characters, question.tag)
@@ -45,7 +46,7 @@ export default {
                 answer = 'No'
             }
 
-            this.closeRedundantQuestionBasedOnRemainingTags()
+            this.closeRedundantQuestionsBasedOnRemainingTags()
 
             this.gameLog.push({ question, answer });
         },
@@ -102,9 +103,8 @@ export default {
             })
         },
 
-        closeRedundantQuestionBasedOnRemainingTags() {
+        closeRedundantQuestionsBasedOnRemainingTags() {
             const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
-            console.log(remainingTags)
 
             this.questions.forEach(question => {
                 let questionIsRelevant = false
@@ -116,6 +116,22 @@ export default {
                 }
 
                 if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
+        },
+
+        closeQuestionsBasedOnQuestionTypePreferences(typeToClose) {
+            this.questions.forEach(question => {
+                let questionIsPrefered = true
+
+                for (let i = 0; i < question.type.length; i++) {
+                    if (question.type[i] === typeToClose) {
+                        questionIsPrefered = false
+                    }
+                }
+
+                if (questionIsPrefered === false) {
                     question.isAnswered = true
                 }
             })
@@ -140,7 +156,9 @@ export default {
     display: block;
     size: 100%;
     width: 100%;
+}
 
+#myUL li button h3 {
     font-family: "Yanone Kaffeesatz", sans-serif;
     font-size: 1.3rem;
 }
