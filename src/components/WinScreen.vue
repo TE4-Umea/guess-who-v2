@@ -13,7 +13,7 @@ defineProps(['stats', 'game'])
                     stats.time }}
                     seconds.</p>
                 <button v-on:click="() => { restart() }">Restart</button>
-                <button>Main menu</button>
+                <button v-on:click="() => { mainMenu() }">Main menu</button>
                 <button v-on:click="() => { toggleGameLog() }">Game log</button>
                 <button v-on:click="() => { replay() }">Watch replay</button>
             </div>
@@ -24,9 +24,6 @@ defineProps(['stats', 'game'])
                         <p>{{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}</p>
                     </li>
                 </ul>
-                <!-- <p v-for="(turn, index) in gameLog" :key="index">
-                    {{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}
-                </p> -->
             </div>
         </div>
     </div>
@@ -50,6 +47,11 @@ export default {
             this.game.characters.forEach(character => {
                 character.isHidden = false
             })
+        },
+        mainMenu() {
+            this.restart()
+            this.stats.gameStarted = false
+            this.game.themePack[0] = 'league'
         },
         toggleGameLog() {
             if (document.getElementById('gameLog').style.display === 'block') {

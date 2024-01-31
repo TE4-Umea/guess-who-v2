@@ -31,10 +31,24 @@ const picked = ref('League of Legends')
 </template>
 
 <script>
+import { getCharactersLeague } from '../characters/GetLeagueCharacters.js';
+import { getQuestionsLeague } from '../questions/GetLeagueQuestions.js';
+import { getCharactersOverwatch } from '../characters/GetOverwatchCharacters.js';
+import { getQuestionsOverwatch } from '../questions/GetOverwatchQuestions.js';
+
 export default {
     methods: {
-        startGame() {
+        async startGame() {
             this.stats.gameStarted = true
+            if (this.game.themePack[0] === 'league') {
+                this.game.characters = await getCharactersLeague()
+                this.game.questions = await getQuestionsLeague()
+            } else {
+                this.game.characters = await getCharactersOverwatch()
+                this.game.questions = await getQuestionsOverwatch()
+            }
+
+            this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
         },
 
         selectLeaguePack() {

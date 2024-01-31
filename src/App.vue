@@ -45,9 +45,6 @@ import StartScreen from './components/StartScreen.vue'
 </template>
 
 <script>
-import { getCharactersFromDatabase } from './characters/GetOverwatchCharacters.js';
-import { getQuestionsFromDatabase } from './questions/GetOverwatchQuestions.js';
-
 export default {
     data() {
         return {
@@ -56,7 +53,7 @@ export default {
                 questions: [],
                 correctAnswer: {},
                 gameLog: [],
-                themePack: ['None'],
+                themePack: ['league'],
             },
             stats: {
                 guesses: 0,
@@ -101,8 +98,8 @@ export default {
     },
     async mounted() {
         // Get characters and questions from database, must be in mounted() for async/await to work
-        this.game.characters = await getCharactersFromDatabase();
-        this.game.questions = await getQuestionsFromDatabase();
+        // this.game.characters = await getCharactersFromDatabase();
+        // this.game.questions = await getQuestionsFromDatabase();
 
         // Set a random character to be the correct answer
         this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
