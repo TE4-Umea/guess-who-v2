@@ -1,10 +1,10 @@
 <script setup>
-defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'characters', 'gameLog'])
+defineProps(['stats', 'game', 'character'])
 </script>
 
 <template>
     <div :id="[character.id]" :class="[{ backsideAnimation: character.isHidden }]"
-        v-on:click="Guess(character, correctAnswer)" class="characterCard" :title="'Guess on ' + character.name + '?'">
+        v-on:click="Guess()" class="characterCard" :title="'Guess on ' + character.name + '?'">
 
         <!-- Get class 'backsideAnimation' if isHidden is true -->
         <div class="imgWrapper">
@@ -17,8 +17,8 @@ defineProps(['question', 'questions', 'character', 'correctAnswer', 'stats', 'ch
 <script>
 export default {
     methods: {
-        Guess(character, answer) {
-            if (this.stats.replay || this.stats.gameOver || character.isHidden) {
+        Guess() {
+            if (this.stats.replay || this.stats.gameOver || this.character.isHidden) {
                 return
             }
 
@@ -28,9 +28,9 @@ export default {
             }
 
             this.stats.guesses++
-            if (character.name === answer.name) {
-                this.characters.forEach(character => {
-                    if (character.name !== answer.name) {
+            if (this.character.name === this.game.correctAnswer.name) {
+                this.game.characters.forEach(character => {
+                    if (character.name !== this.game.correctAnswer.name) {
                         character.isHidden = true
                     }
                 })
@@ -41,12 +41,12 @@ export default {
                 this.stats.gameOver = true
             } else {
                 correctGuess = 'No'
-                character.isHidden = true
+                this.character.isHidden = true
             }
 
-            this.gameLog.push({
+            this.game.gameLog.push({
                 question: {
-                    text: 'Is it ' + character.name + '?',
+                    text: 'Is it ' + this.character.name + '?',
                     type: 'character',
                 }, answer: correctGuess,
             })
@@ -55,9 +55,9 @@ export default {
         },
 
         closeRedundantQuestionsBasedOnRemainingTags() {
-            const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+            const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
 
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 let questionIsRelevant = false
 
                 for (let i = 0; i < remainingTags.length; i++) {

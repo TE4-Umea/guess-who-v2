@@ -6,11 +6,10 @@ import StartScreen from './components/StartScreen.vue'
 </script>
 
 <template>
-    <StartScreen v-if="!stats.gameStarted" :stats=stats :themePack=themePack>
+    <StartScreen v-if="!stats.gameStarted" :stats=stats :game=game>
     </StartScreen>
 
-    <WinScreen v-if="stats.gameOver" :stats=stats :characters=characters :correctAnswer=correctAnswer :questions=questions
-        :gameLog=gameLog>
+    <WinScreen v-if="stats.gameOver" :stats=stats :game=game>
     </WinScreen>
 
     <div>
@@ -18,28 +17,26 @@ import StartScreen from './components/StartScreen.vue'
             <div v-if="stats.gameStarted">
                 <p class="center"></p>
                 <div class="grid">
-                    <CharacterCard v-for="character in characters" :key=character.id :character=character
-                        :correctAnswer=correctAnswer :characters=characters :gameLog=gameLog :stats=stats
-                        :questions=questions />
+                    <CharacterCard v-for="character in game.characters" :key=character.id :character=character
+                        :game=game :stats=stats />
                 </div>
             </div>
         </div>
 
         <section id="searchField">
             <div>
-                <h2 v-if="gameLog.length > 0" class="lastQuestion" id="lastQuestion">
-                    {{ gameLog.length }} {{ gameLog[gameLog.length - 1].question.text }}
-                    {{ gameLog[gameLog.length - 1].answer }}
+                <h2 v-if="game.gameLog.length > 0" class="lastQuestion" id="lastQuestion">
+                    {{ game.gameLog.length }}. {{ game.gameLog[game.gameLog.length - 1].question.text }}
+                    {{ game.gameLog[game.gameLog.length - 1].answer }}
                 </h2>
                 <input type="text" id="myInput" @input="() => { search() }" placeholder="Search for questions.."
-                    :onFocus="() => { showQuestions() }" />
+                    :onFocus="() => { showQuestions(); }" />
             </div>
             <div>
                 <div id="questionField">
                     <ul id="myUL" tabindex="-1">
-                        <QuestionButton v-for="(question, index) in  questions " :key="index" :question=question
-                            :characters=characters :correctAnswer=correctAnswer :gameLog=gameLog :stats=stats
-                            :questions=questions />
+                        <QuestionButton v-for="(question, index) in  game.questions " :key="index" :question=question
+                            :stats=stats :game=game />
                     </ul>
                 </div>
             </div>
@@ -54,11 +51,13 @@ import { getQuestionsFromDatabase } from './questions/GetOverwatchQuestions.js';
 export default {
     data() {
         return {
-            characters: [],
-            questions: [],
-            correctAnswer: {},
-            gameLog: [],
-            themePack: ['None'],
+            game: {
+                characters: [],
+                questions: [],
+                correctAnswer: {},
+                gameLog: [],
+                themePack: ['None'],
+            },
             stats: {
                 guesses: 0,
                 questionsAsked: 0,
@@ -72,7 +71,7 @@ export default {
     methods: {
         search() {
             const input = document.getElementById('myInput').value;
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 if (question.text.toLowerCase().includes(input.toLowerCase())) {
                     question.isHidden = false;
                 } else {
@@ -90,7 +89,7 @@ export default {
                 return;
             }
 
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 if (!this.$el.contains(event.target)) {
                     question.isHidden = true;
                 }
@@ -102,12 +101,12 @@ export default {
     },
     async mounted() {
         // Get characters and questions from database, must be in mounted() for async/await to work
-        this.characters = await getCharactersFromDatabase();
-        this.questions = await getQuestionsFromDatabase();
+        this.game.characters = await getCharactersFromDatabase();
+        this.game.questions = await getQuestionsFromDatabase();
 
         // Set a random character to be the correct answer
-        this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
-        console.log(this.correctAnswer)
+        this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
+
         document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);
         document.getElementById('searchField').addEventListener('click', this.search);
         document.getElementById('questionField').addEventListener('click', this.closeQuestionsOnClick);

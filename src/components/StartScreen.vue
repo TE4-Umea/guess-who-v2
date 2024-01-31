@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-defineProps(['stats', 'themePack'])
+defineProps(['stats', 'game'])
 
 const picked = ref('League of Legends')
 </script>
@@ -10,7 +10,7 @@ const picked = ref('League of Legends')
         <div class="startScreen">
             <section class="startScreenText">
                 <h1>Guess Who?</h1>
-                <img class="startScreenImage" src="../../public/icon.svg" alt="">
+                <img class="startScreenImage" src="/icon.svg" alt="">
                 <div>
                     <p id="pickedText">Picked: {{ picked }}</p>
                 </div>
@@ -38,10 +38,10 @@ export default {
         },
 
         selectLeaguePack() {
-            this.themePack[0] = 'league'
+            this.game.themePack[0] = 'league'
         },
         selectOverwatchPack() {
-            this.themePack[0] = 'overwatch'
+            this.game.themePack[0] = 'overwatch'
         },
     },
 }
