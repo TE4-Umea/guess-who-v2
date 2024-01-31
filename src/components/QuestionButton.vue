@@ -1,10 +1,10 @@
 <script setup>
-defineProps(['question', 'questions', 'characters', 'correctAnswer', 'gameLog', 'stats'])
+defineProps(['question', 'game', 'stats'])
 </script>
 
 <template>
     <li>
-        <button v-on:click="() => { askQuestion(question, characters, correctAnswer) }"
+        <button v-on:click="() => { askQuestion() }"
             v-if="!question.isAnswered && !question.isHidden">
             <h3>{{ question.text }}</h3>
         </button>
@@ -21,7 +21,7 @@ export default {
                 this.stats.time = Date.now()
             }
         },
-        askQuestion(question, characters, correctAnswer) {
+        askQuestion() {
             if (this.stats.replay || this.stats.gameOver) {
                 return
             }
@@ -31,24 +31,24 @@ export default {
             let answer = ''
             this.question.isAnswered = true;
 
-            for (let i = 0; i < correctAnswer.tags.length; i++) {
-                if (correctAnswer.tags[i] === question.tag) {
+            for (let i = 0; i < this.game.correctAnswer.tags.length; i++) {
+                if (this.game.correctAnswer.tags[i] === this.question.tag) {
                     correctAnswerIncludesTag = true
                 }
             }
 
             if (correctAnswerIncludesTag) {
-                this.closeAllWithoutTag(characters, question.tag)
+                this.closeAllWithoutTag(this.game.characters, this.question.tag)
                 answer = 'Yes'
             } else {
-                this.closeAllWithTag(characters, question.tag)
-                this.closeRedundantQuestionsOnWrong(question.type)
+                this.closeAllWithTag(this.game.characters, this.question.tag)
+                this.closeRedundantQuestionsOnWrong(this.question.type)
                 answer = 'No'
             }
 
             this.closeRedundantQuestionsBasedOnRemainingTags()
 
-            this.gameLog.push({ question, answer });
+            this.game.gameLog.push({ question: this.question, answer });
         },
 
         closeAllWithTag(characters, tag) {
@@ -77,7 +77,7 @@ export default {
         },
 
         closeRedundantQuestionsOnCorrect(type) {
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 if (question.type === type) {
                     question.isAnswered = true
                 }
@@ -87,14 +87,14 @@ export default {
         closeRedundantQuestionsOnWrong(type) {
             let questionsLeft = 0;
             // Count how many questions are left
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 if (question.type === type && question.isAnswered === false) {
                     questionsLeft++
                 }
             })
 
             // If there are only 1 question left, close it
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 if (question.type === type && question.isAnswered === false) {
                     if (questionsLeft === 1) {
                         question.isAnswered = true
@@ -104,9 +104,9 @@ export default {
         },
 
         closeRedundantQuestionsBasedOnRemainingTags() {
-            const remainingTags = this.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+            const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
 
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 let questionIsRelevant = false
 
                 for (let i = 0; i < remainingTags.length; i++) {
@@ -122,7 +122,7 @@ export default {
         },
 
         closeQuestionsBasedOnQuestionTypePreferences(typeToClose) {
-            this.questions.forEach(question => {
+            this.game.questions.forEach(question => {
                 let questionIsPrefered = true
 
                 for (let i = 0; i < question.type.length; i++) {

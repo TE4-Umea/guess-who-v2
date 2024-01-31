@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
+defineProps(['stats', 'game'])
 </script>
 
 <template>
@@ -7,8 +7,8 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
         <div :class="[{ enterAnimation: stats.gameOver }]" class="winScreen">
             <div>
                 <h1>You win!</h1>
-                <img :src="correctAnswer.image" alt="">
-                <h1>{{ correctAnswer.name }}</h1>
+                <img :src="game.correctAnswer.image" alt="">
+                <h1>{{ game.correctAnswer.name }}</h1>
                 <p>You guessed {{ stats.guesses }} times. You asked {{ stats.questionsAsked }} questions. It took {{
                     stats.time }}
                     seconds.</p>
@@ -20,7 +20,7 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
             <div class="questions" id="gameLog">
                 <h2>Questions asked:</h2>
                 <ul>
-                    <li v-for="(turn, index) in gameLog" :key="index">
+                    <li v-for="(turn, index) in game.gameLog" :key="index">
                         <p>{{ index + 1 }}. {{ turn.question.text }}: {{ turn.answer }}</p>
                     </li>
                 </ul>
@@ -37,22 +37,19 @@ defineProps(['correctAnswer', 'questions', 'stats', 'characters', 'gameLog'])
 export default {
     methods: {
         restart() {
-            // This.questions.forEach(question => {
-            //     question.isAnswered = false
-            // })
-            // this.stats = {
-            //     guesses: 0,
-            //     questionsAsked: 0,
-            //     time: 0,
-            //     gameOver: false,
-            // }
-            // this.gameLog = []
-            // this.correctAnswer = this.characters[Math.floor(Math.random() * this.characters.length)];
-            // console.log(this.correctAnswer)
-            // this.characters.forEach(character => {
-            //     character.isHidden = false
-            // })
-            location.reload()
+            this.game.questions.forEach(question => {
+                question.isAnswered = false
+            })
+            this.stats.guesses = 0
+            this.stats.questionsAsked = 0
+            this.stats.time = 0
+            this.stats.gameOver = false
+            this.game.gameLog = []
+
+            this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
+            this.game.characters.forEach(character => {
+                character.isHidden = false
+            })
         },
         toggleGameLog() {
             if (document.getElementById('gameLog').style.display === 'block') {
@@ -66,22 +63,22 @@ export default {
             this.stats.replay = true
             const delay = 800
 
-            this.characters.forEach(character => {
+            this.game.characters.forEach(character => {
                 character.isHidden = false;
             });
 
-            this.gameLog.forEach((turn, index) => {
+            this.game.gameLog.forEach((turn, index) => {
                 setTimeout(() => {
                     document.getElementById('lastQuestion').innerHTML = (index + 1) + '. ' + turn.question.text + ' ' + turn.answer
                     if (turn.question.type === 'character') {
                         if (turn.answer === 'Yes') {
-                            this.characters.forEach(character => {
-                                if (character.name !== this.correctAnswer.name) {
+                            this.game.characters.forEach(character => {
+                                if (character.name !== this.game.correctAnswer.name) {
                                     character.isHidden = true;
                                 }
                             });
                         } else {
-                            this.characters.forEach(character => {
+                            this.game.characters.forEach(character => {
                                 if (turn.question.text.includes(character.name)) {
                                     character.isHidden = true;
                                 }
@@ -90,7 +87,7 @@ export default {
                     } else if (turn.question.type !== 'character') {
                         if (turn.answer === 'Yes') {
                             // Close all without tag
-                            this.characters.forEach(character => {
+                            this.game.characters.forEach(character => {
                                 let hasTag = false
                                 for (let i = 0; i < character.tags.length; i++) {
                                     if (character.tags[i] === turn.question.tag) {
@@ -104,7 +101,7 @@ export default {
                             })
                         } else {
                             // Close all with tag
-                            this.characters.forEach(character => {
+                            this.game.characters.forEach(character => {
                                 for (let i = 0; i < character.tags.length; i++) {
                                     if (character.tags[i] === turn.question.tag) {
                                         character.isHidden = true
@@ -119,7 +116,7 @@ export default {
             setTimeout(() => {
                 this.stats.gameOver = true
                 this.stats.replay = false
-            }, delay * (this.gameLog.length + 1));
+            }, delay * (this.game.gameLog.length + 1));
         },
     },
 }
