@@ -1,4 +1,4 @@
-export async function getQuestionsFromDatabase() {
+export async function getQuestionsLeague() {
     const questions = [
         {
             text: 'Is the character male?',

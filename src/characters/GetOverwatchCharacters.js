@@ -1,5 +1,4 @@
-export async function getCharactersFromDatabase() {
-    // Cconst characters = await prisma.character.findMany({})
+export async function getCharactersOverwatch() {
     const charactersTemp = [
         {
             id: 16,
