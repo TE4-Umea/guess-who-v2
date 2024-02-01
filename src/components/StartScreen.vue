@@ -13,9 +13,9 @@ const picked = ref('League of Legends')
                 <div class="intro">
                     <p>
                         A game where you have to guess which character the computer has chosen. You can ask the computer
-                        questions to which it answers yes or no. When you think you know which character it is, you can
-                        guess by clicking their image.
-                        If you guess correctly, you win, otherwise the game continues. Try to win in as few questions and
+                        questions to which it will answers yes or no. When you think you know which character it is, you can
+                        guess by clicking on their image.
+                        If you guess correctly, you win, otherwise the game continues. Try to win using as few questions and 
                         guesses as possible.
                     </p>
                 </div>
