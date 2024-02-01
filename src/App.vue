@@ -102,11 +102,6 @@ export default {
         },
     },
     async mounted() {
-        // Get characters and questions from database, must be in mounted() for async/await to work
-        // this.game.characters = await getCharactersFromDatabase();
-        // this.game.questions = await getQuestionsFromDatabase();
-
-        // Set a random character to be the correct answer
         this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
 
         document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);

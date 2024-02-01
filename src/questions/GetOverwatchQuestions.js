@@ -125,11 +125,6 @@ export async function getQuestionsOverwatch() {
             tag: 'shield',
             type: 'shield',
         },
-        // {
-        //     text: 'Does the character have a boop?',
-        //     tag: 'boop',
-        //     type: 'abilities',
-        // },
         {
             text: 'Is the characters primary fire projectile?',
             tag: 'projectile',
@@ -146,7 +141,7 @@ export async function getQuestionsOverwatch() {
             type: 'shoot',
         },
     ];
-    // Add isAnswered and isHidden property to all questions
+
     questions.forEach(question => {
         question.isAnswered = false;
     });
