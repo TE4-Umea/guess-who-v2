@@ -17,11 +17,16 @@ import StartScreen from './components/StartScreen.vue'
             <div v-if="stats.gameStarted">
                 <p class="center"></p>
                 <div class="grid">
-                    <CharacterCard v-for="character in game.characters" :key=character.id :character=character
-                        :game=game :stats=stats />
+                    <CharacterCard v-for="character in game.characters" :key=character.id :character=character :game=game
+                        :stats=stats />
                 </div>
             </div>
         </div>
+        <p class="grid" v-if="game.themePack[0] === 'overwatch'">
+            ®2016 Blizzard Entertainment, Inc. All rights reserved.
+            Overwatch is a trademark or registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other
+            countries.
+        </p>
 
         <section id="searchField">
             <div>
