@@ -95,7 +95,7 @@ p {
   margin-right: auto;
   margin-bottom: 0;
 
-  max-height: 240px;
+  max-height: 25vh;
   overflow-y: scroll;
 
   display: none;
