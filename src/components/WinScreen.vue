@@ -132,6 +132,7 @@ export default {
 
 .winScreen {
     width: 80vw;
+    max-height: 80vh;
     padding: 1rem;
     margin-top: 1rem;
 
@@ -146,11 +147,13 @@ export default {
 
     display: flex;
     justify-content: space-evenly;
+
+    overflow-y: scroll;
 }
 
 .winScreen img {
-    width: 24vw;
-    height: 24vw;
+    width: 16vw;
+    height: 16vw;
 
     border-radius: 10px;
 

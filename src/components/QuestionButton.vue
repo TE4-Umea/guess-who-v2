@@ -4,8 +4,7 @@ defineProps(['question', 'game', 'stats'])
 
 <template>
     <li>
-        <button v-on:click="() => { askQuestion() }"
-            v-if="!question.isAnswered && !question.isHidden">
+        <button v-on:click="() => { askQuestion() }" v-if="!question.isAnswered && !question.isHidden">
             <h3>{{ question.text }}</h3>
         </button>
     </li>
@@ -146,8 +145,7 @@ export default {
     background-color: #28282b;
 
     margin-top: -1px;
-    padding: 12px;
-    padding-right: 50px;
+    padding: 5px;
 
     text-decoration: none;
     font-size: 18px;
