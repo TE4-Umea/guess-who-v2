@@ -10,6 +10,15 @@ const picked = ref('League of Legends')
         <div class="startScreen">
             <section class="startScreenText">
                 <h1>Guess Who?</h1>
+                <div class="intro">
+                    <p>
+                        A game where you have to guess which character the computer has chosen. You can ask the computer
+                        questions to which it answers yes or no. When you think you know which character it is, you can
+                        guess by clicking their image.
+                        If you guess correctly, you win, otherwise the game continues. Try to win in as few questions and
+                        guesses as possible.
+                    </p>
+                </div>
                 <img class="startScreenImage" src="/icon.svg" alt="">
                 <div>
                     <p id="pickedText">Picked: {{ picked }}</p>
@@ -64,7 +73,8 @@ export default {
 <style>
 .startScreen {
     width: 80vw;
-    min-height: 100%;
+    min-height: 95%;
+    max-height: 95%;
     padding: 1rem;
 
     background-color: #2b2b2b;
@@ -76,10 +86,16 @@ export default {
     z-index: 1;
     position: fixed;
     flex-direction: column;
+
+    overflow-y: scroll;
 }
 
 .startScreenText {
     font-size: large;
+}
+
+.startScreenText h1 {
+    margin-bottom: 0;
 }
 
 .packSelectionButtons {
@@ -98,5 +114,14 @@ export default {
 .startScreenImage {
     width: 25%;
     height: 25%;
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+}
+
+.intro p {
+    width: 90ch;
 }
 </style>
