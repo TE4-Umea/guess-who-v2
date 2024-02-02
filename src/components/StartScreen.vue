@@ -30,6 +30,10 @@ const picked = ref('League of Legends')
                     <label>League of Legends</label>
                     <input type="radio" value="Overwatch" v-model="picked" v-on:click="selectOverwatchPack()" />
                     <label>Overwatch</label>
+                    <input type="radio" value="Jujutsu Kaisen" v-model="picked" v-on:click="selectJJKPack()" />
+                    <label>Jujutsu Kaisen</label>
+                    <input type="radio" value="TE4" v-model="picked" v-on:click="selectTE4Pack()" />
+                    <label>TE4</label>
                 </div>
                 <div class="startScreenButtons">
                     <button v-on:click="startGame()">Start</button>
@@ -44,6 +48,10 @@ import { getCharactersLeague } from '../characters/GetLeagueCharacters.js';
 import { getQuestionsLeague } from '../questions/GetLeagueQuestions.js';
 import { getCharactersOverwatch } from '../characters/GetOverwatchCharacters.js';
 import { getQuestionsOverwatch } from '../questions/GetOverwatchQuestions.js';
+import { getCharactersJJK } from '../characters/GetJJKCharacters.js';
+import { getQuestionsJJK } from '../questions/GetJJKQuestions.js';
+import { getCharactersTE4 } from '../characters/GetTE4Characters.js';
+import { getQuestionsTE4 } from '../questions/GetTE4Questions.js';
 
 export default {
     methods: {
@@ -52,9 +60,15 @@ export default {
             if (this.game.themePack[0] === 'league') {
                 this.game.characters = await getCharactersLeague()
                 this.game.questions = await getQuestionsLeague()
-            } else {
+            } else if (this.game.themePack[0] === 'overwatch') {
                 this.game.characters = await getCharactersOverwatch()
                 this.game.questions = await getQuestionsOverwatch()
+            } else if (this.game.themePack[0] === 'jjk') {
+                this.game.characters = await getCharactersJJK()
+                this.game.questions = await getQuestionsJJK()
+            } else if (this.game.themePack[0] === 'te4') {
+                this.game.characters = await getCharactersTE4()
+                this.game.questions = await getQuestionsTE4()
             }
 
             this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
@@ -65,6 +79,12 @@ export default {
         },
         selectOverwatchPack() {
             this.game.themePack[0] = 'overwatch'
+        },
+        selectJJKPack() {
+            this.game.themePack[0] = 'jjk'
+        },
+        selectTE4Pack() {
+            this.game.themePack[0] = 'te4'
         },
     },
 }
