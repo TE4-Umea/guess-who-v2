@@ -309,18 +309,8 @@ export async function getQuestionsLeague() {
             type: ['hairColor', 'appearance'],
         },
         {
-            text: 'Does the character have dark hair?',
-            tag: 'darkHair',
-            type: ['hairColor', 'appearance'],
-        },
-        {
             text: 'Does the character have purple hair?',
             tag: 'purpleHair',
-            type: ['hairColor', 'appearance'],
-        },
-        {
-            text: 'Does the character have dark hair?',
-            tag: 'darkHair',
             type: ['hairColor', 'appearance'],
         },
         {
