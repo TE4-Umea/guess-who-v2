@@ -27,6 +27,9 @@ import StartScreen from './components/StartScreen.vue'
             Overwatch is a trademark or registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other
             countries.
         </p>
+        <p class="grid" v-if="game.themePack[0] === 'jjk'">
+            JUJUTSU KAISEN © 2018 by Gege Akutami/SHUEISHA Inc. All rights reserved.
+        </p>
 
         <section id="searchField">
             <div>
