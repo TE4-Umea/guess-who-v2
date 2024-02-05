@@ -30,8 +30,8 @@ const picked = ref('League of Legends')
                     <label>League of Legends</label>
                     <input type="radio" value="Overwatch" v-model="picked" v-on:click="selectOverwatchPack()" />
                     <label>Overwatch</label>
-                    <input type="radio" value="Jujutsu Kaisen" v-model="picked" v-on:click="selectJJKPack()" />
-                    <label>Jujutsu Kaisen</label>
+                    <!-- <input type="radio" value="Jujutsu Kaisen" v-model="picked" v-on:click="selectJJKPack()" />
+                    <label>Jujutsu Kaisen</label> -->
                     <input type="radio" value="TE4" v-model="picked" v-on:click="selectTE4Pack()" />
                     <label>TE4</label>
                 </div>
