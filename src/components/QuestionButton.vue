@@ -47,6 +47,10 @@ export default {
 
             this.closeRedundantQuestionsBasedOnRemainingTags()
 
+            if (this.game.characters.filter(character => character.isHidden === false).length === 1) {
+                this.closeRemainingQuestions()
+            }
+
             this.game.gameLog.push({ question: this.question, answer });
         },
 
@@ -133,6 +137,12 @@ export default {
                 if (questionIsPrefered === false) {
                     question.isAnswered = true
                 }
+            })
+        },
+
+        closeRemainingQuestions() {
+            this.game.questions.forEach(question => {
+                question.isAnswered = true
             })
         },
     },
