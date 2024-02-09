@@ -17,7 +17,7 @@ import StartScreen from './components/StartScreen.vue'
             <div v-if="stats.gameStarted">
                 <p class="center"></p>
                 <div class="grid">
-                    <CharacterCard v-for="character in game.characters" :key=character.id :character=character :game=game
+                    <CharacterCard v-for="(character, index) in game.characters" :key=index :character=character :game=game
                         :stats=stats />
                 </div>
             </div>
