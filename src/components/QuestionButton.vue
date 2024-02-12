@@ -41,14 +41,15 @@ export default {
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(this.game.characters, this.question.tag)
-                this.closeRedundantQuestionsOnWrong(this.question.type)
+                // Tthis.closeRedundantQuestionsOnWrong(this.question.type)
                 answer = 'No'
             }
 
             this.closeRedundantQuestionsBasedOnRemainingTags()
+            this.closeRedundantQuestions()
 
             if (this.game.characters.filter(character => character.isHidden === false).length === 1) {
-                this.closeRemainingQuestions()
+                this.closeAllQuestions()
             }
 
             this.game.gameLog.push({ question: this.question, answer });
@@ -79,32 +80,33 @@ export default {
             })
         },
 
-        closeRedundantQuestionsOnCorrect(type) {
-            this.game.questions.forEach(question => {
-                if (question.type === type) {
-                    question.isAnswered = true
-                }
-            })
-        },
+        // Unused
+        // closeRedundantQuestionsOnCorrect(type) {
+        //     this.game.questions.forEach(question => {
+        //         if (question.type === type) {
+        //             question.isAnswered = true
+        //         }
+        //     })
+        // },
 
-        closeRedundantQuestionsOnWrong(type) {
-            let questionsLeft = 0;
-            // Count how many questions are left
-            this.game.questions.forEach(question => {
-                if (question.type === type && question.isAnswered === false) {
-                    questionsLeft++
-                }
-            })
+        // closeRedundantQuestionsOnWrong(type) {
+        //     let questionsLeft = 0;
+        //     // Count how many questions are left
+        //     this.game.questions.forEach(question => {
+        //         if (question.type === type && question.isAnswered === false) {
+        //             questionsLeft++
+        //         }
+        //     })
 
-            // If there are only 1 question left, close it
-            this.game.questions.forEach(question => {
-                if (question.type === type && question.isAnswered === false) {
-                    if (questionsLeft === 1) {
-                        question.isAnswered = true
-                    }
-                }
-            })
-        },
+        //     // If there are only 1 question left, close it
+        //     this.game.questions.forEach(question => {
+        //         if (question.type === type && question.isAnswered === false) {
+        //             if (questionsLeft === 1) {
+        //                 question.isAnswered = true
+        //             }
+        //         }
+        //     })
+        // },
 
         closeRedundantQuestionsBasedOnRemainingTags() {
             const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
@@ -124,6 +126,7 @@ export default {
             })
         },
 
+        // WIP, unused
         closeQuestionsBasedOnQuestionTypePreferences(typeToClose) {
             this.game.questions.forEach(question => {
                 let questionIsPrefered = true
@@ -140,7 +143,26 @@ export default {
             })
         },
 
-        closeRemainingQuestions() {
+        closeRedundantQuestions() {
+            const charsLeft = this.game.characters.filter(character => character.isHidden === false)
+            console.log(charsLeft)
+            this.game.questions.forEach(question => {
+                let counter = 0
+                charsLeft.forEach(char => {
+                    char.tags.forEach(tag => {
+                        if (tag === question.tag) {
+                            counter++
+                        }
+                    })
+                })
+
+                if (counter === charsLeft.length) {
+                    question.isAnswered = true
+                }
+            })
+        },
+
+        closeAllQuestions() {
             this.game.questions.forEach(question => {
                 question.isAnswered = true
             })
