@@ -41,7 +41,6 @@ export default {
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(this.game.characters, this.question.tag)
-                // Tthis.closeRedundantQuestionsOnWrong(this.question.type)
                 answer = 'No'
             }
 
@@ -80,34 +79,6 @@ export default {
             })
         },
 
-        // Unused
-        // closeRedundantQuestionsOnCorrect(type) {
-        //     this.game.questions.forEach(question => {
-        //         if (question.type === type) {
-        //             question.isAnswered = true
-        //         }
-        //     })
-        // },
-
-        // closeRedundantQuestionsOnWrong(type) {
-        //     let questionsLeft = 0;
-        //     // Count how many questions are left
-        //     this.game.questions.forEach(question => {
-        //         if (question.type === type && question.isAnswered === false) {
-        //             questionsLeft++
-        //         }
-        //     })
-
-        //     // If there are only 1 question left, close it
-        //     this.game.questions.forEach(question => {
-        //         if (question.type === type && question.isAnswered === false) {
-        //             if (questionsLeft === 1) {
-        //                 question.isAnswered = true
-        //             }
-        //         }
-        //     })
-        // },
-
         closeRedundantQuestionsBasedOnRemainingTags() {
             const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
 
@@ -145,7 +116,6 @@ export default {
 
         closeRedundantQuestions() {
             const charsLeft = this.game.characters.filter(character => character.isHidden === false)
-            console.log(charsLeft)
             this.game.questions.forEach(question => {
                 let counter = 0
                 charsLeft.forEach(char => {
