@@ -88,7 +88,7 @@ export async function getCharactersJJK() {
             id: 15,
             name: 'Mai Zenin',
             image: 'jjk/Mai.webp',
-            tags: ['F', 'human', 'darkHair', 'brownEyes', 'sorcerer', 'CT', 'dead'],
+            tags: ['F', 'human', 'darkHair', 'brownEyes', 'sorcerer', 'CT', 'weapon', 'dead'],
         },
         {
             id: 16,
@@ -106,7 +106,7 @@ export async function getCharactersJJK() {
             id: 18,
             name: 'Noritoshi Kamo',
             image: 'jjk/Noritoshi.webp',
-            tags: ['M', 'human', 'darkHair', 'darkEyes', 'CT', 'sorcerer', 'alive', 'weapon', 'semigrade1'],
+            tags: ['M', 'human', 'darkHair', 'darkEyes', 'CT', 'sorcerer', 'alive', 'weapon', 'semigrade1', 'cullingGames'],
         },
         {
             id: 19,
@@ -268,13 +268,13 @@ export async function getCharactersJJK() {
             id: 45,
             name: 'Kenjaku',
             image: 'jjk/Kenjaku.webp',
-            tags: ['M', 'human', 'darkHair', 'darkEyes', 'CT', 'sorcerer', 'RCT', 'domain', 'simple', 'alive'],
+            tags: ['M', 'human', 'darkHair', 'darkEyes', 'CT', 'sorcerer', 'RCT', 'domain', 'simple', 'dead'],
         },
         {
             id: 46,
             name: 'Uraume',
             image: 'jjk/Uraume.webp',
-            tags: ['F', 'human', 'whiteHair', 'darkHair', 'redEyes', 'CT', 'sorcerer', 'alive'],
+            tags: ['F', 'human', 'whiteHair', 'pinkHair', 'redEyes', 'CT', 'sorcerer', 'alive'],
         },
         {
             id: 47,
