@@ -41,6 +41,7 @@ export default {
                 answer = 'Yes'
             } else {
                 this.closeAllWithTag(this.game.characters, this.question.tag)
+                // this.closeRedundantQuestionsOnWrong(this.question.type)
                 answer = 'No'
             }
 
@@ -50,6 +51,9 @@ export default {
             if (this.game.characters.filter(character => character.isHidden === false).length === 1) {
                 this.closeAllQuestions()
             }
+
+            // remove
+            console.log(this.game.characters.filter(character => character.isHidden === false).length)
 
             this.game.gameLog.push({ question: this.question, answer });
         },
@@ -75,6 +79,34 @@ export default {
 
                 if (!hasTag) {
                     character.isHidden = true
+                }
+            })
+        },
+
+        // Unused
+        // closeRedundantQuestionsOnCorrect(type) {
+        //     this.game.questions.forEach(question => {
+        //         if (question.type === type) {
+        //             question.isAnswered = true
+        //         }
+        //     })
+        // },
+
+        closeRedundantQuestionsOnWrong(type) {
+            let questionsLeft = 0;
+            // Count how many questions are left
+            this.game.questions.forEach(question => {
+                if (question.type == type && question.isAnswered === false) {
+                    questionsLeft++
+                }
+            })
+
+            // If there are only 1 question left, close it
+            this.game.questions.forEach(question => {
+                if (question.type == type && question.isAnswered === false) {
+                    if (questionsLeft === 1) {
+                        question.isAnswered = true
+                    }
                 }
             })
         },
@@ -114,6 +146,7 @@ export default {
             })
         },
 
+        // If all remaining characters have the same tag, close all questions with that tag
         closeRedundantQuestions() {
             const charsLeft = this.game.characters.filter(character => character.isHidden === false)
             this.game.questions.forEach(question => {
