@@ -383,7 +383,7 @@ export async function getCharactersLeague() {
             id: 59,
             name: 'Kindred',
             image: 'leagueoflegends/KindredSquare.webp',
-            tags: ['M', 'F', 'spirit', 'demonDarkinSpirit', 'runeterra', 'marksman', 'jungle', 'ranged', 'mana', 'AD', 'blueEyes', 'whiteHair', 'darkHair', 'mediumHair', 'longHair', 'mask', 'animal', 'naked'],
+            tags: ['spirit', 'demonDarkinSpirit', 'runeterra', 'marksman', 'jungle', 'ranged', 'mana', 'AD', 'blueEyes', 'whiteHair', 'darkHair', 'mediumHair', 'longHair', 'mask', 'animal', 'naked'],
         },
         {
             id: 60,
