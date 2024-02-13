@@ -26,15 +26,23 @@ const picked = ref('League of Legends')
             </section>
             <section>
                 <div class="packSelectionButtons">
-                    <input type="radio" value="League of Legends" v-model="picked" v-on:click="selectLeaguePack()"
-                        id="LoL" />
-                    <label for="LoL">League of Legends</label>
-                    <input type="radio" value="Overwatch" v-model="picked" v-on:click="selectOverwatchPack()" id="ow" />
-                    <label for="ow">Overwatch</label>
-                    <input type="radio" value="Jujutsu Kaisen" v-model="picked" v-on:click="selectJJKPack()" id="jjk" />
-                    <label for="jjk">Jujutsu Kaisen</label>
-                    <input type="radio" value="TE4" v-model="picked" v-on:click="selectTE4Pack()" id="TE4" />
-                    <label for="TE4">TE4</label>
+                    <div>
+                        <input type="radio" value="League of Legends" v-model="picked" v-on:click="selectLeaguePack()"
+                            id="LoL" />
+                        <label for="LoL">League of Legends</label>
+                    </div>
+                    <div>
+                        <input type="radio" value="Overwatch" v-model="picked" v-on:click="selectOverwatchPack()" id="ow" />
+                        <label for="ow">Overwatch</label>
+                    </div>
+                    <div>
+                        <input type="radio" value="Jujutsu Kaisen" v-model="picked" v-on:click="selectJJKPack()" id="jjk" />
+                        <label for="jjk">Jujutsu Kaisen</label>
+                    </div>
+                    <div>
+                        <input type="radio" value="TE4" v-model="picked" v-on:click="selectTE4Pack()" id="TE4" />
+                        <label for="TE4">TE4</label>
+                    </div>
                 </div>
                 <div class="startScreenButtons">
                     <button v-on:click="startGame()">Start</button>
@@ -121,6 +129,8 @@ export default {
 
 .packSelectionButtons {
     font-size: x-large;
+    display: flex;
+    justify-content: center;
 }
 
 .packSelectionButtons input {
@@ -149,5 +159,11 @@ export default {
 
 .intro p {
     width: 90ch;
+}
+
+@media screen and (max-width: 768px) {
+    .packSelectionButtons {
+        flex-direction: column;
+    }
 }
 </style>
