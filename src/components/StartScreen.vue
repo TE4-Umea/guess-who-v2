@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { supabase } from '/src/lib/supabaseClient'
 defineProps(['stats', 'game'])
 
 const picked = ref('League of Legends')
@@ -26,6 +27,11 @@ const picked = ref('League of Legends')
             </section>
             <section>
                 <div class="packSelectionButtons">
+                    <div v-for="(theme, index) in this.game.themes" :key="index">
+                        <input type="radio" :value="theme.gameName" v-model="picked" v-on:click="selectLeaguePack()"
+                            :id="theme.gameName" />
+                        <label :for="theme.gameName">League of Legends</label>
+                    </div>
                     <input type="radio" value="League of Legends" v-model="picked" v-on:click="selectLeaguePack()"
                         id="LoL" />
                     <label for="LoL">League of Legends</label>

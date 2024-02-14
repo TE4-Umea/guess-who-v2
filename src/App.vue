@@ -3,6 +3,7 @@ import CharacterCard from './components/CharacterCard.vue'
 import QuestionButton from './components/QuestionButton.vue'
 import WinScreen from './components/WinScreen.vue'
 import StartScreen from './components/StartScreen.vue'
+import { supabase } from './lib/supabaseClient'
 </script>
 
 <template>
@@ -62,6 +63,7 @@ export default {
                 correctAnswer: {},
                 gameLog: [],
                 themePack: ['league'],
+                themes: [],
             },
             stats: {
                 guesses: 0,
@@ -103,8 +105,13 @@ export default {
         showQuestions() {
             document.getElementById('myUL').style.display = 'block'
         },
+        async getThemes() {
+            this.game.themes = await supabase.from('Game').select()
+            console.log(this.game.themes)
+        },
     },
     async mounted() {
+        this.getThemes()
         this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
 
         document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);
