@@ -51,12 +51,14 @@ export default {
                 .from('Characters')
                 .select('*')
                 .eq('gameId', this.game.themePack.id)
+                .order('id')
             this.game.characters = charData.data
 
             const questionData = await supabase
                 .from('Questions')
                 .select('*')
                 .or('gameId.eq.' + this.game.themePack.id + ',gameId.eq.0')
+                .order('id')
             this.game.questions = questionData.data
 
             // Kinda unnecessary bc they are false by default when undefined
