@@ -106,7 +106,8 @@ export default {
             document.getElementById('myUL').style.display = 'block'
         },
         async getThemes() {
-            this.game.themes = await supabase.from('Game').select()
+            const { data } = await supabase.from('Game').select()
+            this.game.themes = data
             console.log(this.game.themes)
         },
     },
