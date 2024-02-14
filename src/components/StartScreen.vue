@@ -51,13 +51,12 @@ export default {
                 .from('Characters')
                 .select('*')
                 .eq('gameId', this.game.themePack.id)
-
             this.game.characters = charData.data
 
             const questionData = await supabase
                 .from('Questions')
                 .select('*')
-                .eq('gameId', this.game.themePack.id)
+                .or('gameId.eq.' + this.game.themePack.id + ',gameId.eq.0')
             this.game.questions = questionData.data
 
             this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
