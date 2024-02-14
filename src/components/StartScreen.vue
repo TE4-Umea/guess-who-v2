@@ -59,6 +59,15 @@ export default {
                 .or('gameId.eq.' + this.game.themePack.id + ',gameId.eq.0')
             this.game.questions = questionData.data
 
+            // Kinda unnecessary bc they are false by default when undefined
+            this.game.characters.forEach(character => {
+                character.isHidden = false
+            })
+            this.game.questions.forEach(question => {
+                question.isHidden = false
+                question.isAnswered = false
+            })
+
             this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
         },
 
