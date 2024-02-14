@@ -23,12 +23,12 @@ import { supabase } from './lib/supabaseClient'
                 </div>
             </div>
         </div>
-        <p class="grid" v-if="game.themePack[0] === 'overwatch'">
+        <p class="grid" v-if="game.themePack.gameName === 'overwatch'">
             ®2016 Blizzard Entertainment, Inc. All rights reserved.
             Overwatch is a trademark or registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other
             countries.
         </p>
-        <p class="grid" v-if="game.themePack[0] === 'jjk'">
+        <p class="grid" v-if="game.themePack.gameName === 'jjk'">
             JUJUTSU KAISEN © 2018 by Gege Akutami/SHUEISHA Inc. All rights reserved.
         </p>
 
@@ -62,7 +62,7 @@ export default {
                 questions: [],
                 correctAnswer: {},
                 gameLog: [],
-                themePack: ['league'],
+                themePack: {}, // Selected theme
                 themes: [],
             },
             stats: {
@@ -108,7 +108,7 @@ export default {
         async getThemes() {
             const { data } = await supabase.from('Game').select()
             this.game.themes = data
-            console.log(this.game.themes)
+            this.game.themePack = this.game.themes[0]
         },
     },
     async mounted() {

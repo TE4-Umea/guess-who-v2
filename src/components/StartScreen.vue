@@ -28,7 +28,7 @@ const picked = ref('League of Legends')
             <section>
                 <div class="packSelectionButtons" v-if="game.themes.length > 0">
                     <div v-for="(theme, index) in game.themes" :key="index">
-                        <input type="radio" :value="theme.gameName" v-model="picked" v-on:click="selectPack(theme.gameName)"
+                        <input type="radio" :value="theme.gameName" v-model="picked" v-on:click="selectPack(theme)"
                             :id="theme.gameName" />
                         <label :for="theme.gameName">{{ theme.gameName }}</label>
                     </div>
@@ -42,38 +42,24 @@ const picked = ref('League of Legends')
 </template>
 
 <script>
-import { getCharactersLeague } from '../characters/GetLeagueCharacters.js';
-import { getQuestionsLeague } from '../questions/GetLeagueQuestions.js';
-import { getCharactersOverwatch } from '../characters/GetOverwatchCharacters.js';
-import { getQuestionsOverwatch } from '../questions/GetOverwatchQuestions.js';
-import { getCharactersJJK } from '../characters/GetJJKCharacters.js';
-import { getQuestionsJJK } from '../questions/GetJJKQuestions.js';
-import { getCharactersTE4 } from '../characters/GetTE4Characters.js';
-import { getQuestionsTE4 } from '../questions/GetTE4Questions.js';
 
 export default {
     methods: {
         async startGame() {
             this.stats.gameStarted = true
-            if (this.game.themePack[0] === 'league') {
-                this.game.characters = await getCharactersLeague()
-                this.game.questions = await getQuestionsLeague()
-            } else if (this.game.themePack[0] === 'overwatch') {
-                this.game.characters = await getCharactersOverwatch()
-                this.game.questions = await getQuestionsOverwatch()
-            } else if (this.game.themePack[0] === 'jjk') {
-                this.game.characters = await getCharactersJJK()
-                this.game.questions = await getQuestionsJJK()
-            } else if (this.game.themePack[0] === 'te4') {
-                this.game.characters = await getCharactersTE4()
-                this.game.questions = await getQuestionsTE4()
-            }
+
+            const charData = await supabase
+                .from('characters')
+                .select('*')
+                .eq('gameId', this.game.themePack.id)
+
+            console.log(charData)
 
             this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
         },
 
-        selectPack(String) {
-            this.game.themePack[0] = String
+        selectPack(theme) {
+            this.game.themePack = theme
         },
     },
 }
