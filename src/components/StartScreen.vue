@@ -42,7 +42,6 @@ const picked = ref('League of Legends')
 </template>
 
 <script>
-
 export default {
     methods: {
         async startGame() {

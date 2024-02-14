@@ -23,12 +23,12 @@ import { supabase } from './lib/supabaseClient'
                 </div>
             </div>
         </div>
-        <p class="grid" v-if="game.themePack.gameName === 'overwatch'">
+        <p class="grid" v-if="game.themePack.gameName === 'Overwatch'">
             ®2016 Blizzard Entertainment, Inc. All rights reserved.
             Overwatch is a trademark or registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other
             countries.
         </p>
-        <p class="grid" v-if="game.themePack.gameName === 'jjk'">
+        <p class="grid" v-if="game.themePack.gameName === 'Jujutsu Kaisen'">
             JUJUTSU KAISEN © 2018 by Gege Akutami/SHUEISHA Inc. All rights reserved.
         </p>
 
