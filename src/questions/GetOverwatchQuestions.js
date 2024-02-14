@@ -83,47 +83,47 @@ export async function getQuestionsOverwatch() {
         {
             text: 'Does the character have shield health?',
             tag: 'shields',
-            type: 'shields',
+            type: ['mechanic'],
         },
         {
             text: 'Does the character have armor?',
             tag: 'armor',
-            type: 'armor',
+            type: ['mechanic'],
         },
         {
             text: 'Is it a dive character?',
             tag: 'dive',
-            type: 'comp',
+            type: ['comp'],
         },
         {
             text: 'Is it a poke character?',
             tag: 'poke',
-            type: 'comp',
+            type: ['comp'],
         },
         {
             text: 'Is it a brawl character?',
             tag: 'brawl',
-            type: 'comp',
+            type: ['comp'],
         },
         {
             text: 'Is the character a tank?',
             tag: 'tank',
-            type: 'role',
+            type: ['role'],
         },
         {
             text: 'Is the character a DPS?',
             tag: 'DPS',
-            type: 'role',
+            type: ['role'],
         },
         {
             text: 'Is the character a support?',
             tag: 'support',
-            type: 'role',
+            type: ['role'],
         },
         {
             text: 'Does the character have a shield?',
             tag: 'shield',
-            type: 'shield',
+            type: ['shield'],
         },
         {
             text: 'Is the characters primary fire projectile?',

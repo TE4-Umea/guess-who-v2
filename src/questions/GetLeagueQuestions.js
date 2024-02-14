@@ -14,42 +14,42 @@ export async function getQuestionsLeague() {
         {
             text: 'Is the character human?',
             tag: 'human', // If correct, close all species questions, else close this one
-            type: ['species'],
+            type: ['species', 'lore'],
         },
         {
             text: 'Is the character a yordle?',
             tag: 'yordle',
-            type: ['species'],
+            type: ['species', 'lore'],
         },
         {
             text: 'Is the character a vastaya?',
             tag: 'vastaya',
-            type: ['species'],
+            type: ['species', 'lore'],
         },
         {
             text: 'Is the character undead?',
             tag: 'undead',
-            type: ['species'],
+            type: ['species', 'lore'],
         },
         {
             text: 'Is the character voidborn?',
             tag: 'voidborn',
-            type: ['species'],
+            type: ['species', 'lore'],
         },
         {
             text: 'Is the character a demon, darkin or spirit?',
             tag: 'demonDarkinSpirit',
-            type: ['species'],
+            type: ['species', 'lore'],
         },
         {
             text: 'Is the character a god, celestial, aspect or ascended?',
             tag: 'godCelestialAspectAscended',
-            type: ['species'],
+            type: ['species', 'lore'],
         },
         {
             text: 'Is the character a brackern, titan, yeti, troll, minotaur, rat, cat, tree, golem or dragon?',
             tag: 'brackernTitanYetiTrollMinotaurRatCatTreeGolemDragon',
-            type: ['species'],
+            type: ['species', 'lore'],
         },
 
         {
@@ -208,11 +208,6 @@ export async function getQuestionsLeague() {
             tag: 'energy',
             type: ['resource', 'mecanics'],
         },
-        // {
-        //     text: 'Does the character use health?',
-        //     tag: 'health',
-        //     type: ['resource', 'mecanics'],
-        // },
         {
             text: 'Does the character use an alternate resource?',
             tag: 'otherResource',
@@ -226,22 +221,22 @@ export async function getQuestionsLeague() {
         {
             text: 'Is the character AP?',
             tag: 'AP',
-            type: 'damageType',
+            type: ['damageType', 'mecanics'],
         },
         {
             text: 'Is the character AD?',
             tag: 'AD',
-            type: 'damageType',
+            type: ['damageType', 'mecanics'],
         },
         {
             text: 'Is the character hybrid?',
             tag: 'Hybrid',
-            type: 'damageType',
+            type: ['damageType', 'mecanics'],
         },
         {
             text: 'Is the character HP scaling?',
             tag: 'HP-scale',
-            type: 'damageType',
+            type: ['damageType', 'mecanics'],
         },
         {
             text: 'Does the character have blue eyes?',
