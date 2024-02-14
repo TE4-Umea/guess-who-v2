@@ -49,11 +49,17 @@ export default {
             this.stats.gameStarted = true
 
             const charData = await supabase
-                .from('characters')
+                .from('Characters')
                 .select('*')
                 .eq('gameId', this.game.themePack.id)
 
-            console.log(charData)
+            this.game.characters = charData.data
+
+            const questionData = await supabase
+                .from('Questions')
+                .select('*')
+                .eq('gameId', this.game.themePack.id)
+            this.game.questions = questionData.data
 
             this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
         },
