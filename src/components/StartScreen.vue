@@ -1,5 +1,6 @@
 <script setup>
 import { supabase } from '/src/lib/supabaseClient'
+import QuestionButton from './QuestionButton.vue';
 defineProps(['stats', 'game'])
 </script>
 
@@ -67,11 +68,49 @@ export default {
                 question.isAnswered = false
             })
 
+            this.closeRedundantQuestions()
+
             this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
         },
 
         selectPack(theme) {
             this.game.themePack = theme
+        },
+
+        closeRedundantQuestions() {
+            const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+
+            this.game.questions.forEach(question => {
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
+                    }
+                }
+
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                    console.log('closed redundant question')
+                }
+            })
+
+            const charsLeft = this.game.characters.filter(character => character.isHidden === false)
+            this.game.questions.forEach(question => {
+                let counter = 0
+                charsLeft.forEach(char => {
+                    char.tags.forEach(tag => {
+                        if (tag === question.tag) {
+                            counter++
+                        }
+                    })
+                })
+
+                if (counter === charsLeft.length) {
+                    question.isAnswered = true
+                    console.log('closed redundant question2')
+                }
+            })
         },
     },
 }
