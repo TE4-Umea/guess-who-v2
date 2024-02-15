@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { supabase } from '/src/lib/supabaseClient'
 defineProps(['stats', 'game'])
 </script>
