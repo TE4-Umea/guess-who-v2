@@ -1,6 +1,5 @@
 <script setup>
 import { supabase } from '/src/lib/supabaseClient'
-import QuestionButton from './QuestionButton.vue';
 defineProps(['stats', 'game'])
 </script>
 
