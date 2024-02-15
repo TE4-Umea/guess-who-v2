@@ -3,6 +3,7 @@ import CharacterCard from './components/CharacterCard.vue'
 import QuestionButton from './components/QuestionButton.vue'
 import WinScreen from './components/WinScreen.vue'
 import StartScreen from './components/StartScreen.vue'
+import { supabase } from './lib/supabaseClient'
 </script>
 
 <template>
@@ -22,12 +23,12 @@ import StartScreen from './components/StartScreen.vue'
                 </div>
             </div>
         </div>
-        <p class="grid" v-if="game.themePack[0] === 'overwatch'">
+        <p class="grid" v-if="game.themePack.gameName === 'Overwatch'">
             ®2016 Blizzard Entertainment, Inc. All rights reserved.
             Overwatch is a trademark or registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other
             countries.
         </p>
-        <p class="grid" v-if="game.themePack[0] === 'jjk'">
+        <p class="grid" v-if="game.themePack.gameName === 'Jujutsu Kaisen'">
             JUJUTSU KAISEN © 2018 by Gege Akutami/SHUEISHA Inc. All rights reserved.
         </p>
 
@@ -61,7 +62,8 @@ export default {
                 questions: [],
                 correctAnswer: {},
                 gameLog: [],
-                themePack: ['league'],
+                themePack: {}, // Selected theme
+                themes: [],
             },
             stats: {
                 guesses: 0,
@@ -103,8 +105,14 @@ export default {
         showQuestions() {
             document.getElementById('myUL').style.display = 'block'
         },
+        async getThemes() {
+            const { data } = await supabase.from('Game').select().eq('isPublic', true).order('id')
+            this.game.themes = data
+            this.game.themePack = this.game.themes[0]
+        },
     },
     async mounted() {
+        this.getThemes()
         this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
 
         document.getElementById('characterGrid').addEventListener('click', this.closeQuestionsOnClick);

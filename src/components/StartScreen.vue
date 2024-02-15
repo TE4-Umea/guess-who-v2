@@ -1,8 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { supabase } from '/src/lib/supabaseClient'
 defineProps(['stats', 'game'])
-
-const picked = ref('League of Legends')
 </script>
 
 <template>
@@ -21,27 +19,15 @@ const picked = ref('League of Legends')
                 </div>
                 <img class="startScreenImage" src="/icon.svg" alt="">
                 <div>
-                    <p id="pickedText">Picked: {{ picked }}</p>
+                    <p id="pickedText">Picked: {{ game.themePack.gameName }}</p>
                 </div>
             </section>
             <section>
-                <div class="packSelectionButtons">
-                    <div>
-                        <input type="radio" value="League of Legends" v-model="picked" v-on:click="selectLeaguePack()"
-                            id="LoL" />
-                        <label for="LoL">League of Legends</label>
-                    </div>
-                    <div>
-                        <input type="radio" value="Overwatch" v-model="picked" v-on:click="selectOverwatchPack()" id="ow" />
-                        <label for="ow">Overwatch</label>
-                    </div>
-                    <div>
-                        <input type="radio" value="Jujutsu Kaisen" v-model="picked" v-on:click="selectJJKPack()" id="jjk" />
-                        <label for="jjk">Jujutsu Kaisen</label>
-                    </div>
-                    <div>
-                        <input type="radio" value="TE4" v-model="picked" v-on:click="selectTE4Pack()" id="TE4" />
-                        <label for="TE4">TE4</label>
+                <div class="packSelectionButtons" v-if="game.themes.length > 0">
+                    <div v-for="(theme, index) in game.themes" :key="index">
+                        <input type="radio" :value="theme.gameName" v-model="game.themePack.gameName"
+                            v-on:click="selectPack(theme)" :id="theme.gameName" />
+                        <label :for="theme.gameName">{{ theme.gameName }}</label>
                     </div>
                 </div>
                 <div class="startScreenButtons">
@@ -53,47 +39,77 @@ const picked = ref('League of Legends')
 </template>
 
 <script>
-import { getCharactersLeague } from '../characters/GetLeagueCharacters.js';
-import { getQuestionsLeague } from '../questions/GetLeagueQuestions.js';
-import { getCharactersOverwatch } from '../characters/GetOverwatchCharacters.js';
-import { getQuestionsOverwatch } from '../questions/GetOverwatchQuestions.js';
-import { getCharactersJJK } from '../characters/GetJJKCharacters.js';
-import { getQuestionsJJK } from '../questions/GetJJKQuestions.js';
-import { getCharactersTE4 } from '../characters/GetTE4Characters.js';
-import { getQuestionsTE4 } from '../questions/GetTE4Questions.js';
-
 export default {
     methods: {
         async startGame() {
             this.stats.gameStarted = true
-            if (this.game.themePack[0] === 'league') {
-                this.game.characters = await getCharactersLeague()
-                this.game.questions = await getQuestionsLeague()
-            } else if (this.game.themePack[0] === 'overwatch') {
-                this.game.characters = await getCharactersOverwatch()
-                this.game.questions = await getQuestionsOverwatch()
-            } else if (this.game.themePack[0] === 'jjk') {
-                this.game.characters = await getCharactersJJK()
-                this.game.questions = await getQuestionsJJK()
-            } else if (this.game.themePack[0] === 'te4') {
-                this.game.characters = await getCharactersTE4()
-                this.game.questions = await getQuestionsTE4()
-            }
+
+            const charData = await supabase
+                .from('Characters')
+                .select('*')
+                .eq('gameId', this.game.themePack.id)
+                .order('name')
+            this.game.characters = charData.data
+
+            const questionData = await supabase
+                .from('Questions')
+                .select('*')
+                .or('gameId.eq.' + this.game.themePack.id + ',gameId.eq.0')
+                .order('id')
+            this.game.questions = questionData.data
+
+            // Kinda unnecessary bc they are false by default when undefined
+            this.game.characters.forEach(character => {
+                character.isHidden = false
+            })
+            this.game.questions.forEach(question => {
+                question.isHidden = false
+                question.isAnswered = false
+            })
+
+            this.closeRedundantQuestions()
 
             this.game.correctAnswer = this.game.characters[Math.floor(Math.random() * this.game.characters.length)];
         },
 
-        selectLeaguePack() {
-            this.game.themePack[0] = 'league'
+        selectPack(theme) {
+            this.game.themePack = theme
         },
-        selectOverwatchPack() {
-            this.game.themePack[0] = 'overwatch'
-        },
-        selectJJKPack() {
-            this.game.themePack[0] = 'jjk'
-        },
-        selectTE4Pack() {
-            this.game.themePack[0] = 'te4'
+
+        closeRedundantQuestions() {
+            const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+
+            this.game.questions.forEach(question => {
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
+                    }
+                }
+
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                    console.log('closed redundant question')
+                }
+            })
+
+            const charsLeft = this.game.characters.filter(character => character.isHidden === false)
+            this.game.questions.forEach(question => {
+                let counter = 0
+                charsLeft.forEach(char => {
+                    char.tags.forEach(tag => {
+                        if (tag === question.tag) {
+                            counter++
+                        }
+                    })
+                })
+
+                if (counter === charsLeft.length) {
+                    question.isAnswered = true
+                    console.log('closed redundant question2')
+                }
+            })
         },
     },
 }

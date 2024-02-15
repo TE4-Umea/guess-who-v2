@@ -44,7 +44,6 @@ export default {
                 answer = 'No'
             }
 
-            this.closeRedundantQuestionsBasedOnRemainingTags()
             this.closeRedundantQuestions()
 
             if (this.game.characters.filter(character => character.isHidden === false).length === 1) {
@@ -79,25 +78,6 @@ export default {
             })
         },
 
-        // Removes all questions that are not relevant to the remaining characters
-        closeRedundantQuestionsBasedOnRemainingTags() {
-            const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
-
-            this.game.questions.forEach(question => {
-                let questionIsRelevant = false
-
-                for (let i = 0; i < remainingTags.length; i++) {
-                    if (question.tag === remainingTags[i]) {
-                        questionIsRelevant = true
-                    }
-                }
-
-                if (questionIsRelevant === false) {
-                    question.isAnswered = true
-                }
-            })
-        },
-
         // WIP, unused
         closeQuestionsBasedOnQuestionTypePreferences(typeToClose) {
             this.game.questions.forEach(question => {
@@ -117,6 +97,22 @@ export default {
 
         // If all remaining characters have the same tag, close all questions with that tag
         closeRedundantQuestions() {
+            const remainingTags = this.game.characters.filter(character => character.isHidden === false).map(character => character.tags).flat()
+
+            this.game.questions.forEach(question => {
+                let questionIsRelevant = false
+
+                for (let i = 0; i < remainingTags.length; i++) {
+                    if (question.tag === remainingTags[i]) {
+                        questionIsRelevant = true
+                    }
+                }
+
+                if (questionIsRelevant === false) {
+                    question.isAnswered = true
+                }
+            })
+
             const charsLeft = this.game.characters.filter(character => character.isHidden === false)
             this.game.questions.forEach(question => {
                 let counter = 0

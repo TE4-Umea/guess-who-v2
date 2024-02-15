@@ -51,7 +51,7 @@ export default {
         mainMenu() {
             this.restart()
             this.stats.gameStarted = false
-            this.game.themePack[0] = 'league'
+            this.game.themePack = this.game.themes[0]
         },
         toggleGameLog() {
             if (document.getElementById('gameLog').style.display === 'block') {
