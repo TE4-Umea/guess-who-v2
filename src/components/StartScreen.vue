@@ -2,8 +2,6 @@
 import { ref } from 'vue'
 import { supabase } from '/src/lib/supabaseClient'
 defineProps(['stats', 'game'])
-
-const picked = ref('League of Legends')
 </script>
 
 <template>
@@ -22,14 +20,14 @@ const picked = ref('League of Legends')
                 </div>
                 <img class="startScreenImage" src="/icon.svg" alt="">
                 <div>
-                    <p id="pickedText">Picked: {{ picked }}</p>
+                    <p id="pickedText">Picked: {{ game.themePack.gameName }}</p>
                 </div>
             </section>
             <section>
                 <div class="packSelectionButtons" v-if="game.themes.length > 0">
                     <div v-for="(theme, index) in game.themes" :key="index">
-                        <input type="radio" :value="theme.gameName" v-model="picked" v-on:click="selectPack(theme)"
-                            :id="theme.gameName" />
+                        <input type="radio" :value="theme.gameName" v-model="game.themePack.gameName"
+                            v-on:click="selectPack(theme)" :id="theme.gameName" />
                         <label :for="theme.gameName">{{ theme.gameName }}</label>
                     </div>
                 </div>
@@ -51,7 +49,7 @@ export default {
                 .from('Characters')
                 .select('*')
                 .eq('gameId', this.game.themePack.id)
-                .order('id')
+                .order('name')
             this.game.characters = charData.data
 
             const questionData = await supabase
