@@ -107,7 +107,6 @@ export default {
         },
         async getThemes() {
             const { data } = await supabase.from('Game').select().eq('isPublic', true).order('id')
-            console.log(data)
             this.game.themes = data
             this.game.themePack = this.game.themes[0]
         },
